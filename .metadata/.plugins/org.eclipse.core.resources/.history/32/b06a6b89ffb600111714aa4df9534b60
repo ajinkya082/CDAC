@@ -1,0 +1,18 @@
+package com.collection.list;
+import java.util.*;
+
+public class Test {
+	public static void main(String [] args) {
+		List l = new ArrayList();
+		l.add(2);
+		l.add("Ajinkya");
+		l.add("efd");
+		l.remove(2);
+//		l.clear();
+//		l.addFirst("asd");
+		l.add("adad");
+		l.lastIndexOf(1);
+		l.hashCode();
+		System.out.println(l.hashCode());
+	}
+}

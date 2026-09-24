@@ -1,0 +1,86 @@
+22/9/26
+
+HTML:
+-it is use to create structure of web pages.
+-it is use to display data to user on browser.
+-latest version of html is html5. 
+-it stand for Hyper Text Markup Language.
+
+-it is tag basis language 
+<tag>  <----tag 
+-in html there two types of tag 
+1.paired tag :<starttag> </endtag>
+2.unpaired tag:<starttag>
+
+*How to create html page 
+create file with extension .htm or html 
+
+<DOCTYPE html> : it tell search engine it is html type of document belongs to version 5.
+head part: it contain external link and meta data in it.
+body : write information which we have to display on browser.
+
+*What is Element in HTML 
+-it contain starting tag to ending tag with  attribute and value.
+example:
+<StartTag attribute="value" > Content of information <EndTag>
+
+*attribute:
+-it gives aditional information about tag.
+-it always write in starting tag.
+-it write as key="value" paire formate.
+
+In html there are two types of Element
+1.block Element: the element which takes full width of its screen.
+                 -it start with new line.
+                 -ex: h1-h6,p,div,li,table
+
+2.inline Element:the element which takes required width of it.
+                 -it never start on new line.
+                 -ex: b,i,u,img,a,
+
+tested tag: writing one tag inside another
+
+hr tag 
+marquee tag : it makes Content scrollable 
+ behavior="alternate",scroll,slide
+
+*list in Html 
+-in html we have 3 types list 
+1.Ordered List (ol): types: 1,2,3,A,B,C,a,b,c,I,II,III,i,ii,iii
+2.Unordered list(ul):types : disc square,circle,none
+3.Description List(dl)
+           dt-define term 
+          dd-define description 
+
+Assignment: create nested List 
+
+*How to insert images in webpage 
+img tag is use to insert images 
+
+*Iframe tag: it is use to create small window on browser
+-using it we can insert google map 
+-using it we can insert youtube video. 
+-insert one website into another website. 
+
+strong: it is not only bold but also important 
+em :  it is not only italic but also important
+ins : it is not only underline but also important
+
+*How to create link in web page 
+-by using anchore tag we can create link 
+-link is use to navigate from one page to another webpage .
+
+
+*Table : 
+-it is collection of rows and columan 
+-in html table first we create row and then columan 
+
+Assignment1: create two table with colspan and rowspan
+Assignment2: create image as link for 6 mobile image.
+
+
+
+
+
+
+
