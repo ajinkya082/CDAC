@@ -11,46 +11,70 @@
         crossorigin="anonymous"></script>
     <title>Task6</title>
     <style>
-        img {
-            height: 500px;
-            width: 40%;
-            border: 2px solid black;
-            padding: 3px;
-            margin: 10px;
+        .passs {
+            width: 100%;
+            height: 50px;
         }
 
-        .name {
-            color: maroon;
-            font-size: 30px;
+        .mail {
+            width: 100%;
+            height: 50px;
+        }
+        label{
+            font-size: 20px;
             font-weight: bold;
-            margin: 10px;
         }
     </style>
 </head>
 
 <body>
-    <img src="../Assets/biryani.jpeg" alt="biryani" id="bir1">
-    <h3 class="name" id="name1">Biryani</h3>
-    <br>
-    <button type="button" class="btn btn-primary" onclick="change()">Change Image</button>
-
-    <script>
-        let isBiryani=true;
-        function change() {
-            if(isBiryani){
-                document.getElementById("bir1").src = "../Assets/chickenmasala.jpeg";
-                document.getElementById("name1").innerHTML = "Chicken Masala";
-                isBiryani=false;
-            }else{
-                document.getElementById("bir1").src = "../Assets/biryani.jpeg";
-                document.getElementById("name1").innerHTML = "Biryani";
-                isBiryani=true;
-            }
-        }
-    </script>
-
-
-
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                <label for="">Email</label><br>
+                <input type="email" name="email" id="e1" class="mail">
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                <label for="">Password</label><br>
+                <input type="password" name="pass" id="p1" class="passs">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <label for="">Address</label>
+        <input type="text" name="address" id="a1" class="mail" placeholder="1234 Main st">
+    </div>
+    <div class="container mt-3">
+        <label for="">Address2</label>
+        <input type="text" name="address" id="a1" class="mail" placeholder="Apartment,studio or floor">
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+            <label for="">City</label>
+            <input type="text" name="city" id="c1" class="mail">
+        </div>
+        <div class="col-xl-4 col-lg-8 col-md-8 col-sm-8">
+            <label for="">State</label>
+            <select name="state" id="s1" class="mail">
+                <option value="">Choose...</option>
+                <option value="gujarat">Gujarat</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="rajasthan">Rajasthan</option>
+                <option value="punjab">Punjab</option>
+            </select>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4">
+            <label for="">Zip</label>
+            <input type="text" name="zip" id="z1" class="mail">
+        </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <input type="radio" name="check" id="r1">Check me out
+        <br>
+        <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+    </div>
 </body>
 
 </html>
