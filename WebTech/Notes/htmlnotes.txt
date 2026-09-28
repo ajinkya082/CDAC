@@ -77,6 +77,56 @@ ins : it is not only underline but also important
 
 Assignment1: create two table with colspan and rowspan
 Assignment2: create image as link for 6 mobile image.
+========================================================
+23/9/26
+
+*Form : 
+-it is usze to get data from user.
+-to suibmit forms data there are two method 
+1.get method:-when we have to submit non-confidential data.
+             -submited data will vissible in browser url 
+             -in browser url there character linitation that is 1024 character  
+
+2.post methhod: when we have to submit confidential data.
+               -submited data will not be vissible in browser url 
+               -there is no character limit.
+
+Label: it provide hint to user what data or information need to insert into input control
+input: it allows user to enter data in it.
+
+Checkbox: it allows user to select multiple option among multiple
+radio button :it allows user to select single option among multiple 
+
+-button types : there are four button types 
+1.button: it will act as normal button.
+2.submit: it is use to submit forms data.
+3.reset: it is use to reset forms data.
+4.menu: it is use to createw menu button.
+
+Q.What is difference between html and html5. 
+Q.what are the features of html5.
+
+1.symantic element introduce: the which has spesific meaning, ex: header,footer,section,aside,nav,address
+2.new tag,new attribute and new input type introduce:
+  new Tag: strong,em,ins,abbr,tbody,thead,address.
+  new attribute: minlength,maxlength,pattern,min,max 
+  new input type: email,password,tel,number,date,week,
+3.multimedia element introduce: we can insert audio and video in html page.
+4.API Introduce in html5: API(Application programming interface) it is small programe which is already developed,which we can use directly.
+ -Geolocation: it return user cuirrent position.
+              -to use this api in your device GPS must available
+ -Drag and Droup:it allows user to grab an object from one location and drag to another
+ -Web-Worker:it is small javascript code which execute in backenf of browser without affect its current execution.
+ -webStorage: it is use to store user data on browser
+             there are two types of webStorage
+       1.local storage:it is use to store user data permamnatly
+       2.session storage:it is use to store user data for limited time.      
+ -SSE(Server Sent Event):it allows user to get automatic update from server.
+
+ *Bookmark:
+
+
+
 
 
 
