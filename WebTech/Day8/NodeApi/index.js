@@ -1,14 +1,14 @@
 require('dotenv').config();
 const bodyparser = require('body-parser');
-
 const con = require('./connection.js');
 const express = require('express');
-
+const cors=require('cors')
 const app = express();
 
 const port = process.env.PORT;
 const host = process.env.HOST;
 
+app.use(cors());
 app.use(bodyparser.urlencoded());
 app.use(bodyparser.json({ extended: true }));
 
