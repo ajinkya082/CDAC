@@ -5,7 +5,6 @@ const con=mysql.createConnection({
     user:"root",
     password:"",
     database:"ycpdb",
-    port:3306,
 });
 
 con.connect((error)=>{
