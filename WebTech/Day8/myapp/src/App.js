@@ -18,6 +18,7 @@ import MultipleImgComp from './task/MultipleImgComp';
 import MyCountComp from './task/MyCountComp';
 import MyDetailsCom from './task/MyDetailsComp';
 import MyFriendDetailsComp from'./task/MyFriendDetailsComp'
+import MyImagesPrevNextComp from './task/MyImagesPrevNextComp';
 import MyTableClassComp from './task/MyTableClassComp';
 import ToggleComp from './task/ToggleComp';
 
@@ -77,7 +78,8 @@ function App() {
           </ErrorBoundaryComp> */}
           {/* <UseStateHookComp/> */}
           {/* <UseEffectHookComp/> */}
-          <MyFormComp/>
+          {/* <MyFormComp/> */}
+          <MyImagesPrevNextComp/>
 
 
     </div>
