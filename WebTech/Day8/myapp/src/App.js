@@ -2,13 +2,18 @@
 import './App.css';
 import ClassComp from './component/ClassComp';
 import ConditionalRenComp from './component/ConditionalRenComp';
+import ErrorBoundaryComp from './component/ErrorBoundaryComp';
 import FunCom from './component/FunCom';
 import GreetingComp from './component/GreetingComp';
 import MyCarouselComp from './component/MyCarouselComp';
+import MyFormComp from './component/MyFormComp';
 import MyImagesComp from './component/MyImagesComp';
 import MyListClassComp from './component/MyListClassComp';
 import ParentClassComp from './component/ParentClassComp';
 import StateComp from './component/StateComp';
+import UserComp from './component/UserComp';
+import UseEffectHookComp from './Hooks/UseEffectHookComp';
+import UseStateHookComp from './Hooks/UseStateHookComp';
 import MultipleImgComp from './task/MultipleImgComp';
 import MyCountComp from './task/MyCountComp';
 import MyDetailsCom from './task/MyDetailsComp';
@@ -49,7 +54,30 @@ function App() {
           {/* <MyTableClassComp/>
           <MyCarouselComp/> */}
           {/* <ToggleComp/> */}
-          <MultipleImgComp/>
+          {/* <MultipleImgComp/> */}
+          {/* <UserComp user="Ajinkya"/>
+          <UserComp user="Aman"/>
+          <UserComp user="Krushna"/>
+          <UserComp user="Abhi"/>
+          <UserComp user="Wagh"/> */}
+          {/* <ErrorBoundaryComp>
+            <UserComp user="Ajinkya"/>
+          </ErrorBoundaryComp>
+          <ErrorBoundaryComp>
+            <UserComp user="Aman"/>
+          </ErrorBoundaryComp>
+          <ErrorBoundaryComp>
+            <UserComp user="Krushna"/>
+          </ErrorBoundaryComp>
+          <ErrorBoundaryComp>
+            <UserComp user="Abhi"/>
+          </ErrorBoundaryComp>
+          <ErrorBoundaryComp>
+            <UserComp user="Wagh"/>
+          </ErrorBoundaryComp> */}
+          {/* <UseStateHookComp/> */}
+          {/* <UseEffectHookComp/> */}
+          <MyFormComp/>
 
 
     </div>
