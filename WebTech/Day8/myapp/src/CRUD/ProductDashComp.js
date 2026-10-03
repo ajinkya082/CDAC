@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 const ProductDashComp = () => {
     const [products,setProducts]=useState([]);
@@ -26,9 +26,10 @@ const ProductDashComp = () => {
     }
     return (
         <div>
-            {/* <h2>This is ProductDashComp</h2> */}
-            {/* <Link to="productAdd" className='btn btn-secondary btn-sm'>Product Add</Link>{" "}
-            <Link to="ProductUpdate" className='btn btn-danger btn-sm'>Product Update</Link>{" "} */}
+            <h2>This is ProductDashComp</h2> 
+             <Link to="/dashboard/productAdd" className='btn btn-secondary btn-sm'>Product Add</Link>{" "}
+            <Link to="ProductUpdate" className='btn btn-danger btn-sm'>Product Update</Link>{" "}
+            {/* <Outlet/> */}
             <table className='table table-bordered table-hover'>
                 <thead>
                     <tr>
