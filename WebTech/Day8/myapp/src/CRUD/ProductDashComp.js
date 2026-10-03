@@ -27,8 +27,8 @@ const ProductDashComp = () => {
     return (
         <div>
             <h2>This is ProductDashComp</h2> 
-             <Link to="/dashboard/productAdd" className='btn btn-secondary btn-sm'>Product Add</Link>{" "}
-            <Link to="ProductUpdate" className='btn btn-danger btn-sm'>Product Update</Link>{" "}
+             <Link to="/dashboard/productAdd" className='btn btn-danger btn-sm mb-2'>Product Add</Link>{" "}
+            {/* <Link to="ProductUpdate" className='btn btn-danger btn-sm'>Product Update</Link>{" "} */}
             {/* <Outlet/> */}
             <table className='table table-bordered table-hover'>
                 <thead>
@@ -46,7 +46,8 @@ const ProductDashComp = () => {
                             <td>{val.pquan}</td>
                             <td>{val.pcom}</td>
                             <td>
-                                <button type='button' className='btn btn-outline-danger' onClick={()=>deleteproduct(val.pid)}>Delete</button>
+                                <button type='button' className='btn btn-outline-danger btn-sm' onClick={()=>deleteproduct(val.pid)}>Delete</button>{" "}
+                                <Link to={`/dashboard/productUpdate/${val.pid}`} className='btn btn-success btn-sm'>Edit</Link>
                             </td>
                         </tr>
                     })

@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             },
             {path:"productDashboard",element:<ProductDashComp/>},
             {path:"productAdd",element:<ProductAddComp/>},
-            {path:"productUpdate",element:<ProductUpdateComp/>}
+            {path:"productUpdate/:pid",element:<ProductUpdateComp/>}
         ]
     },
 
