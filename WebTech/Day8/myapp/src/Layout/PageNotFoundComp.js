@@ -3,7 +3,7 @@ import React from 'react'
 const PageNotFoundComp = () => {
     return (
         <div>
-            <h1>404... Page Not  Found</h1>
+            <div className='text-center bg-blue-700'>404... Page Not  Found</div>
         </div>
     )
 }

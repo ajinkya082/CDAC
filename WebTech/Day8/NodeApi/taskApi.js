@@ -27,6 +27,17 @@ app.get('/product', (req, res, next) => {
     });
 
 });
+// // naming routing
+// app.get('/user', (req, res, next) => {
+
+//     con.query("SELECT * FROM users", (error, result) => {
+
+//         if (error) throw error;
+
+//         res.send(result);
+//     });
+
+// });
 
 // parameterized routing
 app.get('/product/:id', (req, res, next) => {

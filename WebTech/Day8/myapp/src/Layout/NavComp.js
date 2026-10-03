@@ -8,7 +8,8 @@ const NavComp = () => {
             <Link to="list" className='btn btn-primary btn-sm'>List</Link>{" "}
             <Link to="hooks" className='btn btn-primary btn-sm'>Hooks</Link>{" "}
             <Link to="myimages" className='btn btn-primary btn-sm'>Imgaes</Link>{" "}
-            <Link to='productDashboard'className='btn btn-primary btn-sm'>Product Dash</Link>
+            <Link to='productDashboard'className='btn btn-primary btn-sm'>Product Dash</Link>{" "}
+            <Link to="userListComp" className='btn btn-primary btn-sm'>UserList</Link>
         </div>
     )
 }

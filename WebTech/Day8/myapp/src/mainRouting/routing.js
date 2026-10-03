@@ -10,10 +10,16 @@ import DashboardComp from "../Layout/DashboardComp"
 import ProductAddComp from "../CRUD/ProductAddComp";
 import ProductUpdateComp from "../CRUD/ProductUpdateComp";
 import ProductDashComp from "../CRUD/ProductDashComp";
+import UserListComp from "../component/UserListComp";
+import LoginComp from "../Layout/LoginComp";
+import ProtectedRoute from "./ProtectedRoute";
+
 
 const router = createBrowserRouter([
+    {path:"/",element:<LoginComp/>},
     {
-        path: "dashboard", element: <DashboardComp />, children: [
+        path: "dashboard", element: <ProtectedRoute Component={DashboardComp} />, 
+        children: [
             //1.Default routing
             { path: "", element: <MyCarouselComp /> },
             //2.Naming routing
@@ -32,7 +38,8 @@ const router = createBrowserRouter([
             },
             {path:"productDashboard",element:<ProductDashComp/>},
             {path:"productAdd",element:<ProductAddComp/>},
-            {path:"productUpdate/:pid",element:<ProductUpdateComp/>}
+            {path:"productUpdate/:pid",element:<ProductUpdateComp/>},
+            {path:"userListComp",element:<UserListComp/>}
         ]
     },
 
