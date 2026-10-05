@@ -1,0 +1,166 @@
+1. Create the following table
+Salary table 
+Empno	number(3)
+Ename varchar2(20)
+Hiredate date
+Sal number(10,2)
+
+create table salary(
+empno numeric(2),
+ename varchar(20),
+hiredate date,
+sal numeric(10,2));
+
+
+2. Insert 5 records in the table
+insert into salary values(1,'Ajinkya','2026-02-06',50000);
+insert into salary values(2,'Paras','2026-11-27',12000);
+insert into salary values(3,'Aman','2023-06-10',45000);
+insert into salary values(4,'Vivek','2024-09-15',65000);
+insert into salary values(5,'Anand','2025-12-26',60000);
+
+3. Add a new column commission in the table with the data type  numeric(10,2))
+Ans->alter table salary
+    -> add comm numeric(10,2);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc salary;
++----------+---------------+------+-----+---------+-------+
+| Field    | Type          | Null | Key | Default | Extra |
++----------+---------------+------+-----+---------+-------+
+| empno    | decimal(2,0)  | YES  |     | NULL    |       |
+| ename    | varchar(20)   | YES  |     | NULL    |       |
+| hiredate | date          | YES  |     | NULL    |       |
+| sal      | decimal(10,2) | YES  |     | NULL    |       |
+| comm     | decimal(10,2) | YES  |     | NULL    |       |
++----------+---------------+------+-----+---------+-------+
+
+4. Add a new column mgr in the table with the data type  number(4)
+alter table salary
+    -> drop mgr;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table salary
+    -> add mgr numeric(4);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc salary;
++----------+---------------+------+-----+---------+-------+
+| Field    | Type          | Null | Key | Default | Extra |
++----------+---------------+------+-----+---------+-------+
+| empno    | decimal(2,0)  | YES  |     | NULL    |       |
+| ename    | varchar(20)   | YES  |     | NULL    |       |
+| hiredate | date          | YES  |     | NULL    |       |
+| sal      | decimal(10,2) | YES  |     | NULL    |       |
+| comm     | decimal(10,2) | YES  |     | NULL    |       |
+| mgr      | decimal(4,0)  | YES  |     | NULL    |       |
++----------+---------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+5.Add a primary key constraint for empno column
+ alter table salary
+    -> add primary key(empno);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc salary;
++----------+---------------+------+-----+---------+-------+
+| Field    | Type          | Null | Key | Default | Extra |
++----------+---------------+------+-----+---------+-------+
+| empno    | decimal(2,0)  | NO   | PRI | NULL    |       |
+| ename    | varchar(20)   | YES  |     | NULL    |       |
+| hiredate | date          | YES  |     | NULL    |       |
+| sal      | decimal(10,2) | YES  |     | NULL    |       |
+| comm     | decimal(10,2) | YES  |     | NULL    |       |
+| mgr      | decimal(4,0)  | YES  |     | NULL    |       |
++----------+---------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+6.Add  a check constraint for sal column as sal > 1000
+
+mysql> alter table salary
+    -> add check(sal>1000);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+7.. Add  a check constraint for comm column as  comm < 100000
+
+alter table salary
+    -> add check(comm<100000);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+8. rename the col hiredate as doj
+alter table salary
+    -> change hiredate doj date;
+
+9 rename the col ename as name 
+alter table salary
+    -> change ename name varchar(20);
+
+10.Modify the size for ename column to be varchar2(40)
+ alter table salary
+    -> modify name varchar(40);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc salary;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| empno | decimal(2,0)  | NO   | PRI | NULL    |       |
+| name  | varchar(40)   | YES  |     | NULL    |       |
+| doj   | date          | YES  |     | NULL    |       |
+| sal   | decimal(10,2) | YES  |     | NULL    |       |
+| comm  | decimal(10,2) | YES  |     | NULL    |       |
+| mgr   | decimal(4,0)  | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+11. Rename the table as sal_table 
+ alter table salary
+    -> rename sal;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc sal;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| empno | decimal(2,0)  | NO   | PRI | NULL    |       |
+| name  | varchar(40)   | YES  |     | NULL    |       |
+| doj   | date          | YES  |     | NULL    |       |
+| sal   | decimal(10,2) | YES  |     | NULL    |       |
+| comm  | decimal(10,2) | YES  |     | NULL    |       |
+| mgr   | decimal(4,0)  | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

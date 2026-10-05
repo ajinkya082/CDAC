@@ -1,0 +1,261 @@
+-- 1 create a procedure "check_marks" to  accept the marks from the user and 
+if marks 
+>= 60 display first class , 
+<60 and >=50 display 2nd class
+>=35 and  <50 : pass class
+< 35 failed
+--create stored procedure for following
+secon
+ delimiter //
+ create procedure check_marks(in pmarks int )
+   begin
+     declare result varchar(20);
+     set @mark=pmarks;
+     if @mark>=60 then
+     set result='first class';
+     elseif @mark<60 and @mark>=50 then
+     set result ='second class';
+     elseif @mark<50 and @mark>=35 then
+     set result ='pass class';
+     elseif @mark<35 then
+     set result = 'failed';
+     end if;
+     select result;
+     end
+     //
+mysql> delimiter ;
+mysql> call check_marks(60);
++-------------+
+| result      |
++-------------+
+| first class |
++-------------+
+1 row in set (0.00 sec)
+
+ call check_marks(30);
++--------+
+| result |
++--------+
+| failed |
++--------+
+1 row in set (0.00 sec)
+
+2. accept ename from the user check the sal of the same,
+if sal < 2000 , delete the record for the same employee
+delimiter //
+ create procedure check_sal(in pname varchar(20) )
+   begin
+	declare psal decimal(10,2);
+    select sal into psal from emp where ename = pname; 
+
+    select ename,sal from emp where ename = pname; 
+
+     if psal <2000 then
+	delete from emp
+	where ename=pname;
+	end if;
+     end
+     //
+ delimiter ;
+delimiter ;
+mysql> call check_sal('king');
++-------+---------+
+| ename | sal     |
++-------+---------+
+| KING  | 5000.00 |
++-------+---------+
+1 row in set (0.00 sec)
+
+3. accept deptno from the user display the rows for the same dept
+delimiter //
+ create procedure check_deptno1(in pdeptno int )
+   begin
+     select * from emp where deptno=pdeptno;
+     end
+     //
+  call check_deptno1(10)//
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+
+
+4. accept job from the user display the rows for the same dept
+mysql>  create procedure check_job1(in pjob varchar(20) )
+    ->    begin
+    ->      select * from emp where deptno in (select deptno from emp where job=pjob);
+    ->      end
+    ->      //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>  call check_job1('clerk')//
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+13 rows in set (0.01 sec)
+
+-- while loop assignment 
+--create procedure for
+5. calculate the total of first 20 number using while loop
+delimiter //
+ create procedure totalsum()
+     begin
+     set @number=1;
+     set @sum=0;
+     while(@number<=20)
+     do
+     select @sum;
+     set @sum=@sum+@number;
+     set @number=@number+1;
+     end while;
+     end 
+     //
+    
+
+6. display your name 10 times using the while loop
+delimiter //
+ create procedure name()
+     begin
+     declare name varchar(20);
+     set @number=1;
+     while(@number<=10)
+     do
+     set name='Ajinkya';
+     select name;
+     set @number=@number+1;
+     end while;
+     end 
+     //
+
+    call name()//
+
+3. display table of 5 using the while loop
+delimiter //
+ create procedure table1()
+     begin
+     set @tabnumber=5;
+     set @number=1;
+     set @tableof=0;
+     while(@number<=10)
+     do
+     set @tableof=@tabnumber*@number;
+     select @tableof;
+     set @number=@number+1;
+     end while;
+     end 
+     //
+
+     call evenno()//
+
+4. display the first 10 even numbers
+delimiter //
+ create procedure evenno()
+     begin
+     declare result varchar(20);
+     set @number=1;
+     while(@number<=20)
+     do
+     if mod(@number,2)=0 then
+     set result='even number';
+     select @number;
+     end if;
+     set @number=@number+1;
+     end while;
+     end 
+     //
+
+
+
+5. display the first 10 odd numbers
+delimiter //
+ create procedure oddno()
+     begin
+     declare result varchar(20);
+     set @number=1;
+     while(@number<=20)
+     do
+     if mod(@number,2)!=0 then
+     set result='odd number';
+     select @number;
+     end if;
+     set @number=@number+1;
+     end while;
+     end 
+     //
+
+     call oddno()//
+6. display  even numbers between 20 to 40
+delimiter //
+
+ create procedure evenn()
+     begin
+     declare result varchar(20);
+     set @number=20;
+     while(@number<=40)
+     do
+     if mod(@number,2)=0 then
+     set result='even number';
+     select @number;
+     end if;
+     set @number=@number+1;
+     end while;
+     end 
+     //
+      call evenn()//
+delimiter ;
+7. accept a deptno from the user and return number of employees working in the same department and the max salary for  the same dept
+delimiter //
+
+create procedure dept_details(in pdeptno int)
+begin
+    select count(*) as no_of_employees, max(sal) as max_salary
+    from emp
+    where deptno = pdeptno;
+end //
+
+ call dept_details(20)//
++-----------------+------------+
+| no_of_employees | max_salary |
++-----------------+------------+
+|               5 |    3000.00 |
++-----------------+------------+
+1 row in set (0.01 sec)
+
+
+8.create a  procedure to accept the a deptno from the user and return the totsal sal, max sal, min sal from the same dept
+
+delimiter//
+create procedure sal_detail(in pdeptno int)
+begin
+    select max(sal) as total_salary, max(sal) as max_salary,min(sal) as min_salary
+    from emp
+    where deptno = pdeptno;
+end //
+call sal_detail(20)//
++--------------+------------+------------+
+| total_salary | max_salary | min_salary |
++--------------+------------+------------+
+|      3000.00 |    3000.00 |     800.00 |
++--------------+------------+------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)

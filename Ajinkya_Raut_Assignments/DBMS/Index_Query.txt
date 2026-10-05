@@ -1,0 +1,150 @@
+1. Create the  view for Salary2 table  which includes the following columns
+
+Empno	number(3)
+Ename varchar2(20)
+Hiredate date
+Sal number(10,2)
+
+create table salary(
+empno numeric(3),
+ename varchar(20),
+hiredate date,
+sal numeric(10,2));
+
+ create view salary2
+    -> as
+    -> select * from salary;
+
+2. Insert 2 records in the view
+	
+	insert into salary2 values(1,'ajinkya','2004-02-08',200000);
+
+	insert into salary2 values(2,'sarvesh','2005-11-18',50000);
+	
+ select * from salary2;
++-------+---------+------------+-----------+
+| empno | ename   | hiredate   | sal       |
++-------+---------+------------+-----------+
+|     1 | ajinkya | 2004-02-08 | 200000.00 |
+|     2 | sarvesh | 2005-11-18 |  50000.00 |
++-------+---------+------------+-----------+
+2 rows in set (0.00 sec)
+
+3. Update the view and change the ename for one of the records
+	update salary2
+	set ename='sairaj'
+	where empno=1;
+
+	update salary
+	set empno=12
+	where ename='sairaj';
+	
+mysql> select * from salary2;
++-------+---------+------------+-----------+
+| empno | ename   | hiredate   | sal       |
++-------+---------+------------+-----------+
+|     1 | sairaj  | 2004-02-08 | 200000.00 |
+|     2 | sarvesh | 2005-11-18 |  50000.00 |
++-------+---------+------------+-----------+
+2 rows in set (0.00 sec)
+
+4. Delete the records from the view
+	delete from salary2
+	where empno=2;
+	select * from salary2;
++-------+--------+------------+-----------+
+| empno | ename  | hiredate   | sal       |
++-------+--------+------------+-----------+
+|     1 | sairaj | 2004-02-08 | 200000.00 |
++-------+--------+------------+-----------+
+1 row in set (0.00 sec)
+5. Drop the view
+	drop view salary2;
+
+
+6. Create a index on the ename column for salary table in descending order 
+	create index ename_id on salary(ename desc);
+
+7. Drop the index on ename
+	drop index ename_id on salary;
+
+9. Create a following table 
+Emp6
+Empno int
+Ename varchar2(20)
+Pan1 varchar2(20)
+
+	create table emp6(
+	empno int,
+	ename varchar(20),
+	pan varchar(20));
+
+11. Create a following table
+Emp7
+Empno int  
+Sal number(10,2)
+City varchar2(20)   : the allowed city are mumbai, pune, nashik
+	
+	create table emp7(
+	empno int,
+	sal numeric(10,2),
+	city varchar(20) check(city in('mumbai','pune','nashik')));
+	
+	
+12.Alter the table set Empno  as Primary key
+	
+	alter table  emp7
+	add primary key(empno);
+desc emp7;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| empno | int           | NO   | PRI | NULL    |       |
+| sal   | decimal(10,2) | YES  |     | NULL    |       |
+| city  | varchar(20)   | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+13. Create the following table
+Emptravel
+Empno number(4)
+St_date date
+Destination varchar2(20)
+End_date date
+
+Specify the primary key as composite key as empno + st_date
+
+	create table emptravel(
+	empno numeric(4),
+	st_date date,
+	designation varchar(20),
+	end_date date,
+	primary key(empno,st_date));
+	
+	desc emptravel;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| empno       | decimal(4,0) | NO   | PRI | NULL    |       |
+| st_date     | date         | NO   | PRI | NULL    |       |
+| designation | varchar(20)  | YES  |     | NULL    |       |
+| end_date    | date         | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+14. Add 2 records in the same table 
+
+insert into emptravel values(1,'2026-10-13','manager','2026-10-16');
+
+insert into emptravel values(2,'2026-9-30','salesman','2026-9-20');
+
+select * from emptravel;
++-------+------------+-------------+------------+
+| empno | st_date    | designation | end_date   |
++-------+------------+-------------+------------+
+|     1 | 2026-10-13 | manager     | 2026-10-16 |
+|     2 | 2026-09-30 | salesman    | 2026-09-20 |
++-------+------------+-------------+------------+
+2 rows in set (0.00 sec)
+

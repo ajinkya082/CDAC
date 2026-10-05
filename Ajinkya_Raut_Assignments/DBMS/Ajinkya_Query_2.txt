@@ -1,0 +1,834 @@
+1)	Select the employee in department 30.
+	
+	mysql> select * from emp
+    	where deptno=30;
+	+-------+--------+----------+------+------------+---------+---------+--------+
+	| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
+	+-------+--------+----------+------+------------+---------+---------+--------+
+	|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+	|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+	|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+	|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+	|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+	|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+	+-------+--------+----------+------+------------+---------+---------+--------+
+	6 rows in set (0.00 sec)
+
+2)	List the names, numbers and department of all clerks
+
+	mysql> select ename,empno,deptno from emp
+    	where job='clerk';
+	+--------+-------+--------+
+	| ename  | empno | deptno |
+	+--------+-------+--------+
+	| SMITH  |  7369 |     20 |
+	| ADAMS  |  7876 |     20 |
+	| JAMES  |  7900 |     30 |
+	| MILLER |  7934 |     10 |
+	+--------+-------+--------+
+	4 rows in set (0.01 sec)
+
+3)	Find the depart numbers and the name of employee of all dept with Deptno greater or 	equal to 20.
+	 select deptno,ename from emp
+    	 where deptno>=20;
++--------+--------+
+| deptno | ename  |
++--------+--------+
+|     20 | SMITH  |
+|     30 | ALLEN  |
+|     30 | WARD   |
+|     20 | JONES  |
+|     30 | MARTIN |
+|     30 | BLAKE  |
+|     20 | SCOTT  |
+|     30 | TURNER |
+|     20 | ADAMS  |
+|     30 | JAMES  |
+|     20 | FORD   |
++--------+--------+
+11 rows in set (0.00 sec)
+
+4)	Find the employees whose commission is greater than their salary.
+
+	 select * from emp
+    	 where comm>sal;
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+1 row in set (0.00 sec)
+
+5)	Find the employees whose commission is greater than 60 percent of their salary.
+	
+	select ename,sal from emp
+    -> where comm>(sal*0.6);
++--------+---------+
+| ename  | sal     |
++--------+---------+
+| MARTIN | 1250.00 |
++--------+---------+
+1 row in set (0.00 sec)
+
+6)	Find the employee whose commission is greater than 50 percent of their salary.
+
+	 select ename,sal,comm from emp
+    -> where comm>sal*0.5;
++--------+---------+---------+
+| ename  | sal     | comm    |
++--------+---------+---------+
+| MARTIN | 1250.00 | 1400.00 |
++--------+---------+---------+
+1 row in set (0.00 sec)
+
+7)	List the name, job and salary of all employees in dept 20 who earn more than 2000.
+	select ename,job,sal from emp
+    -> where deptno in(20) and sal>2000;
++-------+---------+---------+
+| ename | job     | sal     |
++-------+---------+---------+
+| JONES | MANAGER | 2975.00 |
+| SCOTT | ANALYST | 3000.00 |
+| FORD  | ANALYST | 3000.00 |
++-------+---------+---------+
+3 rows in set (0.00 sec)
+
+8)	Find all salesmen in dept 30 whose salary is greater than or equal to Rs. 1500.
+	select ename,sal, deptno from emp
+    -> where deptno=30 and sal>=1500;
++--------+---------+--------+
+| ename  | sal     | deptno |
++--------+---------+--------+
+| ALLEN  | 1600.00 |     30 |
+| BLAKE  | 2850.00 |     30 |
+| TURNER | 1500.00 |     30 |
++--------+---------+--------+
+3 rows in set (0.00 sec)
+
+9)	Find all the employees whose job is either a president or manager
+	 select ename,job from emp
+    -> where job='president' or job= 'manager';
++-------+-----------+
+| ename | job       |
++-------+-----------+
+| JONES | MANAGER   |
+| BLAKE | MANAGER   |
+| CLARK | MANAGER   |
+| KING  | PRESIDENT |
++-------+-----------+
+4 rows in set (0.00 sec)
+
+10)	Find all managers who are not in dept 30.
+	 select ename ,job,deptno from emp
+    -> where job='manager' and deptno !=30;
++-------+---------+--------+
+| ename | job     | deptno |
++-------+---------+--------+
+| JONES | MANAGER |     20 |
+| CLARK | MANAGER |     10 |
++-------+---------+--------+
+2 rows in set (0.00 sec)
+
+
+11)	Find the details of all managers and clerks in dept 10.
+	 select * from emp
+    -> where deptno=10 and job in('manager','clerk');
+	
+	OR
+	 select * from emp
+    -> where (deptno=10 and job='clerk') or(deptno=10 and job='manager');
+	
++-------+--------+---------+------+------------+---------+------+--------+
+| empno | ename  | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+---------+------+------------+---------+------+--------+
+|  7782 | CLARK  | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7934 | MILLER | CLERK   | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+---------+------+------------+---------+------+--------+
+2 rows in set (0.00 sec)
+
+12)	Find the details of all manager (in any dept) and all clerks in dept 10.
+	 select * from emp
+    -> where job='manager' or job='clerk' and deptno=10;
++-------+--------+---------+------+------------+---------+------+--------+
+| empno | ename  | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+---------+------+------------+---------+------+--------+
+|  7566 | JONES  | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE  | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK  | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7934 | MILLER | CLERK   | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+---------+------+------------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+13)	Find the details of all managers in dept 10 and all clerks in dept 20.
+	 select * from emp
+    -> where job ='manager' and deptno=10 or job='clerk' and deptno=20;
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+14)	Find the details of all the manager in dept 10, all clerk in dept 20  
+15)	And all employees who are neither clerks nor manager but whose salary is greater than or equal to Rs. 2000.
+	select * from emp
+    -> where job='manager' and deptno=10 or job='clerk' and deptno=20 or (job not in('manager','clerk') and sal>=2000);
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7782 | CLARK | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7876 | ADAMS | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+-----------+------+------------+---------+------+--------+
+6 rows in set (0.00 sec)
+
+16)	Find the names of everyone in deptno 20 who is neither a clerk nor a Manager.
+	select ename from emp
+    -> where deptno=20 and job not in('clerk','manager');
++-------+
+| ename |
++-------+
+| SCOTT |
+| FORD  |
++-------+
+2 rows in set (0.00 sec)
+
+17)	Find the employees who earns between Rs. 1200 and Rs.1400.
+	select ename,sal,job from emp
+    -> where sal between 1200 and 1400;
++--------+---------+----------+
+| ename  | sal     | job      |
++--------+---------+----------+
+| WARD   | 1250.00 | SALESMAN |
+| MARTIN | 1250.00 | SALESMAN |
+| MILLER | 1300.00 | CLERK    |
++--------+---------+----------+
+
+18)	Find the employees who are clerks, analysts or salesman.
+	select ename,job from emp
+    -> where job in('clerk','analyst','salesman');
++--------+----------+
+| ename  | job      |
++--------+----------+
+| SMITH  | CLERK    |
+| ALLEN  | SALESMAN |
+| WARD   | SALESMAN |
+| MARTIN | SALESMAN |
+| SCOTT  | ANALYST  |
+| TURNER | SALESMAN |
+| ADAMS  | CLERK    |
+| JAMES  | CLERK    |
+| FORD   | ANALYST  |
+| MILLER | CLERK    |
++--------+----------+
+10 rows in set (0.00 sec)
+	
+19)	Find the employees who are not clerks, analyst or salesman.
+	select ename,job from emp
+    -> where job not in('clerk','analyst','salesman');
++-------+-----------+
+| ename | job       |
++-------+-----------+
+| JONES | MANAGER   |
+| BLAKE | MANAGER   |
+| CLARK | MANAGER   |
+| KING  | PRESIDENT |
++-------+-----------+
+4 rows in set (0.00 sec)
+
+20)	Find the employees who do not receive a commission.
+	 select * from emp
+    -> where comm is null;
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+10 rows in set (0.00 sec)
+
+
+21)	Find the employee whose commission is Rs. 0.
+	select * from emp
+    -> where comm=0;
++-------+--------+----------+------+------------+---------+------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+----------+------+------------+---------+------+--------+
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 | 0.00 |     30 |
++-------+--------+----------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+22)	Find the different jobs of the employees receiving commission.
+	 select job from emp
+    -> where comm>1;
++----------+
+| job      |
++----------+
+| SALESMAN |
+| SALESMAN |
+| SALESMAN |
++----------+
+3 rows in set (0.00 sec)
+
+23)	Find all employees who do not receive a commission or whose Commission is less than 	Rs. 100. 
+	select ename,job from emp
+    -> where comm<100 or comm is null;
++--------+-----------+
+| ename  | job       |
++--------+-----------+
+| SMITH  | CLERK     |
+| JONES  | MANAGER   |
+| BLAKE  | MANAGER   |
+| CLARK  | MANAGER   |
+| SCOTT  | ANALYST   |
+| KING   | PRESIDENT |
+| TURNER | SALESMAN  |
+| ADAMS  | CLERK     |
+| JAMES  | CLERK     |
+| FORD   | ANALYST   |
+| MILLER | CLERK     |
++--------+-----------+
+11 rows in set (0.00 sec)
+
+24)	All employees not receiving commission are entailed to Rs. 250, Show the net earnings of all employees.
+select ename , comm,sal, ifnull(comm,250)+sal netsal from emp;
++--------+---------+---------+---------+
+| ename  | comm    | sal     | netsal  |
++--------+---------+---------+---------+
+| SMITH  |    NULL |  800.00 | 1050.00 |
+| ALLEN  |  300.00 | 1600.00 | 1900.00 |
+| WARD   |  500.00 | 1250.00 | 1750.00 |
+| JONES  |    NULL | 2975.00 | 3225.00 |
+| MARTIN | 1400.00 | 1250.00 | 2650.00 |
+| BLAKE  |    NULL | 2850.00 | 3100.00 |
+| CLARK  |    NULL | 2450.00 | 2700.00 |
+| SCOTT  |    NULL | 3000.00 | 3250.00 |
+| KING   |    NULL | 5000.00 | 5250.00 |
+| TURNER |    0.00 | 1500.00 | 1500.00 |
+| ADAMS  |    NULL | 1100.00 | 1350.00 |
+| JAMES  |    NULL |  950.00 | 1200.00 |
+| FORD   |    NULL | 3000.00 | 3250.00 |
+| MILLER |    NULL | 1300.00 | 1550.00 |
++--------+---------+---------+---------+
+
+25)	Find all employees whose total earnings are greater than Rs. 2000.
+	 select ename
+    -> from emp
+    -> where ifnull(comm,250)+sal >2000;
++--------+
+| ename  |
++--------+
+| JONES  |
+| MARTIN |
+| BLAKE  |
+| CLARK  |
+| SCOTT  |
+| KING   |
+| FORD   |
++--------+
+7 rows in set (0.00 sec)
+
+26)	Find all employees whose names begin with m.
+	select ename
+    -> from emp
+    -> where ename like('m%');
++--------+
+| ename  |
++--------+
+| MARTIN |
+| MILLER |
++--------+
+2 rows in set (0.00 sec)
+
+27)	Find all employees whose names end with m.
+	 select ename
+    -> from emp
+    -> where ename like('%m')
+    -> ;
+Empty set (0.00 sec)
+
+28)	Find all employees whose names contain the letter m in any case.
+	select ename
+    -> from emp
+    -> where ename like ('%m%');
++--------+
+| ename  |
++--------+
+| SMITH  |
+| MARTIN |
+| ADAMS  |
+| JAMES  |
+| MILLER |
++--------+
+
+29)	Find the employees whose names are 5 characters long and end with n.
+	 select ename
+    -> from emp
+    -> where ename like ('_____%m');
+Empty set (0.00 sec)
+
+30)	Find the employees who have the letter i as the 2nd letter in their name
+	select ename
+    -> from emp
+    -> where ename like('_i%');
++--------+
+| ename  |
++--------+
+| KING   |
+| MILLER |
++--------+
+
+31)	Find all employees hired in month of February (of any year).
+	 select ename , hiredate
+    -> from emp
+    -> where hiredate like('_____02%');
++-------+------------+
+| ename | hiredate   |
++-------+------------+
+| ALLEN | 1981-02-20 |
+| WARD  | 1981-02-22 |
++-------+------------+
+
+34)	Find the managers hired in the year 1981
+	select ename,mgr , hiredate
+    -> from emp
+    -> where hiredate between '1981-01-01' and'1981-12-31';
++--------+------+------------+
+| ename  | mgr  | hiredate   |
++--------+------+------------+
+| ALLEN  | 7698 | 1981-02-20 |
+| WARD   | 7698 | 1981-02-22 |
+| JONES  | 7839 | 1981-04-02 |
+| MARTIN | 7698 | 1981-09-28 |
+| BLAKE  | 7839 | 1981-05-01 |
+| CLARK  | 7839 | 1981-06-09 |
+| KING   | NULL | 1981-11-17 |
+| TURNER | 7698 | 1981-09-08 |
+| JAMES  | 7698 | 1981-12-03 |
+| FORD   | 7566 | 1981-12-03 |
++--------+------+------------+
+10 rows in set (0.00 sec)
+
+35)	Display the length of the name of all employees.
+	select length(ename) from emp;
++---------------+
+| length(ename) |
++---------------+
+|             5 |
+|             5 |
+|             4 |
+|             5 |
+|             6 |
+|             5 |
+|             5 |
+|             5 |
+|             4 |
+|             6 |
+|             5 |
+|             5 |
+|             4 |
+|             6 |
++---------------+
+
+36)	Show the first three characters of the names of all employees
+	 select substr(ename,1,3) from emp;
++-------------------+
+| substr(ename,1,3) |
++-------------------+
+| SMI               |
+| ALL               |
+| WAR               |
+| JON               |
+| MAR               |
+| BLA               |
+| CLA               |
+| SCO               |
+| KIN               |
+| TUR               |
+| ADA               |
+| JAM               |
+| FOR               |
+| MIL               |
++-------------------+
+14 rows in set (0.00 sec)
+
+37)	Display the names of all employees with any 'b
+	select ename
+    -> from emp
+    -> where ename like('%b%');
++-------+
+| ename |
++-------+
+| BLAKE |
++-------+
+
+38)	Show the salary of all employees rounding it to the nearest Rs. 1000.
+	select ename, round(sal,-3) from emp;
++--------+---------------+
+| ename  | round(sal,-3) |
++--------+---------------+
+| SMITH  |          1000 |
+| ALLEN  |          2000 |
+| WARD   |          1000 |
+| JONES  |          3000 |
+| MARTIN |          1000 |
+| BLAKE  |          3000 |
+| CLARK  |          2000 |
+| SCOTT  |          3000 |
+| KING   |          5000 |
+| TURNER |          2000 |
+| ADAMS  |          1000 |
+| JAMES  |          1000 |
+| FORD   |          3000 |
+| MILLER |          1000 |
++--------+---------------+
+14 rows in set (0.00 sec)
+
+39)	Display the name of all employees, and their bonus. Assume each Employee gets a 	bonus of 20 percent of his salary subject to the Maximum of Rs. 500
+	select ename , (sal*0.2) as bonus ,least(sal*0.2,500)from emp;
++--------+----------+--------------------+
+| ename  | bonus    | least(sal*0.2,500) |
++--------+----------+--------------------+
+| SMITH  |  160.000 |            160.000 |
+| ALLEN  |  320.000 |            320.000 |
+| WARD   |  250.000 |            250.000 |
+| JONES  |  595.000 |            500.000 |
+| MARTIN |  250.000 |            250.000 |
+| BLAKE  |  570.000 |            500.000 |
+| CLARK  |  490.000 |            490.000 |
+| SCOTT  |  600.000 |            500.000 |
+| KING   | 1000.000 |            500.000 |
+| TURNER |  300.000 |            300.000 |
+| ADAMS  |  220.000 |            220.000 |
+| JAMES  |  190.000 |            190.000 |
+| FORD   |  600.000 |            500.000 |
+| MILLER |  260.000 |            260.000 |
++--------+----------+--------------------+
+
+40)	Display the name of all employees, and their bonus. Assume each employee gets a 	bonus of 20 percent of his salary subject to the Maximum of Rs. 200
+	select ename , (sal*0.2) as bonus ,least(sal*0.2,200)from emp;
++--------+----------+--------------------+
+| ename  | bonus    | least(sal*0.2,200) |
++--------+----------+--------------------+
+| SMITH  |  160.000 |            160.000 |
+| ALLEN  |  320.000 |            200.000 |
+| WARD   |  250.000 |            200.000 |
+| JONES  |  595.000 |            200.000 |
+| MARTIN |  250.000 |            200.000 |
+| BLAKE  |  570.000 |            200.000 |
+| CLARK  |  490.000 |            200.000 |
+| SCOTT  |  600.000 |            200.000 |
+| KING   | 1000.000 |            200.000 |
+| TURNER |  300.000 |            200.000 |
+| ADAMS  |  220.000 |            200.000 |
+| JAMES  |  190.000 |            190.000 |
+| FORD   |  600.000 |            200.000 |
+| MILLER |  260.000 |            200.000 |
++--------+----------+--------------------+
+14 rows in set (0.00 sec)
+
+41)	Display the details of all employees, sorted on the names.
+	select ename
+    -> from emp
+    -> order by ename ;
++--------+
+| ename  |
++--------+
+| ADAMS  |
+| ALLEN  |
+| BLAKE  |
+| CLARK  |
+| FORD   |
+| JAMES  |
+| JONES  |
+| KING   |
+| MARTIN |
+| MILLER |
+| SCOTT  |
+| SMITH  |
+| TURNER |
+| WARD   |
++--------+
+
+42)	Display the name of all employees, based on their tenure, with the oldest employee coming first.
+	 select ename, hiredate
+    -> from emp
+    -> order by hiredate asc;
++--------+------------+
+| ename  | hiredate   |
++--------+------------+
+| SMITH  | 1980-12-17 |
+| ALLEN  | 1981-02-20 |
+| WARD   | 1981-02-22 |
+| JONES  | 1981-04-02 |
+| BLAKE  | 1981-05-01 |
+| CLARK  | 1981-06-09 |
+| TURNER | 1981-09-08 |
+| MARTIN | 1981-09-28 |
+| KING   | 1981-11-17 |
+| JAMES  | 1981-12-03 |
+| FORD   | 1981-12-03 |
+| MILLER | 1982-01-23 |
+| SCOTT  | 1982-12-09 |
+| ADAMS  | 1983-01-12 |
++--------+------------+
+
+43)	Display the names, job and salary of all employees sorted on jobs and Salary.
+	select ename,job,sal
+    -> from emp
+    -> order by job,sal;
++--------+-----------+---------+
+| ename  | job       | sal     |
++--------+-----------+---------+
+| SCOTT  | ANALYST   | 3000.00 |
+| FORD   | ANALYST   | 3000.00 |
+| SMITH  | CLERK     |  800.00 |
+| JAMES  | CLERK     |  950.00 |
+| ADAMS  | CLERK     | 1100.00 |
+| MILLER | CLERK     | 1300.00 |
+| CLARK  | MANAGER   | 2450.00 |
+| BLAKE  | MANAGER   | 2850.00 |
+| JONES  | MANAGER   | 2975.00 |
+| KING   | PRESIDENT | 5000.00 |
+| WARD   | SALESMAN  | 1250.00 |
+| MARTIN | SALESMAN  | 1250.00 |
+| TURNER | SALESMAN  | 1500.00 |
+| ALLEN  | SALESMAN  | 1600.00 |
++--------+-----------+---------+
+
+44)	Display the names, job and salary of all employees, sorted on jobs and within job, sorted on the descending order of salary
+	 select ename,job, sal
+    -> from emp
+    -> order by job , sal desc;
++--------+-----------+---------+
+| ename  | job       | sal     |
++--------+-----------+---------+
+| SCOTT  | ANALYST   | 3000.00 |
+| FORD   | ANALYST   | 3000.00 |
+| MILLER | CLERK     | 1300.00 |
+| ADAMS  | CLERK     | 1100.00 |
+| JAMES  | CLERK     |  950.00 |
+| SMITH  | CLERK     |  800.00 |
+| JONES  | MANAGER   | 2975.00 |
+| BLAKE  | MANAGER   | 2850.00 |
+| CLARK  | MANAGER   | 2450.00 |
+| KING   | PRESIDENT | 5000.00 |
+| ALLEN  | SALESMAN  | 1600.00 |
+| TURNER | SALESMAN  | 1500.00 |
+| WARD   | SALESMAN  | 1250.00 |
+| MARTIN | SALESMAN  | 1250.00 |
++--------+-----------+---------+
+		
+45)	Display the names, job and salary of all employees, sorted on Descending order of job and within job, sorted on the descending order of salary.
+	select ename,job, sal
+    -> from emp
+    -> order by job desc , sal desc;
++--------+-----------+---------+
+| ename  | job       | sal     |
++--------+-----------+---------+
+| ALLEN  | SALESMAN  | 1600.00 |
+| TURNER | SALESMAN  | 1500.00 |
+| WARD   | SALESMAN  | 1250.00 |
+| MARTIN | SALESMAN  | 1250.00 |
+| KING   | PRESIDENT | 5000.00 |
+| JONES  | MANAGER   | 2975.00 |
+| BLAKE  | MANAGER   | 2850.00 |
+| CLARK  | MANAGER   | 2450.00 |
+| MILLER | CLERK     | 1300.00 |
+| ADAMS  | CLERK     | 1100.00 |
+| JAMES  | CLERK     |  950.00 |
+| SMITH  | CLERK     |  800.00 |
+| SCOTT  | ANALYST   | 3000.00 |
+| FORD   | ANALYST   | 3000.00 |
++--------+-----------+---------+
+
+46)Display the name, month and year of all employees, sorted on the month of their hire date irrespective of the year.
+	select ename,hiredate
+    -> from emp
+    -> order by MONTH( hiredate) ;
++--------+------------+
+| ename  | hiredate   |
++--------+------------+
+| ADAMS  | 1983-01-12 |
+| MILLER | 1982-01-23 |
+| ALLEN  | 1981-02-20 |
+| WARD   | 1981-02-22 |
+| JONES  | 1981-04-02 |
+| BLAKE  | 1981-05-01 |
+| CLARK  | 1981-06-09 |
+| MARTIN | 1981-09-28 |
+| TURNER | 1981-09-08 |
+| KING   | 1981-11-17 |
+| SMITH  | 1980-12-17 |
+| SCOTT  | 1982-12-09 |
+| JAMES  | 1981-12-03 |
+| FORD   | 1981-12-03 |
++--------+------------+
+	47)	Display the name, month and year of joining of all employees, sorted on the month of their hire date, and within that on the year, with the earliest year appearing first
+	 select ename,hiredate
+    -> from emp
+    -> order by MONTH( hiredate), Year(hiredate) ;
++--------+------------+
+| ename  | hiredate   |
++--------+------------+
+| MILLER | 1982-01-23 |
+| ADAMS  | 1983-01-12 |
+| ALLEN  | 1981-02-20 |
+| WARD   | 1981-02-22 |
+| JONES  | 1981-04-02 |
+| BLAKE  | 1981-05-01 |
+| CLARK  | 1981-06-09 |
+| MARTIN | 1981-09-28 |
+| TURNER | 1981-09-08 |
+| KING   | 1981-11-17 |
+| SMITH  | 1980-12-17 |
+| JAMES  | 1981-12-03 |
+| FORD   | 1981-12-03 |
+| SCOTT  | 1982-12-09 |
++--------+------------+.
+
+33)
+select ename ,last_day(hiredate) from emp;
++--------+--------------------+
+| ename  | last_day(hiredate) |
++--------+--------------------+
+| SMITH  | 1980-12-31         |
+| ALLEN  | 1981-02-28         |
+| WARD   | 1981-02-28         |
+| JONES  | 1981-04-30         |
+| MARTIN | 1981-09-30         |
+| BLAKE  | 1981-05-31         |
+| CLARK  | 1981-06-30         |
+| SCOTT  | 1982-12-31         |
+| KING   | 1981-11-30         |
+| TURNER | 1981-09-30         |
+| ADAMS  | 1983-01-31         |
+| JAMES  | 1981-12-31         |
+| FORD   | 1981-12-31         |
+| MILLER | 1982-01-31         |
++--------+--------------------+
+14 rows in set (0.01 sec
+
+34)
+ select ename ,round(datediff(curdate(),hiredate)/365) as exps
+    -> from emp
+    -> where round(datediff(curdate(),hiredate)/365)>12;
++--------+------+
+| ename  | exps |
++--------+------+
+| SMITH  |   46 |
+| ALLEN  |   46 |
+| WARD   |   46 |
+| JONES  |   45 |
+| MARTIN |   45 |
+| BLAKE  |   45 |
+| CLARK  |   45 |
+| SCOTT  |   44 |
+| KING   |   45 |
+| TURNER |   45 |
+| ADAMS  |   44 |
+| JAMES  |   45 |
+| FORD   |   45 |
+| MILLER |   45 |
++--------+------+
+14 rows in set (0.00 sec)
+
+
+
+Q Display ename & month of hiredate
+
+select ename,Month(hiredate) from emp;
++--------+-----------------+
+| ename  | Month(hiredate) |
++--------+-----------------+
+| SMITH  |              12 |
+| ALLEN  |               2 |
+| WARD   |               2 |
+| JONES  |               4 |
+| MARTIN |               9 |
+| BLAKE  |               5 |
+| CLARK  |               6 |
+| SCOTT  |              12 |
+| KING   |              11 |
+| TURNER |               9 |
+| ADAMS  |               1 |
+| JAMES  |              12 |
+| FORD   |              12 |
+| MILLER |               1 |
++--------+-----------------+
+14 rows in set (0.00 sec)
+
+
+Q Display ename & year of hiredate
+
+mysql> select ename,year(hiredate) from emp;
++--------+----------------+
+| ename  | year(hiredate) |
++--------+----------------+
+| SMITH  |           1980 |
+| ALLEN  |           1981 |
+| WARD   |           1981 |
+| JONES  |           1981 |
+| MARTIN |           1981 |
+| BLAKE  |           1981 |
+| CLARK  |           1981 |
+| SCOTT  |           1982 |
+| KING   |           1981 |
+| TURNER |           1981 |
+| ADAMS  |           1983 |
+| JAMES  |           1981 |
+| FORD   |           1981 |
+| MILLER |           1982 |
++--------+----------------+
+14 rows in set (0.00 sec)
+
+
+Q Display ename & last_day of hiredate
+select ename,last_day(hiredate) from emp;
++--------+--------------------+
+| ename  | last_day(hiredate) |
++--------+--------------------+
+| SMITH  | 1980-12-31         |
+| ALLEN  | 1981-02-28         |
+| WARD   | 1981-02-28         |
+| JONES  | 1981-04-30         |
+| MARTIN | 1981-09-30         |
+| BLAKE  | 1981-05-31         |
+| CLARK  | 1981-06-30         |
+| SCOTT  | 1982-12-31         |
+| KING   | 1981-11-30         |
+| TURNER | 1981-09-30         |
+| ADAMS  | 1983-01-31         |
+| JAMES  | 1981-12-31         |
+| FORD   | 1981-12-31         |
+| MILLER | 1982-01-31         |
++--------+--------------------+
+14 rows in set (0.00 sec)
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+	

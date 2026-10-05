@@ -1,0 +1,129 @@
+//PRN=260843420002
+//Name = Ajinkya Govardhan Raut
+// email:ajinkyaraut0804@gmail.com
+
+//Q1Problem 1: Analyze a Given Line of Text
+
+//Write a C++ program that accepts a from the user.
+
+The program must analyze the given line and calculate:
+#include<iostream>
+using namespace std;
+int main(){
+	string line;
+	cout<<"Enter the sentence : ";
+	getline(cin,line);
+	int count_alphabet,count_ucase,count_lcase,count_word,count_digit;
+	count_alphabet=count_ucase=count_lcase=count_word=count_digit=0;
+	for(int i=0;i<line.length();i++){
+		if(line[i]>='A' && line[i]<='Z' || line[i]>='a' && line[i]<='z'){
+			count_alphabet++;
+		}
+		if(line[i]>=48 && line[i]<=57){
+			count_digit++;
+		}
+		if(line[i]!=32 && (line[i-1]==' ' || line[i]==0)){
+			count_word++;
+		}
+		if(line[i]>='A' && line[i]<='Z'){
+			count_ucase++;
+		}
+		else if(line[i]>='a' && line[i]<='z'){
+			count_lcase++;
+		}
+	}
+	cout<<"\nTotal alphabets are : " <<count_alphabet;
+	cout<<"\nTotal digits are : " <<count_digit;
+	cout<<"\nTotal words  are : " <<count_word;
+	cout<<"\nTotal upper case alphabets are : " <<count_ucase;
+	cout<<"\nTotal lower case alphabets are : " <<count_lcase;
+	return 0;
+}
+
+//Q2Problem 2: Matrix with Row-wise and Column-wise Addition
+
+#include<iostream>
+using namespace std;
+int main(){
+	int rows,columns;
+	cout<<"Enter rows and columns\n";
+	cin>>rows>>columns;
+	int m[rows][columns];
+	
+	for(int r=0;r<rows;r++){
+		for(int j=0;j<columns;j++){
+			cout<<"Enter data for m ["<<r<<"]["<<j<<"]: ";
+			cin>>m[r][j];
+		}
+	}
+	int sum_all=0;
+	cout<<"\nMatrix has : \n";
+	for(int r=0;r<rows;r++){
+		int sum=0;
+		for(int j=0;j<columns;j++){
+			cout<<m[r][j]<<"\t";
+			sum+=m[r][j];
+			sum_all+=m[r][j];
+		}
+		cout<<sum<<endl;
+	}
+		
+		
+		cout<<"\n";
+		for(int j=0;j<columns;j++){
+		int sum_col=0;
+		for(int r=0;r<rows;r++){
+			sum_col+=m[r][j];
+		}
+		cout<<sum_col<<"\t";
+	}
+	cout<<"\n\n Total sum : "<<sum_all;
+	return 0;
+}
+
+//Q3 Problem 3: Elements Above and Below Average
+
+#include<iostream>
+using namespace std;
+int main(){
+	int size;
+	cout<<"Enter size : ";
+	cin>>size;
+	int a[size];
+	int sum=0;
+	float avg;
+	int above_avg=0;
+	int below_avg=0;
+	for(int i=0;i<size;i++){
+		cout<<"\nEnter element at " <<i <<" :";
+		cin>>a[i];
+	}
+	for(int i=0;i<size;i++){
+		cout<<"\nElement at " <<i <<" is :"<<a[i];
+		sum+=a[i];
+	}
+	avg=sum/size;
+	for(int i=0;i<size;i++){
+		if(a[i]<avg){
+			below_avg++;
+			cout<<"\nElements below avg are : "<<a[i]<<",";
+		}
+		else if(a[i]>avg){
+			above_avg++;
+			cout<<"\nElements below avg are : "<<a[i]<<",";
+		}
+	}	
+	cout<<"\nSum is : "<<sum;
+	cout<<"\nAverage is : "<<avg;
+	cout<<"\nNumber of elements below average are: "<<below_avg;
+	cout<<"\nNumber of elements above average are: "<<above_avg;
+	return 0;
+}
+
+
+
+
+
+
+
+

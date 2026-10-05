@@ -1,0 +1,289 @@
+q.1)display the employee name and the manager name (use self join).
+
+	select a.ename , b.ename
+	from emp a, emp b
+	where a.mgr=b.empno;
++--------+-------+
+| ename  | ename |
++--------+-------+
+| FORD   | JONES |
+| SCOTT  | JONES |
+| JAMES  | BLAKE |
+| TURNER | BLAKE |
+| MARTIN | BLAKE |
+| WARD   | BLAKE |
+| ALLEN  | BLAKE |
+| MILLER | CLARK |
+| ADAMS  | SCOTT |
+| CLARK  | KING  |
+| BLAKE  | KING  |
+| JONES  | KING  |
+| SMITH  | FORD  |
++--------+-------+
+13 rows in set (0.00 sec)
+
+
+q.2) the above query sort by ename.
+	select a.ename , b.ename
+	from emp a, emp b
+	where a.mgr=b.empno
+	order by a.ename;
++--------+-------+
+| ename  | ename |
++--------+-------+
+| ADAMS  | SCOTT |
+| ALLEN  | BLAKE |
+| BLAKE  | KING  |
+| CLARK  | KING  |
+| FORD   | JONES |
+| JAMES  | BLAKE |
+| JONES  | KING  |
+| MARTIN | BLAKE |
+| MILLER | CLARK |
+| SCOTT  | JONES |
+| SMITH  | FORD  |
+| TURNER | BLAKE |
+| WARD   | BLAKE |
++--------+-------+
+q.3) display the employee name and his salary and  the manager name and manger salary (use self join).
+	
+	select a.ename , b.ename,a.sal,b.sal
+	from emp a, emp b
+	where a.mgr=b.empno;
++--------+-------+---------+---------+
+| ename  | ename | sal     | sal     |
++--------+-------+---------+---------+
+| FORD   | JONES | 3000.00 | 2975.00 |
+| SCOTT  | JONES | 3000.00 | 2975.00 |
+| JAMES  | BLAKE |  950.00 | 2850.00 |
+| TURNER | BLAKE | 1500.00 | 2850.00 |
+| MARTIN | BLAKE | 1250.00 | 2850.00 |
+| WARD   | BLAKE | 1250.00 | 2850.00 |
+| ALLEN  | BLAKE | 1600.00 | 2850.00 |
+| MILLER | CLARK | 1300.00 | 2450.00 |
+| ADAMS  | SCOTT | 1100.00 | 3000.00 |
+| CLARK  | KING  | 2450.00 | 5000.00 |
+| BLAKE  | KING  | 2850.00 | 5000.00 |
+| JONES  | KING  | 2975.00 | 5000.00 |
+| SMITH  | FORD  |  800.00 | 3000.00 |
++--------+-------+---------+---------+
+13 rows in set (0.00 sec)
+
+
+q.4)write a query for the inner join of the dept and emp table, display DEPTNO,DNAME, name
+	
+	select d.deptno,dname,ename 
+	from emp e, dept d
+	where e.deptno=d.deptno; 
+	
++--------+------------+--------+
+| deptno | dname      | ename  |
++--------+------------+--------+
+|     20 | RESEARCH   | SMITH  |
+|     30 | SALES      | ALLEN  |
+|     30 | SALES      | WARD   |
+|     20 | RESEARCH   | JONES  |
+|     30 | SALES      | MARTIN |
+|     30 | SALES      | BLAKE  |
+|     10 | ACCOUNTING | CLARK  |
+|     20 | RESEARCH   | SCOTT  |
+|     10 | ACCOUNTING | KING   |
+|     30 | SALES      | TURNER |
+|     20 | RESEARCH   | ADAMS  |
+|     30 | SALES      | JAMES  |
+|     20 | RESEARCH   | FORD   |
+|     10 | ACCOUNTING | MILLER |
++--------+------------+--------+
+14 rows in set (0.02 sec)
+
+q.5)display the ename, sal, dname and location using inner join
+	select ename,sal,dname,loc
+	from emp e,dept d
+	where d.deptno=e.deptno;
+	
++--------+---------+------------+----------+
+| ename  | sal     | dname      | loc      |
++--------+---------+------------+----------+
+| SMITH  |  800.00 | RESEARCH   | DALLAS   |
+| ALLEN  | 1600.00 | SALES      | CHICAGO  |
+| WARD   | 1250.00 | SALES      | CHICAGO  |
+| JONES  | 2975.00 | RESEARCH   | DALLAS   |
+| MARTIN | 1250.00 | SALES      | CHICAGO  |
+| BLAKE  | 2850.00 | SALES      | CHICAGO  |
+| CLARK  | 2450.00 | ACCOUNTING | NEW YORK |
+| SCOTT  | 3000.00 | RESEARCH   | DALLAS   |
+| KING   | 5000.00 | ACCOUNTING | NEW YORK |
+| TURNER | 1500.00 | SALES      | CHICAGO  |
+| ADAMS  | 1100.00 | RESEARCH   | DALLAS   |
+| JAMES  |  950.00 | SALES      | CHICAGO  |
+| FORD   | 3000.00 | RESEARCH   | DALLAS   |
+| MILLER | 1300.00 | ACCOUNTING | NEW YORK |
++--------+---------+------------+----------+
+14 rows in set (0.00 sec)
+q.6) using subquery : display the information from the emp table for all the employees for which the deptno is same as that of jones
+	select * from emp where deptno =
+	(select deptno from emp where ename='jones' );
+	+-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+5 rows in set (0.00 sec)
+
+
+Q. 7)  using subquery :  display the information from the emp table for all the employees for which the deptno is same as that of Smith
+select * from emp where deptno=
+(select deptno from emp where ename='smith');
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+	
+
+
+q.8)  using subquery :  display the information from the emp table for all the employees whose sal is greater than the average sal of the same deptno.
+select * from emp e where sal >
+(select avg(sal) from emp where deptno=e.deptno);
++-------+-------+-----------+------+------------+---------+--------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal     | comm   | deptno |
++-------+-------+-----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN  | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 |   NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 |   NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
++-------+-------+-----------+------+------------+---------+--------+--------+
+6 rows in set (0.00 sec)
+
+q.9) using subquery : display the information from the emp table for all the employees whose sal is greater than all the employees from department number 20
+
+select * from emp e where sal >all
+(select avg(sal) from emp where deptno=20);
+
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+-----------+------+------------+---------+------+--------+
+6 rows in set (0.00 sec)
+
+q.10) perform the left outer join on department table, and display the columns empno, ename , dname, loc
+
+select empno,ename,dname,loc
+from dept d
+left join 
+emp e
+on(e.deptno=d.deptno);
+
++-------+--------+------------+----------+
+| empno | ename  | dname      | loc      |
++-------+--------+------------+----------+
+|  7934 | MILLER | ACCOUNTING | NEW YORK |
+|  7839 | KING   | ACCOUNTING | NEW YORK |
+|  7782 | CLARK  | ACCOUNTING | NEW YORK |
+|  7902 | FORD   | RESEARCH   | DALLAS   |
+|  7876 | ADAMS  | RESEARCH   | DALLAS   |
+|  7788 | SCOTT  | RESEARCH   | DALLAS   |
+|  7566 | JONES  | RESEARCH   | DALLAS   |
+|  7369 | SMITH  | RESEARCH   | DALLAS   |
+|  7900 | JAMES  | SALES      | CHICAGO  |
+|  7844 | TURNER | SALES      | CHICAGO  |
+|  7698 | BLAKE  | SALES      | CHICAGO  |
+|  7654 | MARTIN | SALES      | CHICAGO  |
+|  7521 | WARD   | SALES      | CHICAGO  |
+|  7499 | ALLEN  | SALES      | CHICAGO  |
+|  NULL | NULL   | OPERATIONS | BOSTON   |
++-------+--------+------------+----------+
+15 rows in set (0.00 sec)
+
+q.11) perform the right outer join on department table, and display the columns empno, ename , dname, loc
+select empno,ename,dname,loc
+    -> from dept d
+    -> right join
+    -> emp e
+    -> on(e.deptno=d.deptno);
++-------+--------+------------+----------+
+| empno | ename  | dname      | loc      |
++-------+--------+------------+----------+
+|  7369 | SMITH  | RESEARCH   | DALLAS   |
+|  7499 | ALLEN  | SALES      | CHICAGO  |
+|  7521 | WARD   | SALES      | CHICAGO  |
+|  7566 | JONES  | RESEARCH   | DALLAS   |
+|  7654 | MARTIN | SALES      | CHICAGO  |
+|  7698 | BLAKE  | SALES      | CHICAGO  |
+|  7782 | CLARK  | ACCOUNTING | NEW YORK |
+|  7788 | SCOTT  | RESEARCH   | DALLAS   |
+|  7839 | KING   | ACCOUNTING | NEW YORK |
+|  7844 | TURNER | SALES      | CHICAGO  |
+|  7876 | ADAMS  | RESEARCH   | DALLAS   |
+|  7900 | JAMES  | SALES      | CHICAGO  |
+|  7902 | FORD   | RESEARCH   | DALLAS   |
+|  7934 | MILLER | ACCOUNTING | NEW YORK |
++-------+--------+---------
+
+q.12) using subquery : display the information from the emp table for all the employees whose sal is greater than any of the employees from department number 20
+select * from emp e where sal >any
+(select sal from emp where deptno=20);+-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+13 rows in set (0.00 sec)
+
+q.13) using subquery : display the details from the department table where the employees exists in it
+	select * from dept d where exists
+	(select * from emp e where e.deptno=d.deptno);
+select * from dept d where exists
+    ->  (select * from emp e where e.deptno=d.deptno);
++--------+------------+----------+
+| deptno | dname      | loc      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
++--------+------------+----------+
+3 rows in set (0.01 sec)	
+
+q.14) using subquery : display the details from the department table where the employees do not exists in it
+	select * from dept d where not exists
+	(select * from emp e where e.deptno=d.deptno);
++--------+------------+--------+
+| deptno | dname      | loc    |
++--------+------------+--------+
+|     40 | OPERATIONS | BOSTON |
++--------+------------+--------+
+1 row in set (0.00 sec)
+
+
+q.16)using subquery : display the information from the emp table for all the employees for which the deptno is same as that of smith and blake
+
+select * from emp where deptno in
+(select deptno from emp where ename in('smith','blake'));
+
+

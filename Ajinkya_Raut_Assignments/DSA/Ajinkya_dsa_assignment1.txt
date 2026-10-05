@@ -1,0 +1,472 @@
+//Name : Ajinkya Raut
+//PRN:260843420002
+// email:ajinkyaraut0804@gmail.com
+
+
+//1. Sum and Average
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Sum_Avg {
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int arr[];
+		System.out.println("Enter size of array");
+		int size=sc.nextInt();
+		arr=new int[size];
+		int sum=0;
+		float avg;
+		for(int i=0;i<size;i++) {
+			System.out.println("Enter element at:"+i);
+			arr[i]=sc.nextInt();
+			sum=sum+arr[i];
+		}
+		avg=(float)sum/size;
+		System.out.println("Sum = "+sum);
+		System.out.println("Average is = "+ String.format("%.2f", avg));
+		sc.close();
+	}
+}
+
+
+//2. Even / Odd Count
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Even_Odd {
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+		int arr[];
+		System.out.println("Enter size of array");
+		int size=sc.nextInt();
+		arr=new int[size];
+		int count_Even=0;
+		int count_Odd=0;
+		for(int i=0;i<size;i++) {
+			System.out.println("Enter element at:"+i);
+			arr[i]=sc.nextInt();
+			if(arr[i]%2==0) {
+				count_Even++;
+			}else if(arr[i]%2!=0) {
+				count_Odd++;
+			}
+		}
+		System.out.println("Even = " + count_Even);
+		System.out.println("Odd = " + count_Odd);
+		sc.close();
+	}
+}
+
+
+//3. Largest and Smallest
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Min_Max {
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+		int arr[];
+		System.out.println("Enter size of array");
+		int size=sc.nextInt();
+		arr=new int[size];
+		int max=Integer.MIN_VALUE;
+		int min=Integer.MAX_VALUE;
+		for(int i=0;i<size;i++) {
+			System.out.println("Enter element at:"+i);
+			arr[i]=sc.nextInt();
+			if(arr[i]>max) {
+				max=arr[i];
+			}
+			 if(arr[i]<min) {
+				min=arr[i];
+			}
+		}
+		System.out.println("largest = " + max);
+		System.out.println("Smallest = "+ min);
+		
+		sc.close();
+	}
+
+}
+
+
+
+
+//4. Reverse an Array In-Place
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Reversed_Array {
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int arr[];
+		System.out.println("Enter size of array");
+		int size=sc.nextInt();
+		arr=new int[size];
+		
+		for(int i=0;i<size;i++) {
+			System.out.println("Enter element at:"+i);
+			arr[i]=sc.nextInt();
+		}
+		int i=0,j=size-1;
+		while(i<j) {
+			int temp=arr[i];
+			arr[i]=arr[j];
+			arr[j]=temp;
+			i++;
+			j--;
+		}
+		for(int k=0;i<size;k++) {
+			System.out.print(arr[k] + " ");
+		}
+		sc.close();
+	}
+}
+
+
+
+//5. Linear Search
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Linear_Search {
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int arr[];
+		System.out.println("Enter size of array");
+		int size=sc.nextInt();
+		arr=new int[size];
+		boolean flag=false;
+
+		for(int i=0;i<size;i++) {
+			System.out.println("Enter element at:"+i);
+			arr[i]=sc.nextInt();
+		}
+		System.out.println("Enter number to search:");
+		int search=sc.nextInt();
+		for(int i=0;i<size;i++) {
+			if(arr[i]==search) {
+				System.out.println("Key Found at index :"+i);
+				flag=true;
+				break;
+			}
+		}
+		if(!flag) {
+			System.out.println("-1");
+		}
+		sc.close();
+	}
+}
+
+
+//6. Sum of Digits
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Sum_Of_Digit {
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter a number");
+		long number=sc.nextLong();
+		long digit;
+		long sum=0;
+
+		while(number>0) {
+			digit=number%10;
+			sum=sum+digit;
+
+			number=number/10;
+		}
+		System.out.println("Sum of digits=" + sum);
+	}
+}
+
+
+//7. Count Vowels and Consonants
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Vowel_Consonant {
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter a sentence :");
+		String line=sc.nextLine();
+		int vowels=0;
+		int consonant=0;
+		for(int i=0;i<line.length();i++) {
+			if(line.charAt(i)=='A' || line.charAt(i)=='E' ||line.charAt(i)=='I' ||line.charAt(i)=='O' ||line.charAt(i)=='U' ||line.charAt(i)=='a' || line.charAt(i)=='e' ||line.charAt(i)=='i' ||line.charAt(i)=='o' ||line.charAt(i)=='u' ) {
+				vowels++;
+			}else if((line.charAt(i)>='A'&&line.charAt(i)<='Z')||(line.charAt(i)>='a'&&line.charAt(i)<='z')){
+				consonant++;
+			}
+		}
+		System.out.println("Vowels = " +vowels);
+		System.out.println("Consonant = " +consonant);
+	}
+}
+
+
+//8. Palindrome String
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Pallindrome {
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter a word :");
+		String word=sc.nextLine();
+		String temp=word;
+		String newword="";
+		for(int i=temp.length()-1;i>=0;i--) {
+			newword=newword+temp.charAt(i);
+		}
+		if(newword.equals(word)) {
+			System.out.println("Palindrome");
+		}else {
+			System.out.println("Not a Palindrome");
+		}
+	}
+}
+
+
+//9. Inverted Right Triangle Pattern
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Right_Triangle {
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter number of rows :");
+		int rows=sc.nextInt();
+		for(int i=rows;i>0;i--) {
+			for(int j=0;j<i;j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+}
+
+
+//10. Swap with a Method
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Swap_Method {
+
+	public void swap(int[] a,int i,int j) {
+
+		int temp=a[i];
+		a[i]=a[j];
+		a[j]=temp;
+
+	}
+
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		
+		Swap_Method sm=new Swap_Method();
+		System.out.println("Enter size of array:");
+		int size=sc.nextInt();
+		int a[]=new int[size];
+		for(int i=0;i<a.length;i++) {
+			System.out.println("Enter element at :" + i);
+			a[i]=sc.nextInt();
+		}
+		
+		sm.swap(a,0,a.length-1);
+		
+		for(int i=0;i<a.length;i++) {
+			System.out.print(a[i]+" ");
+		}
+	}
+}
+
+
+//11. Second Largest Distinct Element
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Second_Largest {
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+
+		System.out.println("Enter size of array:");
+		int size=sc.nextInt();
+		int a[]=new int[size];
+		int max=Integer.MIN_VALUE;
+		int smax=max;
+		for(int i=0;i<a.length;i++) {
+			System.out.println("Enter element at : "+i);
+			a[i]=sc.nextInt();
+		}
+		for(int i=0;i<a.length;i++) {
+			if(a[i]>max) {
+				smax=max;
+				max=a[i];
+			}
+			else if(a[i]>smax&&a[i]<max) {
+				smax=a[i];
+			}
+		}
+		if(smax==Integer.MIN_VALUE) {
+			System.out.println("-1");
+		}
+		else {
+			System.out.println("Second Largest="+smax);
+		}
+
+	}
+}
+
+
+//12. Count Frequencies
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Count_Frequency {
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+
+		System.out.println("Enter size of array:");
+		int size=sc.nextInt();
+		int a[]=new int[size];
+		boolean [] visited=new boolean[size];
+		for(int i=0;i<a.length;i++) {
+			System.out.println("Enter element at:" + i);
+			a[i]=sc.nextInt();
+		}
+		
+		for(int i=0;i<a.length;i++) {
+			if(visited[i]) {
+				continue;
+			}
+			int count=0;
+			for(int j=0;j<a.length;j++) {
+				if(a[i]==a[j]) {
+					count++;
+					visited[j]=true;
+				}
+				
+			}
+			System.out.println(a[i]+"->"+count);
+		}
+		sc.close();
+	}
+}
+
+
+//13. Remove Duplicates from a Sorted Array
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Remove_Duplicates {
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter size of array:");
+		int size=sc.nextInt();
+		int a[]=new int[size];
+		
+		for(int i=0;i<a.length;i++) {
+			System.out.println("Enter element at:" + i);
+			a[i]=sc.nextInt();
+		}
+		int newSize=1;
+		
+		for(int i=1;i<a.length;i++) {
+			
+			if(a[i]!=a[newSize-1]){
+				a[newSize]=a[i];
+				newSize++;
+			}
+		}
+		System.out.println("New Length:"+newSize);
+		for(int i=0;i<newSize;i++) {
+			System.out.print(a[i] + " ");
+		}
+		sc.close();
+	}
+}
+
+
+//14. Move Zeros to the End
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Move_Zero_End {
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter size of array:");
+		int size=sc.nextInt();
+		int a[]=new int[size];
+		for(int i=0;i<size;i++) {
+			System.out.println("Enter element at:" + i);
+			a[i]=sc.nextInt();
+		}
+
+		int pos=0;
+		for(int i=0;i<size;i++) {
+			if(a[i]!=0) {
+				a[pos]=a[i];
+				pos++;
+			}
+			
+		}
+		while(pos<size) {
+			a[pos]=0;
+			pos++;
+		}
+		for(int i=0;i<size;i++) {
+			System.out.print(a[i]+" ");
+		}
+		sc.close();
+	}
+}
+
+
+//15. Rotate Array by K
+package com.Assignment;
+
+import java.util.Scanner;
+
+public class Rotations {
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter size of array:");
+		int size=sc.nextInt();
+		int a[]=new int[size];
+		for(int i=0;i<size;i++) {
+			System.out.println("Enter element at:" + i);
+			a[i]=sc.nextInt();
+		}
+		System.out.println("Enter number of rotations:");
+		int rotation=sc.nextInt();
+		for(int i=0;i<rotation;i++) {
+			int temp=a[size-1];
+			for(int j=a.length-1;j>0;j--) {
+				a[j]=a[j-1];
+			}
+			a[0]=temp;
+		}
+		System.out.println("Array after rotations:");
+		for(int i=0;i<a.length;i++) {
+			System.out.print(a[i] + " ");
+		}
+		sc.close();
+	}
+}
+

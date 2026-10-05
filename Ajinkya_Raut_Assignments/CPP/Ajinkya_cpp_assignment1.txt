@@ -1,0 +1,263 @@
+//PRN : 260843420002
+// Name : Ajinkya Govardhan Raut
+// email : ajinkyaraut0804@gmail.com
+
+//Q.1. 🍕 Pizza Party Calculator
+//A pizza shop charges ₹250 per pizza. A group orders n pizzas.
+//Write a C++ program to calculate the total bill.
+
+#include<iostream>
+using namespace std;
+int main(){
+	int pizza_price=250;
+	int order;
+	cout<<"Enter the number of pizza to order  : \n";
+	cin>>order;
+	int total_bill=pizza_price*order;
+	cout<<"The total bill is : " <<total_bill<<" rs.";
+	
+}
+
+//2.Speed of the Tired Student
+//A student travels a distance of d kilometres in t hours.
+//Write a program to calculate and display the student's speed.
+#include<iostream>
+using namespace std;
+int main(){
+	float distance;
+	cout<<"Enter the distance covered : ";
+	cin>>distance;
+	float time;
+	cout<<"\n Enter the time : ";
+	cin>>time;
+	float speed=distance/time;
+	cout<<"The speed is : " <<speed << "KM/Hr."
+	
+}
+
+//3. Salary After Bonus
+#include<iostream>
+using namespace std;
+int main(){
+	float salary;
+	cout<<"Enter the basic salary : ";
+	cin>>salary;
+	float bonus=salary*0.1;
+	cout<<"\n the bonus is : " <<bonus;
+	float total_salary=salary+bonus;
+	cout<<"\n The total salary is : " <<total_salary << "rs.";
+	
+}
+
+//4. Celsius to Fahrenheit
+#include<iostream>
+using namespace std;
+int main(){
+	float celcius;
+	cout<<"Enter the temperature in celcius : ";
+	cin>>celcius;
+	float farenhite=(celcius*9/5)+32;
+	cout<<"\n the temperature in farenhite is : " <<farenhite;
+	
+}
+
+//5.Area of a Triangle
+#include<iostream>
+using namespace std;
+int main(){
+	int base;
+	cout<<"Enter the base: ";
+	cin>>base;
+	int  height;
+	cout<<"\nenter the height :";
+	cin>>height; 
+	float area=0.5*base*height;
+	cout<<"\n the area of triangle is : " <<area;
+	
+}
+
+//6. Shopping Discount
+#include<iostream>
+using namespace std;
+int main(){
+	int amount;
+	cout<<"Enter the amount : ";
+	cin>>amount;
+	float discount=amount*0.1;
+	if(amount>=5000){
+		float final_bill=amount-discount;
+		cout<<"The discount is : " <<discount<<" rs";
+		cout<<"\nThe final bill is : "<<final_bill<<" rs";
+	}
+	else{
+		cout<<"The final bill is : " << amount<<" rs";
+	}
+	
+	
+}
+
+//7. Pass or Fail
+#include <iostream>
+using namespace std;
+int main(){
+	int mark;
+	cout<<"Enter your marks : ";
+	cin>>mark;
+	if(mark>40){
+		cout<<"You are Pass !";
+	}else{
+		cout<<"Better luck next time, Fail !";
+	}
+}
+
+//8.Speeding Fine
+#include<iostream>
+using namespace std;
+int main(){
+	int speed;
+	cout<<"Enter the speed in km/h : ";
+	cin>>speed;
+	if(speed>80){
+		cout<<"The fine is 2000 rs";
+	}else{
+		cout<<"No fine";
+	}
+}
+
+//9.Simple Interest Calculator
+#include<iostream>
+using namespace std;
+int main(){
+	int principal;
+	cout<<"Enter the principal amount : ";
+	cin>>principal;
+	float rate;
+	cout<<"Enter rate : ";
+	cin>>rate;
+	float time;
+	cout<<"Enter the time in years : ";
+	cin>>time;
+	float SI=(principal*rate*time)/100;
+	cout<<"The simple interest is : " <<SI <<"Rs.";
+	float amount=principal+SI;
+	cout<<"\n The total amount is : " << amount <<"Rs.";
+}
+
+//10. Age Category
+#include <iostream>
+using namespace std;
+int main(){
+	int age;
+	cout<<"Enter your age : ";
+	cin>>age;
+	if(age<13){
+		cout<<"Child and age is  : "<<age;
+	}
+	else if(age<=19){
+		cout<<"Teenager and age is : " <<age;
+	}
+	else{
+		cout<<"Adult and age is :" <<age;
+	}
+}
+//11.Positive, Negative or Zero
+#include <iostream>
+using namespace std;
+int main(){
+	int number;
+	cout<<"Enter number : ";
+	cin>>number;
+	if(number>0){
+		cout<<"Number is positve : " << number;
+	}else if(number<0){
+		cout<<"Number is negative : " << number;
+	}else{
+		cout<<"Number is zero : " << number;
+	}
+}
+
+//12.Find the Bigger Number
+#include <iostream>
+using namespace std;
+int main(){
+	int number1;
+	cout<<"Enter first number : ";
+	cin>>number1;
+	int number2;
+	cout<<"Enter second number : ";
+	cin>>number2;
+	if(number1>number2){
+		cout<<"First number is greater : " << number1;
+	}else if(number1<number2){
+		cout<<"Second number is greater : " << number2;
+	}else{
+		cout<<"Both the numbers are equal : " << number1<<" and "<<number2;
+	}
+}
+
+//13.Electricity Bill
+#include <iostream>
+using namespace std;
+int main(){
+	int units;
+	cout<<"Enter the units consumed : ";
+	cin>>units;
+	float rate ;
+	cout<<"Enter the rate : " ;
+	cin>>rate;
+	float bill=units*rate ;
+	cout<<"The bill is : " << bill << " rs";
+	if(bill>2000){
+		cout<<"\n High consumption .";
+	}else{
+		cout<<"\n Normal consumption .";
+	}
+}
+
+//14. Loan Eligibility
+#include <iostream>
+using namespace std;
+int main(){
+	int age;
+	cout<<"Enter age : " ;
+	cin>>age;
+	int salary;
+	cout<<"Enter salary : ";
+	cin>>salary;
+	
+	if(age>=21 && salary>=25000){
+		cout<<"Eligible for Loan";
+	}else{
+		cout<<"Not Eligible for Loan";
+	}
+}
+
+/15. Student Grade Calculator
+#include<iostream>
+using namespace std;
+int main(){
+	int marks;
+	cout<<"Enter marks : ";
+	cin>>marks;
+	if(marks<=100 && marks>=90 ){
+		cout<<"Grade = A ";
+	}else if(marks<=89 && marks>=75){
+		cout<<"Grade = B ";
+	}else if(marks<=74 && marks>=60){
+		cout<<"Grade = C ";
+	}else if(marks<=59 && marks>=40){
+		cout<<"Grade = D ";
+	}else if(marks<40 && marks>=0){
+		cout<<"Fail ! ";
+	}
+	else{
+		cout<<"Invalid Marks!";
+	}
+}
+
+
+
+
+
+
+

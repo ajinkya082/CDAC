@@ -1,0 +1,152 @@
+1)	Create the following tables:
+a.	Table Name : Client_master1
+Description: Use to store information about client 
+Column Name	Data Type	Size	Attributes
+client_no	Varchar	6	Primary key/first letter must start with ‘C’
+Name	Varchar	20	not null
+address1	Varchar	30	
+address2	Varchar	30	
+City	Varchar	15	
+state	Varchar	15	
+pincode	Numeric	6	
+bal_due	Numeric	10,2	
+
+Ans-->
+	create table client_master1(
+	client_no varchar(6) primary key check(client_no like('c%')),
+	name varchar(20) not null,
+	address1 varchar(30),
+	address2 varchar(30),
+	city varchar(15),
+	state varchar(15),
+	pincode numeric(6),
+	bal_due numeric(10,2));
+
+desc client_master1;
++-----------+---------------+------+-----+---------+-------+
+| Field     | Type          | Null | Key | Default | Extra |
++-----------+---------------+------+-----+---------+-------+
+| client_no | varchar(6)    | NO   | PRI | NULL    |       |
+| name      | varchar(20)   | NO   |     | NULL    |       |
+| address1  | varchar(30)   | YES  |     | NULL    |       |
+| address2  | varchar(30)   | YES  |     | NULL    |       |
+| city      | varchar(15)   | YES  |     | NULL    |       |
+| state     | varchar(15)   | YES  |     | NULL    |       |
+| pincode   | decimal(6,0)  | YES  |     | NULL    |       |
+| bal_due   | decimal(10,2) | YES  |     | NULL    |       |
++-----------+---------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+
+
+b.	Table Name: product_master1
+Description:  Use it store information about products.
+Column Name	Data Type	Size	Attributes
+product_no	Varchar	6	Primary key/first letter must start with ‘P’
+description	Varchar	50	not null
+profit_percent	Numeric	3,2	not null
+unit_measure	Varchar	10	not null
+qty_on_hand	Numeric	7	Not null
+record_lvl	Numeric	8	not null
+sell_price	Numeric	8,2	not null, greater than 0
+cost_price	Numeric	8,2	not null, greater than 0
+
+Ans--->
+
+create table product_master1(
+product_no varchar(6) primary key check(product_no like('p%')),
+description varchar(50) not null,
+profit_percent numeric(10,2) not null,
+unit_measure varchar(10) not null,
+qty_on_hand numeric(7) not null,
+record_lvl numeric(8) not null,
+sell_price numeric(8,2) not null check(sell_price>0),
+cost_price numeric(8,2) not null check(cost_price>0));
+
+desc product_master1;
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| product_no     | varchar(6)    | NO   | PRI | NULL    |       |
+| description    | varchar(50)   | NO   |     | NULL    |       |
+| profit_percent | decimal(10,2) | NO   |     | NULL    |       |
+| unit_measure   | varchar(10)   | NO   |     | NULL    |       |
+| qty_on_hand    | decimal(7,0)  | NO   |     | NULL    |       |
+| record_lvl     | decimal(8,0)  | NO   |     | NULL    |       |
+| sell_price     | decimal(8,2)  | NO   |     | NULL    |       |
+| cost_price     | decimal(8,2)  | NO   |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+
+2. Insert the following data into their respective tables using the SQL insert statement:
+1. Data for client_master1  table
+Client No	Name	City	Pin Code	State	Bal_Due
+C00001	Ivan Bayross	Bombay	400054	Maharashtra	15000
+C00002	Vandana Saitwal	Madras	780001	Tamil Nadu	0
+C00003	Pramada Jaguste	Bombay	400057	Maharashtra	5000
+C00004	Basu Navindgi	Bombay	400056	Maharashtra	0
+C00005	Ravi Sreedharan	Delhi	100001	Delhi	2000
+C00006	Rukmini	Bombay	400050	Maharashtra	0
+
+insert into client_master1(client_no,name,city,pincode,state,bal_due) values('c00001','Ivan Bayross','Bombay',400054,'Maharashtra',15000);
+insert into client_master1(client_no,name,city,pincode,state,bal_due) values('c00002','Vandana Saitwal','Madras',780001,'Tamil Nadu',0);
+insert into client_master1(client_no,name,city,pincode,state,bal_due) values('c00003','Pramada Jaguste','Bombay',400057,'Maharashtra',5000);
+insert into client_master1(client_no,name,city,pincode,state,bal_due) values('c00004','Basu Navindgi','Bombay',400054,'Maharashtra',0);
+insert into client_master1(client_no,name,city,pincode,state,bal_due) values('c00005','Ravi  sreedharan','Delhi',100001,'Delhi',2000);
+insert into client_master1(client_no,name,city,pincode,state,bal_due) values('c00006','Rukmini','Bombay',400050,'Maharashtra',0);
+
+ select * from client_master1;
++-----------+------------------+----------+----------+--------+-------------+---------+----------+
+| client_no | name             | address1 | address2 | city   | state       | pincode | bal_due  |
++-----------+------------------+----------+----------+--------+-------------+---------+----------+
+| c00001    | Ivan Bayross     | NULL     | NULL     | Bombay | Maharashtra |  400054 | 15000.00 |
+| c00002    | Vandana Saitwal  | NULL     | NULL     | Madras | Tamil Nadu  |  780001 |     0.00 |
+| c00003    | Pramada Jaguste  | NULL     | NULL     | Bombay | Maharashtra |  400057 |  5000.00 |
+| c00004    | Basu Navindgi    | NULL     | NULL     | Bombay | Maharashtra |  400054 |     0.00 |
+| c00005    | Ravi  sreedharan | NULL     | NULL     | Delhi  | Delhi       |  100001 |  2000.00 |
+| c00006    | Rukmini          | NULL     | NULL     | Bombay | Maharashtra |  400050 |     0.00 |
++-----------+------------------+----------+----------+--------+-------------+---------+----------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+2. Data for Product_master1 Table:
+
+insert into product_master1 values('P00001','1.44 Floppies',5,'Piece',100,20,525,500);
+
+insert into product_master1 values('P03453','Monitor',6,'Piece',10,3,12000,11280);
+
+insert into product_master1 values('P06734','Mouse',5,'Piece',20,5,1050,1000);
+
+insert into product_master1 values('P07865','1.22 Floppies',5,'Piece',100,20,525,500);
+
+insert into product_master1 values('P07868','Keyboard',2,'Piece',10,3,3150,3050);
+
+insert into product_master1 values('P07885','CD Drive',2.5,'Piece',10,3,5250,5100);
+
+insert into product_master1 values('P07965','540 HDD',5,'Piece',10,3,8400,8000);
+
+insert into product_master1 values('P07975','1.44 Drive',5,'Piece',10,3,1050,1000);
+
+insert into product_master1 values('P08865','1.22 Drive',5,'Piece',10,3,1050,1000);
+
+
+select * from product_master1;
++------------+---------------+----------------+--------------+-------------+------------+------------+------------+
+| product_no | description   | profit_percent | unit_measure | qty_on_hand | record_lvl | sell_price | cost_price |
++------------+---------------+----------------+--------------+-------------+------------+------------+------------+
+| P00001     | 1.44 Floppies |           5.00 | Piece        |         100 |         20 |     525.00 |     500.00 |
+| P03453     | Monitor       |           6.00 | Piece        |          10 |          3 |   12000.00 |   11280.00 |
+| P06734     | Mouse         |           5.00 | Piece        |          20 |          5 |    1050.00 |    1000.00 |
+| P07865     | 1.22 Floppies |           5.00 | Piece        |         100 |         20 |     525.00 |     500.00 |
+| P07868     | Keyboard      |           2.00 | Piece        |          10 |          3 |    3150.00 |    3050.00 |
+| P07885     | CD Drive      |           2.50 | Piece        |          10 |          3 |    5250.00 |    5100.00 |
+| P07965     | 540 HDD       |           5.00 | Piece        |          10 |          3 |    8400.00 |    8000.00 |
+| P07975     | 1.44 Drive    |           5.00 | Piece        |          10 |          3 |    1050.00 |    1000.00 |
+| P08865     | 1.22 Drive    |           5.00 | Piece        |          10 |          3 |    1050.00 |    1000.00 |
++------------+---------------+----------------+--------------+-------------+------------+------------+------------+
+9 rows in set (0.00 sec)

@@ -1,0 +1,133 @@
+a.	Table Name : salesman_master1
+Description: Use to store information about salesman working in the company
+Column Name	Data Type	Size	Attributes
+salesman_no	Varchar	6	Primary key/first letter must start with ‘S’
+salesman_name	Varchar	20	not null
+Address1	Varchar	30	not null
+Address2	Varchar	30	
+City	Varchar	20	
+Pincode	Varchar	6	
+State	Varchar	20	
+sal_amt	Number	8,2	not null, cannot be 0
+tgt_to_get	Number	6,2	not null, cannot be 0
+ytd_sales	Number	6,2	not null
+Remarks	Varchar	60	
+
+Ans-->
+create table salesman_master1(
+	salesman_no varchar(6) primary key check(salesman_no like('s%')),
+	salesman_name varchar(20) not null,
+	address1 varchar(30),
+	address2 varchar(30),
+	city varchar(15),
+	state varchar(15),
+	pincode varchar(6),
+	sal_amt numeric(8,2) not null check(sal_amt > 0),
+	tgt_to_get numeric(6,2) not null check(tgt_to_get > 0),
+	ytd_sales numeric(6,2) not null,
+	Remarks varchar(60));
+
+desc salesman_master1;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| salesman_no   | varchar(6)   | NO   | PRI | NULL    |       |
+| salesman_name | varchar(20)  | NO   |     | NULL    |       |
+| address1      | varchar(30)  | YES  |     | NULL    |       |
+| address2      | varchar(30)  | YES  |     | NULL    |       |
+| city          | varchar(15)  | YES  |     | NULL    |       |
+| state         | varchar(15)  | YES  |     | NULL    |       |
+| pincode       | varchar(6)   | YES  |     | NULL    |       |
+| sal_amt       | decimal(8,2) | NO   |     | NULL    |       |
+| tgt_to_get    | decimal(6,2) | NO   |     | NULL    |       |
+| ytd_sales     | decimal(6,2) | NO   |     | NULL    |       |
+| Remarks       | varchar(60)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+
+b.	Table Name : sales_order1
+Description: Use to store information about order
+Column Name	Data Type	Size	Attributes
+s_order_no	Varchar	6	Primary key/first letter must start with ‘O’
+s_order_date	Date		
+client_no	Varchar	6	Foreign key references client_no of client_master1 table
+dely_addr	Varchar	25	
+salesman_no	Varchar	6	Foreign key references salesman_no of salesman_master1 table
+dely_type	Char	1	Default ‘F’,delivery :part (P) / full (F)
+billed_yn	Char	1	delivery :part (Y) / full (N), Default ‘N’
+dely_date	Date		
+order_status	Varchar	10	values (‘in process’, ’Fulfilled’, ’BackOrder’, ’Canceled’)
+
+Ans --->
+create table sales_order1(
+s_order_no varchar(6) primary key check(s_order_no like('o%')),
+s_order_date date,
+client_no varchar(6) ,foreign key(client_no) references client_master1(client_no),
+dely_addr varchar(25),
+salesman_no varchar(6) ,foreign key(salesman_no) references salesman_master1(salesman_no),
+dely_type char(1) check(dely_type in('P','F')) default 'F',
+billed_yn char(1) check(billed_yn in('Y','N')) default 'N',
+dely_date date,
+order_status varchar(10) check(order_status in('in process','Fulfilled','BackOrder','Canceled')));
+
+ desc sales_order1;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| s_order_no   | varchar(6)  | NO   | PRI | NULL    |       |
+| s_order_date | date        | YES  |     | NULL    |       |
+| client_no    | varchar(6)  | YES  | MUL | NULL    |       |
+| dely_addr    | varchar(25) | YES  |     | NULL    |       |
+| salesman_no  | varchar(6)  | YES  | MUL | NULL    |       |
+| dely_type    | char(1)     | YES  |     | F       |       |
+| billed_yn    | char(1)     | YES  |     | N       |       |
+| dely_date    | date        | YES  |     | NULL    |       |
+| order_status | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+
+3. Data for salesman_master1 table:  
+Salesman_ no	Salesman_ name	Address1	Address2	City	Pin code	State	sal_amt	Tgt_to Get	Ytd sales	Remarks
+S00001	Kiran	A/14	Worli	Bombay	400002	MAH	3000	100	50	Good
+S00002	Manish	65	Nariman	Bombay	400001	MAH	3000	200	100	Good
+S00003	Ravi	P-7	Bandra	Bombay	400032	MAH	3000	200	100	Good
+ S00004	Ashish	A/5	Juhu	Bombay	400044	MAH	3500	200	150	Good
+insert into salesman_master1 values ('s00001','Kiran','A/14','Worli','Bombay','MAH','400002',3000,100,50,'Good');
+
+insert into salesman_master1 values ('s00002','Manish','65','Nariman','Bombay','MAH','400001',3000,200,100,'Good');
+
+insert into salesman_master1 values ('s00003','Ravi','P-7','Bandra','Bombay','MAH','400032',3000,200,100,'Good');
+
+insert into salesman_master1 values ('s00004','Ashish','A/5','Juhu','Bombay','MAH','400044',3500,200,150,'Good');
+
+ select * from salesman_master1;
++-------------+---------------+----------+----------+--------+-------+---------+---------+------------+-----------+---------+
+| salesman_no | salesman_name | address1 | address2 | city   | state | pincode | sal_amt | tgt_to_get | ytd_sales | Remarks |
++-------------+---------------+----------+----------+--------+-------+---------+---------+------------+-----------+---------+
+| s00001      | Kiran         | A/14     | Worli    | Bombay | MAH   | 400002  | 3000.00 |     100.00 |     50.00 | Good    |
+| s00002      | Manish        | 65       | Nariman  | Bombay | MAH   | 400001  | 3000.00 |     200.00 |    100.00 | Good    |
+| s00003      | Ravi          | P-7      | Bandra   | Bombay | MAH   | 400032  | 3000.00 |     200.00 |    100.00 | Good    |
+| s00004      | Ashish        | A/5      | Juhu     | Bombay | MAH   | 400044  | 3500.00 |     200.00 |    150.00 | Good    |
++-------------+---------------+----------+----------+--------+-------+---------+---------+------------+-----------+---------+
+4 rows in set (0.00 sec)
+
+4. Data for sales_order1 table :
+S_order_no	S_order_date	Client No	Dely Type	Bill Yn	salesman no	Dely Date	Order Status
+O19001	1996-1-12	C00001	F	N	S00001	1996-1-20	IP
+O19002	1996-1-25	C00002	P	N	S00002	19961-27	C
+
+insert into sales_order1(s_order_no,s_order_date,client_no,salesman_no,dely_type,billed_yn,dely_date,order_status) values('O19001','1996-1-12','c00001','s00001','F','N','1996-1-20','in process');
+
+insert into sales_order1(s_order_no,s_order_date,client_no,salesman_no,dely_type,billed_yn,dely_date,order_status) values('O19002','1996-1-25','c00002','s00002','P','N','1996-1-27','Canceled');
+
+select * from sales_order1;
++------------+--------------+-----------+-----------+-------------+-----------+-----------+------------+--------------+
+| s_order_no | s_order_date | client_no | dely_addr | salesman_no | dely_type | billed_yn | dely_date  | order_status |
++------------+--------------+-----------+-----------+-------------+-----------+-----------+------------+--------------+
+| O19001     | 1996-01-12   | c00001    | NULL      | s00001      | F         | N         | 1996-01-20 | in process   |
+| O19002     | 1996-01-25   | c00002    | NULL      | s00002      | P         | N         | 1996-01-27 | Canceled     |
++------------+--------------+-----------+-----------+-------------+-----------+-----------+------------+--------------+
+2 rows in set (0.00 sec)
+
+
+

@@ -1,0 +1,57 @@
+1.create a procedure "ass_eg1" to accept a empno from the user and display the details for the same employee
+delimiter //
+	create procedure ass_eg(in pename varchar(10))
+     begin
+     select * from emp where ename=pename;
+     end
+     //
+call ass_eg('smith')//
++-------+-------+-------+------+------------+--------+------+--------+
+| empno | ename | job   | mgr  | hiredate   | sal    | comm | deptno |
++-------+-------+-------+------+------------+--------+------+--------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 | 800.00 | NULL |     20 |
++-------+-------+-------+------+------------+--------+------+--------+
+1 row in set (0.01 sec)
+
+2.create a procedure "ass_eg2" to accept a job from the user and display all the details for employees doing the same job
+
+delimiter //
+create procedure ass_eg2(in pjob varchar(9) )
+begin 
+select * from emp where job=pjob;
+end
+//
+
+call ass_eg2('manager')//
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
++-------+-------+---------+------+------------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+3.create a procedure "ass_eg3" to accept a deptno and mgr from the user and display all the details for employees in the same deptno and whose manager is the given value
+
+delimiter //
+create procedure ass_eg3(in pdeptno numeric(2),in pmgr numeric(4))
+begin
+select * from emp where deptno=pdeptno and mgr=pmgr; 
+end
+//
+ call ass_eg3(10,7839)//
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
++-------+-------+---------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
