@@ -1,0 +1,304 @@
+1/10/26
+
+React: 
+-it is javascript library.
+-which is mainly use for creating rich User Interface.
+-it create single page application.(SPA).
+-it work on component basis.
+-react developed and maintain by meta(facebbok). 
+-latest version of react is react-18
+
+Note: make sure nodejs is install in system
+
+-there are three ways to create react project 
+1.by using npm : need to install configuration file first.
+  npm install -g create-react-app 
+  create-react-app projectName 
+  cd projectName
+  npm start 
+2.by using npx : no need to install configuration file .
+  npx create-react-app projectName
+  cd projectName
+  npm start 
+2.by using vite :it create react project with minumum required.
+
+*how to get output of react project 
+-first we have write "npm start" commant and then it will display react project output on browser with locahost:3000 port number.
+
+*folder structure
+node_module: all dependecy and dev-dependecy install in this folder.
+package.json: all dependecy and dev-dependecy entry will found here.
+package-lock.json : it contain detail descriptof dependecy and dev-dependecy.
+
+public: it contain static file and idex.html file 
+src: in this folder we write develpoment code.
+
+*component in react :-it is partial part of react project.
+                     -it can be reuse multiple time.
+
+ Note: in react project App.js if root component.
+      -while creating component its filename must start with capital letter.
+
+ -in react there are two types of component.
+ 1.function component: when our main focus is on UI design. 
+ 2.class component: when we need to write complex logic.   
+
+*JSX(javascript and XML):
+-it imakes react code easy.
+-it allows user to write html code in react component.
+-in jsx we have to use one parent element to wrap multiple child element.
+
+*props(properties):
+-it is parameter or function parameter which is use to pass data inside component.
+-it return us object type of data.
+-in function component we can access props by writting prop.propertyname
+-in class component we can access props by writting this.prop.propertyname
+
+*destructuring: creating constant variable to store data in it.
+
+assignment: create one function component having name MyDetailsComp pass props as name,contact,gender,address and display it.
+
+assignment: create one class component having name FriendDetailsComp pass props as name,contact,gender,address and display it.
+
+
+*method and event in React 
+
+*state in class component
+state:
+-it is use to handle essential data in class component.
+-it write inside class constructor.
+-it return object of type of data. 
+-to access state prop we write this.state.property in class component
+-after react version 16 we can use state in function component by using usestate hook.
+
+-in class component if you want to change state data for this this.setstate() method we use. 
+
+assignment: create one class component witrh name MyCounter having state with property name count=0, display it value and increment ,descrement and resaet ounter value by click on button.
+
+Rendering: display component output or view on browser
+*Conditional Rendering : display component output or view conditionally.
+1.if else: if condtion is then if block will execute otherwise else block 
+2.element as variable: in this we store result in variable and display it inside element
+3.use of ternary operator: it is shorthand syntax of if else 
+4.use of short-circuit(&&): if the condition is true then an only display output or view,it is basically use for null checking. 
+
+*PureComponent: it is use to prevent unneccessary re-Rendering of class component when same data come as props in class component 
+-to achive this we have to extends class with PureComponent class.
+
+*React.memo():it is use to prevent unneccessary re-Rendering of function component when same data come as props in function component
+-to achieve this we pass function component name as argument to react.memo method.
+
+ *How to access images and multimedia file in reacg component
+
+*What is Virtual DOM 
+*use of extension 
+rfce: it generate normal function component
+rafce: it generate arrow function component
+rce: it generate class component
+rconst:it generate constructor,super methos and state insoide class component
+
+*How to display array of objhect data into list 
+Assignment: display employee data in table formate using class component. 
+
+*how to use bootstrap and react bootstrap
+step1: instrall bootstrap and reacy-bootstrap
+npm install react-bootstrap bootstrap 
+step2: import it in index.js file 
+import 'bootstrap/dist/css/bootstrap.min.css'
+step3: use bootstrap classes 
+
+MyCarouselComp.js   fc
+======================================
+2/9/26
+
+*we Saw practically how virtual DOM Work.
+*ErrorBoundary: it is react class component,which check if any child component is giving error while rendering it,to handle that component render error we use error boundary component.
+-it uses two class component lifecycle method.
+-it handle only error which occure only while redering component not logical error.
+1.getDerivedStateFromError: if error occure in class component it execute automatically
+2.componentDidCatch(): it give error log which error occure in component
+
+UserComp.js  fc 
+ErrorBoundaryComp.js 
+
+*Hooks In React
+-In react Hooks allows us to class component feature in function component.
+-in react version-16 hookes introiduce.
+-before using hooks in react first we have o import it.
+
+Rules to use hooks 
+-React hooks only work with function component not in class.
+-in react hoooks can be render conditionally.
+-in react hooks always write at top level component.
+
+List of hooks 
+1.usestate hook:
+2.useEffect hook:
+3.useref hook:
+4.useContext hook:
+5.useReducer hook:
+6.useCallBack hook:
+7.usememo Hook:
+8.custome hook: 
+
+
+1.useState Hook:
+-if you want to use state in function component for this we use useState hook.
+-it return takes two parameter 1.currentState,2.function to update state
+synatx:   const [currentState,functionToupdateState] = useState(values);
+
+2.useEffectHook:
+-useEffect is use to perform sideeffect in function component.
+-sideeffect means fetching data from server,DOM ,manipulation and use of timers function.
+-useEffect hook execute immediatly after component render.
+-useEffect hook can perfom componentDidMount,ComponentDidUpdate,and componentwillUnmount lifecycle methode of class component.
+-it takes two parameter 1.callback function,2.dependecy
+syntax:useEffect(()=>{},dependecy);
+
+Case1: if no dependecy value.
+      useEffecthokk will execute after every component render.
+syntax:useEffect(()=>{});
+           
+case2:when dependecy value pass as blank array, it will execute useEffect only once. it act as componentDidMount of class component lifecycle method.
+syntax:useEffect(()=>{},[]);
+
+case3: when we pass state or prop value as  dependecy, in this case use effect use execute once and after every time when state or property value change.
+syntax:useEffect(()=>{},[state or props]);
+
+*Form in React 
+*onsubmit event
+*onchange Event 
+
+*Routing:
+-navigation of component 
+-to perform routing in react we use react-router-dom library.
+-to perform routing we use createBrowserRouter and Routerprovider module from  react-router-dom library.
+1.createBrowserRouter module : it allows to create routing for component
+Routerprovider: it helps to display routing component output(view) on browser. 
+-createBrowserRouter is method which tales argument array of object type.
+-how to install react-router-dom 
+npm install react-router-dom 
+
+*types of routing 
+1.naming routing:display component view after writting routing path name in browser url.
+
+2.default routing:display component view when routing path is black.
+
+3.parameterize routing:display component view when we pass parameter with routing path.
+
+4.child routing : display one routing inside another routing, to perform this routing we use children property in routing object and again write routing login in it. to display child routing component view in parent routing component we have to import <Outlet/> directory in parent routing component .
+
+5.whildcard routing:whe user enter wrong routing path in browser url then we display output of this routing component.make sure that whildcard routing must be always last routing in order, its below routing will never work.
+
+src folder  
+    CRUD folder 
+       ProductDashComp.js
+       ProductAddComp.js
+       ProductUpdateComp.js
+    layout folder 
+         DashboardComp.js   
+         PageNotFoundComp.js 
+         LoginComp.js     
+         NavComp.js    
+    mainRouting folder 
+         routing.js   file 
+
+
+Assignemt: perform form validation for username,passwpord,email,contact,qualification,gender in React
+Assignemt: in function component store array onf object data in state having id,title,imgpath,price display it in bootstrap card and display in one row.
+Assignment : create new react project for ecormerse website, having component dashboard,productsdetails,enquiry,contact,header,footer.and display informatio in it. 
+
+*Axios :-it is use to make request from reat app to server database.
+        -it work on promises concept.
+        -to use it first we have to install it 
+        npm i axios 
+=====================================================
+3/9/26
+
+*post request 
+*put request 
+*usenavigate 
+*useparams 
+
+*Redux :
+-it is a library use for javascript app.
+-it is use to store,manage and track state for javascript application.
+or 
+-redux is predictable state container for javascript app.
+-redux work on three core principle.
+-Store:it is use to store state in it.
+-Action:it is action which we are going to perform on state.
+-Reducer:it actually carry-out state transition base on store and action, and it return new state.
+
+to connection react and redux we use react-redux library.
+
+*How to install reduxtoolkit 
+npm install @reduxjs/toolkit
+
+*how to install react-redux library
+npm install react-redux
+
+
+*useSelector hook: we can access state from redux to react function component.
+*useDispatch kook: it allows us to call redux action in react function component. 
+
+*React hooks 
+1.useState Hook;
+2.useEffecthooks;
+3.useContext: when we have stare state with multiple compnent in that case we use it. 
+4.useRef hook: when we have to access DOM Node Directly in that case we use dit.
+5.useReducer hook: when we have to write comple logic with multiple state in that case we use it.
+6.useCallback hook: it is use to handle memoized functikon in that case we use it.
+7.useMemo hook: it isa use to handle memoised values in component.
+8.custome hook: it is use to create customize hook.
+
+*Css : it provide css property values 
+-bootstrap: it provide build in css classes 
+-React-bootstrap: it provide UI Component
+-material UI: it provide UI Component and Icon 
+npm install @mui/material @emotion/react @emotion/styled
+-how to install materical icon 
+npm install @mui/icons-material 
+
+How to install Tailwin css in react project 
+Step1: install tailwin css 
+npm install -D tailwindcss postcss autoprefixer 
+npm install -D tailwindcss@3.4.17
+Step2: to generate tailwind.config.js file write command 
+npx tailwindcss init -p 
+step3: in tailwind.config.js file configure template path 
+  module.export={
+content: ["./index.html","./src/**/*.{js,ts,jsx,tsx}"],
+ }
+Step4: in index.css file remove all code and  write below three line
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+sessionStorage.setItem("user1","admin");
+undefined
+sessionStorage.getItem("user1")
+'admin'
+sessionStorage.clear();
+undefined
+sessionStorage.getItem("user1")
+null
+!sessionStorage.getItem("user1")
+true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
