@@ -28,22 +28,22 @@ int main(){
 //	getline(cin,sentence);
 //	cout<<"\nyour sentence is :"<<sentence;
 //
-	string n="naman";
-	string m=n;
-	cout<<m;
-	string l;
-	cout<<"\n"<<n.length()<<endl;
-	int j=1;
-	for(int i=n.length()-1;i>=0;i--){
-		l=l+n[i];
-	}
-	cout<<l;
-	if(m==l){
-		cout<<"\nit is pallindrome.";
-	}
-	else{
-		cout<<"\nnot pallindrome.";
-	}
+//	string n="naman";
+//	string m=n;
+//	cout<<m;
+//	string l;
+//	cout<<"\n"<<n.length()<<endl;
+//	int j=1;
+//	for(int i=n.length()-1;i>=0;i--){
+//		l=l+n[i];
+//	}
+//	cout<<l;
+//	if(m==l){
+//		cout<<"\nit is pallindrome.";
+//	}
+//	else{
+//		cout<<"\nnot pallindrome.";
+//	}
 //	cout<<l;
 
 	
@@ -58,5 +58,47 @@ int main(){
 //	if(!found){
 //		cout<<"\nNot found";
 //	}
-//	return 0;
+
+//	int x=10;
+//	int y=20;
+//	int *p=&x;
+//	int *q=&y;
+//	int temp=x;
+//	*p=y;
+//	*q=temp;
+//	cout<<x<<endl;
+//	cout<<y;
+	
+//	int num=5;
+//	int fact=1;
+//	for(int i=1;i<=num;i++){
+//		fact=fact*i;
+//	}
+//	cout<<fact;
+//	
+//	int n=5;
+//	for(int i=2;i<n;i++){
+//		if(n%i==0){
+//			cout<<"It is not a prime number";
+//			break;
+//		}
+//		else{
+//				cout<<"It is a prime number";
+//				break;
+//		}
+//	}3
+
+	int n=10;
+	cout<<"0 1 ";
+	int sum=0;
+	for(int i=1;i<n;i++){
+		sum=sum+i; 
+		cout<<sum<<" ";
+	}
+	
+	
+	
+	
+	
+	return 0;
 }
