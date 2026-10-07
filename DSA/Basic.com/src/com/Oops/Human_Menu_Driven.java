@@ -19,7 +19,7 @@ public class Human_Menu_Driven {
 	            	System.out.print("\n0.Exit the system. ");
 	            	
 	            }
-	            else if(flag) {
+	            else {
 	            	System.out.print("\n2.Display already set human details. ");
 		            System.out.print("\n3.Update details.");
 		            System.out.print("\n0.Exit the system. ");
@@ -39,39 +39,50 @@ public class Human_Menu_Driven {
                        h.set_Human(name,gender);
                        System.out.print("\ninput save...");
                        flag=true;
-                       break;
+                      
                    }else {
                 	   System.out.println("Wrong Options");
                    }
+                   break;
                 case 2:
-                    h.display_Human();
-                    break;
+                   if(flag) {
+                	   h.display_Human();
+                      
+                   }else {
+                	   System.out.println("Wrong Options");
+                   }
+                   break;
                 case 3:
-                    h.display_Human();
-                    System.out.print("\n1.change name\n2.change gender\n:");
-                    int ch=sc.nextInt();
-                    if(ch==1)
-                    {
-                        System.out.print("\nEnter name:");
-                        name=sc.next();
-                        gender=h.get_gender();
-                        h.set_Human(name,gender);
-                        System.out.print("\nUpdated");
+                  if(flag) {
+                	  h.display_Human();
+                      System.out.print("\n1.change name\n2.change gender\n:");
+                      int ch=sc.nextInt();
+                      if(ch==1)
+                      {
+                          System.out.print("\nEnter name:");
+                          name=sc.next();
+                          gender=h.get_gender();
+                          h.set_Human(name,gender);
+                          System.out.print("\nUpdated");
 
-                    }
-                    else if(ch==2)
-                    {
-                        System.out.print("\nEnter gender:");
-                        gender=sc.next();
-                        name=h.get_name();
-                        h.set_Human(name,gender);
-                        System.out.print("\nUpdated");
-                    }
-                    else
-                    {
-                        System.out.print("\nWrong option");
-                    }
-                    break;
+                      }
+                      else if(ch==2)
+                      {
+                          System.out.print("\nEnter gender:");
+                          gender=sc.next();
+                          name=h.get_name();
+                          h.set_Human(name,gender);
+                          System.out.print("\nUpdated");
+                      }
+                      else
+                      {
+                          System.out.print("\nWrong option");
+                      }
+                     
+                  }else {
+                	  System.out.print("\nWrong option");
+                  }
+                  break;
                 case 0:
                     System.out.print("\nExit this system ");
                     break;
