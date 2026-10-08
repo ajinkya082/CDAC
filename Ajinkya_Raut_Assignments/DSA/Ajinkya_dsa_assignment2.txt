@@ -147,7 +147,7 @@ public class IntPre {
 			case '*':
 			case '/':
 			case '%':
-				while (!isEmpty() && prec(c) > prec(s[tos])) {
+				while (!isEmpty() && prec(c) < prec(s[tos])) {
 					pre[pi] = pop();
 					pi++;
 				}
@@ -168,4 +168,32 @@ public class IntPre {
 		sc.close();
 	}
 }
+//3 Fill in the blanks:
+1. In Postfix conversion, the expression is scanned from left to right
+2. In Prefix conversion, the expression is scanned from right to left
+3. In Postfix conversion, when an incoming operator has equal precedence, the supplied logic uses pop.
+4. In Prefix conversion, the supplied logic uses push for the precedence comparison.
+5. The precedence value of + and - is 1
+6. The precedence value of *, / and % is 2.
+7. Opening bracket in Postfix is push onto the stack.
+8. Closing bracket in Postfix causes operators to be pop until '(';.
+9. In Prefix conversion, ')' is pushed and'(' causes popping until ) is found.
+10. At the end of either conversion, remaining stack operators are popped.
 
+//4 Practise Question
+Q1. Convert A+B*C into Postfix and Prefix.
+->
+   Prefix= *+ABC
+   Postfix= ABC*+
+Q2. Convert (A+B)*C into Postfix and Prefix.
+->
+   Prefix= *+ABC
+   Postfix=AB+C*
+Q3. Convert A+B*C-D into Postfix and Prefix.
+->
+   Prefix= *+AB-CD
+   Postfix=ABC*+D-
+Q4. Convert (A+B)*(C-D) into Postfix and Prefix.
+->
+   Prefix= *+AB-CD
+   Postfix=AB+CD-*

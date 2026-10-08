@@ -6,8 +6,9 @@ public class Queue_Menu_Driven {
 	public static void main(String[] args)
 	{
 		Scanner sc = new Scanner(System.in);
-		Queue_Class obj = new Queue_Class();
+		//		Queue_Class obj = new Queue_Class();
 //		Circular_Queue obj=new Circular_Queue();
+		Priority_Queue obj=new Priority_Queue();
 
 		System.out.print("\nEnter size of Queue: ");
 		int size = sc.nextInt();

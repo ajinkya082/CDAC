@@ -57,7 +57,7 @@ public class IntPre {
 			case '*':
 			case '/':
 			case '%':
-				while (!isEmpty() && prec(c) > prec(s[tos])) {
+				while (!isEmpty() && prec(c) < prec(s[tos])) {
 					pre[pi] = pop();
 					pi++;
 				}

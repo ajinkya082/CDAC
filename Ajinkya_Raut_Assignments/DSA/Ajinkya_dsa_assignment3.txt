@@ -1,0 +1,385 @@
+//Name:Ajinkya Raut
+//PRN:260843420002
+
+//1.Two Stacks 
+package com.Assignment;
+
+class TwoStacks
+{
+	int arr[];
+	int top1;
+	int top2;
+
+	TwoStacks(int size)
+	{
+		arr = new int[size];
+
+		// Stack 1 starts from left
+		top1 = -1;
+
+		// Stack 2 starts from right
+		top2 = arr.length;
+	}
+
+
+	void push(int stackNo, int value)
+	{
+		// Check whether array is full
+		if (top1+1==top2)
+		{
+			System.out.println("Stack Overflow");
+			return;
+		}
+
+
+		if (stackNo == 1)
+		{
+			top1 = top1+1;
+
+			arr[top1] = value;
+		}
+		else if (stackNo == 2)
+		{
+			top2 = top2-1;
+
+			arr[top2] = value;
+		}
+	}
+
+
+	int pop(int stackNo)
+	{
+		if (stackNo == 1)
+		{
+			if (top1==-1)
+			{
+				System.out.println("Stack 1 is Empty");
+				return -1;
+			}
+
+			int value = arr[top1];
+
+			top1 = top1-1;
+
+			return value;
+		}
+
+
+		else if (stackNo == 2)
+		{
+			if (top2==2)
+			{
+				System.out.println("Stack 2 is Empty");
+				return -1;
+			}
+
+			int value = arr[top2];
+
+			top2 = top2+1;
+
+			return value;
+		}
+
+		return -1;
+	}
+
+
+	void printStack1()
+	{
+		System.out.print("Stack 1: ");
+
+		for (int i = top1; i >= 0; i--)
+		{
+			System.out.print(arr[i] + " ");
+		}
+
+		System.out.println();
+	}
+
+
+	void printStack2()
+	{
+		System.out.print("Stack 2: ");
+
+		for (int i = top2; i < arr.length; i++)
+		{
+			System.out.print(arr[i] + " ");
+		}
+
+		System.out.println();
+	}
+}
+
+
+public class TwoStack {
+	public static void main(String args[])
+	{
+		TwoStacks s = new TwoStacks(10);
+
+		s.push(1, 10);
+		s.push(1, 20);
+		s.push(1, 30);
+
+		s.printStack1();
+
+
+		s.push(2, 100);
+		s.push(2, 200);
+		s.push(2, 300);
+
+		s.printStack2();
+
+
+		System.out.println(
+				"Popped from Stack 1: " + s.pop(1)
+				);
+
+		System.out.println(
+				"Popped from Stack 2: " + s.pop(2)
+				);
+
+
+		s.printStack1();
+		s.printStack2();
+	}
+
+}
+
+//Concept Check
+
+Q1. Why does Stack 1 start with top1 = -1?
+Because Stack 1 starts from index 0.
+Before inserting the first element, there is no element in stack so top1 = -1.
+
+Q2. Why does Stack 2 start with top2 = arr.length?
+Because Stack 2 starts from the right side of the array.
+
+Q3. What condition indicates that the array is full?
+top1 + 1 == top2
+Means there is no empty space between stack 1 and stack 2.
+
+Q4. Why is the condition:
+top1 + 1 == top2
+used instead of checking top1 == arr.length - 1?
+There are two stacks sharing the same array.
+
+Q5. Draw the array after these operations:
+push(1,10)
+push(1,20)
+push(2,100)
+push(2,200)
+
+suppose the array size = 10
+
+ 0       1     2      3     4     5     6     7    8     9    
+ 10     20                                        200   100
+
+  |	 |					  |	|
+stack1	 |					  |   stack2
+         |                                        |
+        top1                                     top2
+
+
+
+//2.TwoQueues in single Array
+package com.Assignment;
+class TwoQueues
+{
+    int arr[];
+
+    int front1;
+    int rear1;
+
+    int front2;
+    int rear2;
+
+
+    TwoQueues(int size)
+    {
+        arr = new int[size];
+
+        // Queue 1
+        front1 = 0;
+        rear1 = -1;
+
+        // Queue 2 starts from middle
+        front2 = arr.length/2;
+        rear2 = (arr.length/2)-1;
+    }
+
+
+    void enqueue(int queueNo, int value)
+    {
+        if (queueNo == 1)
+        {
+            // Check Queue 1 overflow
+            if (rear1+1>=front2)
+            {
+                System.out.println("Queue 1 Overflow");
+                return;
+            }
+
+            rear1 = rear1+1;
+
+            arr[rear1] = value;
+        }
+
+
+        else if (queueNo == 2)
+        {
+            // Check Queue 2 overflow
+            if (rear2>=arr.length)
+            {
+                System.out.println("Queue 2 Overflow");
+                return;
+            }
+
+            arr[rear2] = value;
+            rear2 = rear2+1;
+        }
+    }
+
+
+    int dequeue(int queueNo)
+    {
+        if (queueNo == 1)
+        {
+            if (front1>rear1)
+            {
+                System.out.println("Queue 1 is Empty");
+                return -1;
+            }
+
+            int value = arr[front1];
+
+            front1 = front1+1;
+
+            return value;
+        }
+
+
+        else if (queueNo == 2)
+        {
+            if (front2>=rear2)
+            {
+                System.out.println("Queue 2 is Empty");
+                return -1;
+            }
+
+            int value = arr[front2];
+
+            front2 = front2+1;
+
+            return value;
+        }
+
+        return -1;
+    }
+
+
+    void printQueue1()
+    {
+        System.out.print("Queue 1: ");
+
+        for (int i = front1; i <= rear1; i++)
+        {
+            System.out.print(arr[i] + " ");
+        }
+
+        System.out.println();
+    }
+
+
+    void printQueue2()
+    {
+        System.out.print("Queue 2: ");
+
+        for (int i = front2; i < rear2; i++)
+        {
+            System.out.print(arr[i] + " ");
+        }
+
+        System.out.println();
+    }
+}
+
+public class TwoQueuesInSingleArray {
+	  public static void main(String args[])
+	    {
+	        TwoQueues q = new TwoQueues(10);
+
+
+	        // Queue 1
+
+	        q.enqueue(1, 10);
+	        q.enqueue(1, 20);
+	        q.enqueue(1, 30);
+
+	        q.printQueue1();
+
+
+	        // Queue 2
+
+	        q.enqueue(2, 100);
+	        q.enqueue(2, 200);
+	        q.enqueue(2, 300);
+
+	        q.printQueue2();
+
+
+	        System.out.println(
+	            "Deleted from Queue 1: " + q.dequeue(1)
+	        );
+
+	        System.out.println(
+	            "Deleted from Queue 2: " + q.dequeue(2)
+	        );
+
+
+	        q.printQueue1();
+	        q.printQueue2();
+	    }
+
+}
+// Concept Questions — Two Queues
+
+Q1.What is the difference between: rear1++; and front1++;
+1) rear1++ moves the rear position forward. It is used when adding an element using enqueue().
+2) front1++ moves the front position forward. It is used when removing an element using dequeue().
+
+Q2.Why does `dequeue()` remove an element from `front` and not from `rear`?
+The element inserted first is present at the front, so it must be removed first.
+10 → 20 → 30
+↑
+front
+10 will be removed first.
+If we remove from the rear, 30 would be removed first, which is LIFO, the behavior of a stack.
+
+Q3.Why does Queue 1 use the first half of the array?
+Queue 1 uses the first half because the array is divided into two separate sections.
+0  1  2  3  4 | 5  6  7  8  9
+<--- Queue 1 -->|<--- Queue 2 --->
+
+This prevents Queue 1 and Queue 2 from interfering with each other.
+
+Q4.Why does Queue 2 start from the middle?
+Queue 2 starts from the middle so that it can use the second half of the same array.
+For an array of size 10:
+0  1  2  3  4 | 5  6  7  8  9
+ Queue 1       |    Queue 2
+
+Therefore, both queues can exist in one array without overlapping.
+
+Q5.What happens if Queue 1 becomes full while Queue 2 has empty positions?
+Queue 1 will show "Queue 1 Overflow".
+Even though Queue 2 has empty positions, Queue 1 cannot use them because the space is fixed for each queue.
+
+Q6.Is the space of Queue 1 dynamically usable by Queue 2 in this implementation?
+The array is divided into two fixed sections:
+Queue 1          Queue 2
+0 1 2 3 4   |   5 6 7 8 9
+
+The unused space of Queue 1 cannot be used by Queue 2, and vice versa.
+Therefore, this implementation uses fixed partitioning, not dynamic space sharing.
+
+
