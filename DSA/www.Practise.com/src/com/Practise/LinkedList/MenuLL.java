@@ -10,8 +10,9 @@ public class MenuLL {
 		ll.insert_left(42);
 		System.out.print("The Linked List is :");
 		ll.display();
-		ll.deleteN(2);
-		System.out.print("\nThe Linked List  after deletion is :");
-		ll.display();
+//		ll.deleteN(2);
+//		System.out.print("\nThe Linked List  after deletion is :");
+//		ll.display();
+		System.out.print("\nThe ll data from end by  index 2 is :"+ll.findNth(2));
 	}
 }
