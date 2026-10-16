@@ -12,14 +12,17 @@ public class WellNessParenthesis {
 			if(c=='{'||c=='['||c=='(') {
 				stack.push(c);
 			}
-			if(stack.isEmpty()) {
-				return false;
-			}
-			else {
-				if((c=='}'&&stack.peek()=='{')||(c==']'&&stack.peek()=='[')||(c==')'&&stack.peek()=='(')) {
-						stack.pop();
+			
+			else if(c=='}'|| c==']'|| c==')'){
+				if(stack.isEmpty()) {
+					return false;
+				}
+				 char ch=stack.pop();
+				 if(c=='}'&&ch!='{' || c==']' && ch!='[' || c==')'&& ch!='(') {
+						return false;
 					}
 				}
+			
 			}
 		return (stack.isEmpty());
 		}
