@@ -1,11 +1,11 @@
 package com.Practise.LinkedList;
 
 public class Node {
-	Node next;
+	Node next,prev;
 	int data;
 	
 	Node(int data){
 		this.data=data;
-		next=null;
+		prev=next=null;
 	}
 }
