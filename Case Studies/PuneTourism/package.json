@@ -1,0 +1,7 @@
+{
+  "name": "pune-tourism-portal",
+  "version": "1.0.0",
+  "description": "Pune Tourism front page with XML-based demo registration and login",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Interest Calculator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="header green"><h1>▤ Interest Calculator</h1><p>Calculate simple and compound interest.</p></div>
+<div class="card">
+<label for="principal">Principal Amount (₹)</label><input type="number" id="principal" min="0" step="any" placeholder="Example: 10000">
+<label for="rate">Annual Interest Rate (%)</label><input type="number" id="rate" min="0" step="any" placeholder="Example: 5">
+<label for="time">Time (Years)</label><input type="number" id="time" min="0" step="any" placeholder="Example: 2">
+<label for="type">Interest Type</label>
+<select id="type"><option value="simple">Simple Interest</option><option value="compound">Compound Interest (Annual)</option></select>
+<button onclick="calculateInterest()">Calculate Interest</button><div id="result" class="result" hidden></div>
+</div>
+<script>
+function calculateInterest(){
+ const pText=document.getElementById("principal").value,rText=document.getElementById("rate").value,tText=document.getElementById("time").value;
+ const result=document.getElementById("result"),type=document.getElementById("type").value;
+ result.hidden=false;result.className="result";
+ if(pText.trim()===""||rText.trim()===""||tText.trim()===""){result.className="result error";result.textContent="Please fill in all fields.";return;}
+ const p=Number(pText),r=Number(rText),t=Number(tText);
+ if(![p,r,t].every(Number.isFinite)||p<0||r<0||t<0){result.className="result error";result.textContent="Enter valid non-negative values.";return;}
+ let interest,amount;
+ if(type==="simple"){interest=p*r*t/100;amount=p+interest;}
+ else{amount=p*Math.pow(1+r/100,t);interest=amount-p;}
+ result.innerHTML="<strong>Interest:</strong> ₹"+interest.toFixed(2)+"<br><br><strong>Total Amount:</strong> ₹"+amount.toFixed(2);
+}
+</script></body></html>

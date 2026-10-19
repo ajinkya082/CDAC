@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Quadratic Equation Solver</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="header red"><h1>√ Quadratic Equation Solver</h1><p>Find the roots of ax² + bx + c = 0.</p></div>
+<div class="card">
+<label for="a">Coefficient a</label><input type="number" id="a" step="any" placeholder="Enter a">
+<label for="b">Coefficient b</label><input type="number" id="b" step="any" placeholder="Enter b">
+<label for="c">Coefficient c</label><input type="number" id="c" step="any" placeholder="Enter c">
+<button onclick="solveEquation()">Find Roots</button><div id="result" class="result" hidden></div>
+</div>
+<script>
+function solveEquation(){
+ const aText=document.getElementById("a").value,bText=document.getElementById("b").value,cText=document.getElementById("c").value,result=document.getElementById("result");
+ result.hidden=false;result.className="result";
+ if(aText.trim()===""||bText.trim()===""||cText.trim()===""){result.className="result error";result.textContent="Please enter all three coefficients.";return;}
+ const a=Number(aText),b=Number(bText),c=Number(cText);
+ if(![a,b,c].every(Number.isFinite)){result.className="result error";result.textContent="Please enter valid numbers.";return;}
+ if(a===0){result.className="result error";result.textContent="Coefficient a cannot be zero. This must be a quadratic equation.";return;}
+ const d=b*b-4*a*c;
+ if(d>0){const x1=(-b+Math.sqrt(d))/(2*a),x2=(-b-Math.sqrt(d))/(2*a);result.innerHTML="<strong>Two distinct real roots</strong><br>x₁ = "+x1.toFixed(4)+"<br>x₂ = "+x2.toFixed(4);}
+ else if(d===0){const x=-b/(2*a);result.innerHTML="<strong>One repeated real root</strong><br>x = "+x.toFixed(4);}
+ else{const real=-b/(2*a),imaginary=Math.sqrt(-d)/(2*Math.abs(a));result.innerHTML="<strong>Two complex roots</strong><br>x₁ = "+real.toFixed(4)+" + "+imaginary.toFixed(4)+"i<br>x₂ = "+real.toFixed(4)+" - "+imaginary.toFixed(4)+"i";}
+}
+</script></body></html>

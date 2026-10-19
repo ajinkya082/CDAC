@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyland - Playful Toy Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="brand">🧸 Toyland</div>
+        <p class="eyebrow">A LITTLE MAGIC IN EVERY TOY</p>
+        <h1>Hover, play &amp; smile!</h1>
+        <p class="intro">Move your mouse over a toy to bring it to life. Turn your sound on for a little surprise.</p>
+        <div class="sound-note">🔊 Sound plays when you hover over a toy</div>
+    </header>
+
+    <main class="gallery">
+        <article class="toy-card">
+            <div class="toy-stage robot-stage" tabindex="0" role="button"
+                 aria-label="Play robot animation and sound"
+                 data-sound="sounds/robot.mp3" data-fallback="robot">
+                <div class="robot toy-art">
+                    <div class="antenna"></div><div class="robot-head">
+                        <span class="robot-eye"></span><span class="robot-eye"></span><span class="robot-mouth"></span>
+                    </div>
+                    <div class="robot-body"><span class="robot-panel">★</span></div>
+                    <div class="robot-arm left-arm"></div><div class="robot-arm right-arm"></div>
+                    <div class="robot-leg left-leg"></div><div class="robot-leg right-leg"></div>
+                </div>
+                <span class="stage-hint">HOVER TO PLAY</span>
+            </div>
+            <div class="toy-info"><h2>Robo Buddy</h2><p>Watch me wiggle and blink!</p><span class="tag blue-tag">Robot dance</span></div>
+        </article>
+
+        <article class="toy-card">
+            <div class="toy-stage teddy-stage" tabindex="0" role="button"
+                 aria-label="Play teddy bear animation and sound"
+                 data-sound="sounds/teddy.mp3" data-fallback="teddy">
+                <div class="teddy toy-art">
+                    <div class="ear ear-left"></div><div class="ear ear-right"></div>
+                    <div class="teddy-head"><div class="eye eye-left"></div><div class="eye eye-right"></div><div class="snout"></div><div class="nose"></div><div class="smile"></div></div>
+                    <div class="teddy-body"><div class="belly"></div></div>
+                    <div class="teddy-arm teddy-arm-left"></div><div class="teddy-arm teddy-arm-right"></div>
+                    <div class="teddy-foot teddy-foot-left"></div><div class="teddy-foot teddy-foot-right"></div>
+                </div>
+                <span class="stage-hint">HOVER TO PLAY</span>
+            </div>
+            <div class="toy-info"><h2>Sunny Teddy</h2><p>A friendly wave just for you.</p><span class="tag pink-tag">Bear wave</span></div>
+        </article>
+
+        <article class="toy-card">
+            <div class="toy-stage car-stage" tabindex="0" role="button"
+                 aria-label="Play race car animation and sound"
+                 data-sound="sounds/car.mp3" data-fallback="car">
+                <div class="racecar toy-art">
+                    <div class="car-window"></div><div class="car-body"></div>
+                    <div class="car-wheel wheel-left"></div><div class="car-wheel wheel-right"></div>
+                    <div class="speed-line speed-one"></div><div class="speed-line speed-two"></div><div class="speed-line speed-three"></div>
+                </div>
+                <span class="stage-hint">HOVER TO PLAY</span>
+            </div>
+            <div class="toy-info"><h2>Zoom Racer</h2><p>Ready, set, zoom across the track!</p><span class="tag green-tag">Racing zoom</span></div>
+        </article>
+    </main>
+
+    <footer>Made for curious little minds · Toyland Play Lab</footer>
+    <script src="script.js"></script>
+</body>
+</html>

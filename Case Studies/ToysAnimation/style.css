@@ -1,0 +1,78 @@
+* { box-sizing: border-box; }
+:root { --navy: #17284b; --muted: #64748b; --blue: #4e80ff; }
+body { margin: 0; font-family: "Trebuchet MS", Arial, sans-serif; color: var(--navy); background: #f4f7ff; }
+.hero { text-align: center; padding: 42px 20px 34px; background: radial-gradient(circle at 15% 15%, #fff1c8 0, transparent 28%), linear-gradient(135deg, #e9f2ff, #fff0f7); }
+.brand { font-size: 20px; font-weight: 800; }
+.eyebrow { margin: 26px 0 10px; color: #5d6fc4; font-size: 11px; font-weight: 800; letter-spacing: 3px; }
+h1 { font-size: clamp(34px, 5vw, 54px); margin: 0; letter-spacing: -1.5px; }
+.intro { max-width: 560px; margin: 14px auto; line-height: 1.6; color: var(--muted); }
+.sound-note { display: inline-block; padding: 10px 15px; margin-top: 8px; border-radius: 30px; background: white; box-shadow: 0 4px 18px #243d6610; font-size: 13px; }
+.gallery { max-width: 1120px; margin: 32px auto 45px; padding: 0 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.toy-card { background: white; border: 1px solid #e6ebf5; border-radius: 22px; overflow: hidden; box-shadow: 0 12px 30px #243d660b; transition: transform .25s, box-shadow .25s; }
+.toy-card:hover { transform: translateY(-5px); box-shadow: 0 18px 38px #243d6618; }
+.toy-stage { height: 260px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; outline: none; }
+.toy-stage:focus-visible { outline: 3px solid #316cff; outline-offset: -4px; }
+.robot-stage { background: linear-gradient(145deg, #dbe9ff, #f1e8ff); }
+.teddy-stage { background: linear-gradient(145deg, #ffe9df, #fff4d6); }
+.car-stage { background: linear-gradient(145deg, #d9f9ee, #e4f2ff); }
+.stage-hint { position: absolute; bottom: 13px; padding: 7px 10px; border-radius: 20px; background: #ffffffc9; color: #65738d; font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+.toy-art { position: relative; transition: transform .3s; }
+.robot { width: 118px; height: 174px; }
+.robot-head { position: absolute; top: 20px; left: 18px; width: 82px; height: 65px; background: #69a7ff; border: 4px solid #3168c8; border-radius: 18px; box-shadow: inset 0 -7px #4485e4; display: flex; justify-content: space-evenly; align-items: center; }
+.antenna { position: absolute; top: 3px; left: 55px; width: 8px; height: 20px; background: #3168c8; border-radius: 8px; }
+.antenna:before { content: ""; position: absolute; top: -8px; left: -4px; width: 16px; height: 16px; background: #ffbf4b; border-radius: 50%; }
+.robot-eye { width: 13px; height: 17px; background: #fff; border-radius: 50%; box-shadow: inset 0 -3px #c2ddff; }
+.robot-mouth { position: absolute; bottom: 9px; width: 26px; height: 5px; border-radius: 5px; background: #173c7a; }
+.robot-body { position: absolute; top: 91px; left: 29px; width: 60px; height: 52px; border-radius: 12px; background: #ffbf4b; border: 4px solid #d58b25; display: grid; place-items: center; }
+.robot-panel { font-size: 24px; color: white; }
+.robot-arm { position: absolute; top: 98px; width: 17px; height: 48px; border-radius: 12px; background: #4b82e6; border: 3px solid #3168c8; transform-origin: top center; }
+.left-arm { left: 13px; transform: rotate(20deg); } .right-arm { right: 10px; transform: rotate(-20deg); }
+.robot-leg { position: absolute; top: 139px; width: 20px; height: 32px; border-radius: 9px; background: #4b82e6; border: 3px solid #3168c8; }
+.left-leg { left: 35px; } .right-leg { right: 34px; }
+.teddy { width: 160px; height: 180px; }
+.ear { position: absolute; top: 8px; width: 47px; height: 47px; border-radius: 50%; background: #b97742; border: 5px solid #94562f; }
+.ear-left { left: 25px; } .ear-right { right: 25px; }
+.teddy-head { position: absolute; top: 15px; left: 27px; width: 106px; height: 94px; border-radius: 48%; background: #c98c55; border: 4px solid #94562f; z-index: 2; }
+.eye { position: absolute; top: 31px; width: 10px; height: 12px; border-radius: 50%; background: #382719; }
+.eye-left { left: 26px; } .eye-right { right: 26px; }
+.snout { position: absolute; left: 33px; top: 43px; width: 34px; height: 27px; border-radius: 50%; background: #f3c99d; }
+.nose { position: absolute; top: 47px; left: 44px; width: 13px; height: 9px; border-radius: 50%; background: #382719; z-index: 2; }
+.smile { position: absolute; left: 47px; top: 58px; width: 8px; height: 7px; border-bottom: 2px solid #382719; border-radius: 50%; z-index: 3; }
+.teddy-body { position: absolute; top: 95px; left: 39px; width: 82px; height: 70px; border-radius: 40% 40% 35% 35%; background: #b97742; border: 4px solid #94562f; }
+.belly { position: absolute; top: 17px; left: 18px; width: 38px; height: 42px; background: #f3c99d; border-radius: 50%; }
+.teddy-arm { position: absolute; top: 103px; width: 28px; height: 53px; border-radius: 18px; background: #c98c55; border: 4px solid #94562f; transform-origin: top center; }
+.teddy-arm-left { left: 20px; transform: rotate(22deg); } .teddy-arm-right { right: 17px; transform: rotate(-25deg); }
+.teddy-foot { position: absolute; top: 151px; width: 40px; height: 25px; border-radius: 50%; background: #c98c55; border: 4px solid #94562f; }
+.teddy-foot-left { left: 32px; } .teddy-foot-right { right: 31px; }
+.racecar { width: 210px; height: 115px; }
+.car-body { position: absolute; left: 8px; top: 46px; width: 194px; height: 47px; border-radius: 22px 35px 13px 13px; background: #ff536d; border: 4px solid #ce2e50; box-shadow: inset 0 -9px #e83c5c; }
+.car-window { position: absolute; z-index: 2; top: 22px; left: 68px; width: 80px; height: 39px; border-radius: 28px 28px 3px 3px; background: #85d9ff; border: 4px solid #ce2e50; transform: skew(-14deg); }
+.car-wheel { position: absolute; z-index: 3; top: 78px; width: 40px; height: 40px; border-radius: 50%; background: #26344d; border: 6px solid #52647f; box-shadow: inset 0 0 0 5px #d7e2f3; }
+.wheel-left { left: 35px; } .wheel-right { right: 32px; }
+.speed-line { position: absolute; height: 5px; border-radius: 5px; background: #54a2f8; left: -17px; }
+.speed-one { top: 39px; width: 34px; } .speed-two { top: 55px; left: -28px; width: 40px; } .speed-three { top: 71px; left: -12px; width: 25px; }
+.toy-stage.playing .robot { animation: robot-dance .55s ease-in-out infinite alternate; }
+.toy-stage.playing .left-arm { animation: arm-wave .25s ease-in-out infinite alternate; }
+.toy-stage.playing .right-arm { animation: arm-wave .25s ease-in-out infinite alternate-reverse; }
+.toy-stage.playing .robot-eye { animation: blink .8s infinite; }
+.toy-stage.playing .teddy { animation: teddy-bounce .55s ease-in-out infinite alternate; }
+.toy-stage.playing .teddy-arm-right { animation: teddy-wave .25s ease-in-out infinite alternate; }
+.toy-stage.playing .racecar { animation: car-zoom .75s ease-in-out infinite alternate; }
+.toy-stage.playing .speed-line { animation: speed .25s linear infinite; }
+.toy-info { padding: 21px 22px 23px; }
+.toy-info h2 { margin-bottom: 7px; font-size: 21px; }
+.toy-info p { color: var(--muted); font-size: 14px; margin-bottom: 15px; }
+.tag { display: inline-block; padding: 7px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; }
+.blue-tag { color: #2f62c9; background: #e7efff; }
+.pink-tag { color: #a94d37; background: #ffede4; }
+.green-tag { color: #087b57; background: #def8ec; }
+footer { text-align: center; color: #77849a; padding: 0 15px 30px; font-size: 13px; }
+@keyframes robot-dance { from { transform: rotate(-8deg) translateY(0); } to { transform: rotate(8deg) translateY(-8px); } }
+@keyframes arm-wave { from { rotate: -25deg; } to { rotate: 35deg; } }
+@keyframes blink { 0%, 80%, 100% { transform: scaleY(1); } 85%, 95% { transform: scaleY(.15); } }
+@keyframes teddy-bounce { from { transform: translateY(0) rotate(-3deg); } to { transform: translateY(-9px) rotate(3deg); } }
+@keyframes teddy-wave { from { transform: rotate(-25deg); } to { transform: rotate(-100deg); } }
+@keyframes car-zoom { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
+@keyframes speed { from { transform: translateX(8px); opacity: .2; } to { transform: translateX(-15px); opacity: 1; } }
+@media (max-width: 850px) { .gallery { grid-template-columns: 1fr; max-width: 480px; } .toy-stage { height: 240px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; } }

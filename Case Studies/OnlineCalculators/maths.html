@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Maths Calculator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="header"><h1>＋ Maths Calculator</h1><p>Perform mathematical operations instantly.</p></div>
+<div class="card">
+<label for="n1">First Number</label><input type="number" id="n1" step="any" placeholder="Enter first number">
+<label for="n2">Second Number</label><input type="number" id="n2" step="any" placeholder="Enter second number">
+<label for="op">Choose Operation</label>
+<select id="op"><option value="+">Addition (+)</option><option value="-">Subtraction (-)</option><option value="*">Multiplication (×)</option><option value="/">Division (÷)</option><option value="%">Modulus (%)</option></select>
+<button onclick="calculate()">Calculate Result</button><div id="result" class="result" hidden></div>
+</div>
+<script>
+function calculate() {
+ const a=document.getElementById("n1").value, b=document.getElementById("n2").value;
+ const op=document.getElementById("op").value, result=document.getElementById("result");
+ result.hidden=false; result.className="result";
+ if(a.trim()===""||b.trim()===""){result.className="result error";result.textContent="Please enter both numbers.";return;}
+ const x=Number(a), y=Number(b); let answer;
+ switch(op){
+ case "+": answer=x+y; break; case "-": answer=x-y; break; case "*": answer=x*y; break;
+ case "/": if(y===0){result.className="result error";result.textContent="Cannot divide by zero.";return;} answer=x/y; break;
+ case "%": if(y===0){result.className="result error";result.textContent="Cannot calculate modulus by zero.";return;} answer=x%y; break;
+ }
+ result.textContent="Result: "+answer;
+}
+</script></body></html>

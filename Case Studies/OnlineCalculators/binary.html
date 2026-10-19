@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Binary Calculator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="header purple"><h1>01 Binary Calculator</h1><p>Convert between binary and decimal numbers.</p></div>
+<div class="card">
+<label for="number">Enter Number</label><input type="text" id="number" placeholder="Example: 1010">
+<label for="conversion">Conversion Type</label>
+<select id="conversion"><option value="toDecimal">Binary to Decimal</option><option value="toBinary">Decimal to Binary</option></select>
+<button onclick="convertNumber()">Convert Number</button><div id="result" class="result" hidden></div>
+</div>
+<script>
+function convertNumber(){
+ const input=document.getElementById("number").value.trim(), type=document.getElementById("conversion").value, result=document.getElementById("result");
+ result.hidden=false;result.className="result";
+ if(input===""){result.className="result error";result.textContent="Please enter a number.";return;}
+ if(type==="toDecimal"){
+  if(!/^[01]+$/.test(input)){result.className="result error";result.textContent="Invalid binary number. Use only 0 and 1.";return;}
+  result.textContent="Decimal Result: "+parseInt(input,2);
+ }else{
+  if(!/^\d+$/.test(input)){result.className="result error";result.textContent="Enter a valid non-negative whole number.";return;}
+  result.textContent="Binary Result: "+BigInt(input).toString(2);
+ }
+}
+</script></body></html>

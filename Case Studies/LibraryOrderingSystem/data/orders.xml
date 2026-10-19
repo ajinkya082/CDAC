@@ -1,0 +1,11 @@
+<orders>
+  <order>
+    <orderId>1792396979857</orderId>
+    <customerName>Ajinkya Raut</customerName>
+    <address>At/po-Ahilyanagar</address>
+    <phone>9632102530</phone>
+    <bookId>101</bookId>
+    <bookName>Java Programming</bookName>
+    <orderDate>2026-10-19T08:02:59.857Z</orderDate>
+  </order>
+</orders>

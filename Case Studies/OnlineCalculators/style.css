@@ -1,0 +1,53 @@
+* { box-sizing: border-box; }
+body {
+    margin: 0; padding: 25px; font-family: Arial, Helvetica, sans-serif;
+    background: #f1f5fb; color: #183153;
+}
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-size: 28px; }
+.subtitle { color: #64748b; margin-bottom: 24px; }
+.sidebar {
+    min-height: 100vh; padding: 25px 15px;
+    background: linear-gradient(160deg, #102b55, #071a36); color: white;
+}
+.brand { font-size: 23px; font-weight: bold; margin: 8px 5px 35px; line-height: 1.25; }
+.nav-link {
+    display: block; padding: 14px 12px; margin: 10px 0;
+    border-radius: 9px; color: white; text-decoration: none; font-size: 15px;
+}
+.nav-link:hover, .nav-link:focus { background: #2678f3; }
+.header {
+    padding: 24px; color: white; border-radius: 15px; margin-bottom: 22px;
+    background: linear-gradient(120deg, #246bfd, #70a5ff);
+}
+.purple { background: linear-gradient(120deg, #7048e8, #a18aff); }
+.green { background: linear-gradient(120deg, #079455, #53cc95); }
+.red { background: linear-gradient(120deg, #ec4263, #ff8c9f); }
+.card {
+    background: white; border: 1px solid #e0e9f5; border-radius: 14px;
+    padding: 24px; margin-bottom: 20px; box-shadow: 0 5px 20px #1831530c;
+}
+input, select {
+    display: block; width: 100%; padding: 12px; margin: 8px 0 17px;
+    border: 1px solid #d5dfed; border-radius: 8px; font-size: 15px; background: #fff;
+}
+input:focus, select:focus { outline: 2px solid #8bb7ff; border-color: #2678f3; }
+label { font-size: 14px; font-weight: bold; }
+button {
+    border: none; padding: 13px 22px; border-radius: 8px; background: #2678f3;
+    color: white; font-size: 15px; font-weight: bold; cursor: pointer;
+}
+button:hover { opacity: 0.88; }
+.result {
+    margin-top: 18px; padding: 17px; background: #e9f8ef; color: #087443;
+    border-radius: 9px; overflow-wrap: anywhere;
+}
+.error { background: #fff0f1; color: #bd2341; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.tile {
+    padding: 24px; background: white; border: 1px solid #e0e9f5;
+    border-radius: 14px; box-shadow: 0 5px 20px #1831530c;
+}
+.tile a { color: #2678f3; font-weight: bold; text-decoration: none; }
+.footer { color: #718096; font-size: 13px; text-align: center; margin-top: 35px; }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }

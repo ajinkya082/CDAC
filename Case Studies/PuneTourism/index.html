@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pune Trails | Discover Pune</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="#home"><span class="logo-mark">P</span><span>PUNE<span class="logo-light"> TRAILS</span><small>Explore • Experience • Remember</small></span></a>
+    <nav><a href="#destinations">Destinations</a><a href="#culture">Culture</a><a href="#account">Your Account</a></nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-image" aria-hidden="true"></div>
+      <div class="hero-content">
+        <span class="eyebrow">WELCOME TO MAHARASHTRA</span>
+        <h1>Find your own<br><em>story in Pune.</em></h1>
+        <p>From mighty forts and royal heritage to green hills and unforgettable flavours — your next adventure begins here.</p>
+        <a class="primary-link" href="#destinations">Explore the city <span>↗</span></a>
+        <div class="hero-foot"><span class="dot"></span> HISTORY · NATURE · CULTURE</div>
+      </div>
+      <div class="slide-caption"><span>01 / 03</span><span>Heritage that lives on</span></div>
+    </section>
+
+    <section class="intro section-wrap" id="culture">
+      <div><span class="eyebrow">THE OXFORD OF THE EAST</span><h2>A city of many<br><em>beautiful contrasts.</em></h2></div>
+      <p>Pune brings together Maratha history, welcoming neighbourhoods, creative energy and peaceful escapes. Come for the landmarks; stay for the feeling.</p>
+    </section>
+
+    <section class="destinations section-wrap" id="destinations">
+      <div class="section-heading"><div><span class="eyebrow">MAKE A MEMORY</span><h2>Places worth the journey</h2></div><span class="side-note">A little history. A little wonder.</span></div>
+      <div class="destination-grid">
+        <article class="destination-card wada"><div class="place-number">01</div><div class="place-copy"><span>HERITAGE</span><h3>Shaniwar Wada</h3><p>Walk through the stories of the Peshwa era.</p></div></article>
+        <article class="destination-card sinhagad"><div class="place-number">02</div><div class="place-copy"><span>OUTDOORS</span><h3>Sinhagad Fort</h3><p>Hilltop views, fresh air and a legendary past.</p></div></article>
+        <article class="destination-card palace"><div class="place-number">03</div><div class="place-copy"><span>ARCHITECTURE</span><h3>Aga Khan Palace</h3><p>Graceful arches, gardens and important history.</p></div></article>
+      </div>
+      <p class="source-note">Discover more through the <a href="https://pune.gov.in/en/tourist-places/" target="_blank" rel="noopener">official Pune district tourist places guide ↗</a>.</p>
+    </section>
+
+    <section class="account-section" id="account">
+      <div class="account-copy">
+        <span class="eyebrow">YOUR NEXT CHAPTER</span>
+        <h2>Make room for<br><em>new discoveries.</em></h2>
+        <p>Create an account to get started with your Pune travel journey.</p>
+        <div class="account-benefit"><span>✦</span> Keep your travel account ready for your next visit.</div>
+        <div class="account-benefit"><span>✦</span> Register once, then log in whenever you return.</div>
+      </div>
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="tab active" id="loginTab" type="button">Log in</button>
+          <button class="tab" id="registerTab" type="button">Create account</button>
+        </div>
+        <p class="auth-kicker" id="formKicker">WELCOME BACK</p>
+        <h3 id="formTitle">Good to see you again.</h3>
+        <p class="auth-desc" id="formDesc">Enter your details to continue exploring.</p>
+
+        <form id="authForm" novalidate>
+          <div class="field" id="nameField" hidden>
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="e.g. Aditi Sharma" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="At least 8 characters" autocomplete="current-password" required minlength="8">
+          </div>
+          <button class="submit-btn" type="submit" id="submitBtn">Log in <span>→</span></button>
+          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+        <p class="privacy-note">Demo project · Account details are stored in the server-side XML file.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer><a class="logo footer-logo" href="#home"><span class="logo-mark">P</span><span>PUNE<span class="logo-light"> TRAILS</span><small>Explore • Experience • Remember</small></span></a><span>Made with love for the city of Pune.</span><a href="#home">Back to top ↑</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>

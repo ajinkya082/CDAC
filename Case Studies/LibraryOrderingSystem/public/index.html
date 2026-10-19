@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Ordering System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f5f9;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px #0001;
+        }
+
+        h1 {
+            text-align: center;
+            color: #234a75;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea, button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 11px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        button {
+            margin-top: 22px;
+            color: white;
+            background: #234a75;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #173553;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Library Book Ordering</h1>
+
+        <form id="orderForm">
+            <label for="customerName">Customer Name</label>
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter your full name"
+                required
+            >
+
+            <label for="address">Contact Address</label>
+            <textarea
+                id="address"
+                placeholder="Enter your complete address"
+                required
+            ></textarea>
+
+            <label for="phone">Contact Number</label>
+            <input
+                type="tel"
+                id="phone"
+                placeholder="10-digit mobile number"
+                maxlength="10"
+                required
+            >
+
+            <label for="category">Filter Books by Category</label>
+            <select id="category">
+                <option value="All">All Categories</option>
+            </select>
+
+            <label for="book">Select Book</label>
+            <select id="book" required>
+                <option value="">Select a book</option>
+            </select>
+
+            <button type="submit">Place Order</button>
+        </form>
+
+        <p id="message" role="status" aria-live="polite"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

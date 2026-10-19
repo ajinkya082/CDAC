@@ -1,0 +1,28 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+    <book>
+        <id>101</id>
+        <name>Java Programming</name>
+        <category>Programming</category>
+        <author>Herbert Schildt</author>
+    </book>
+    <book>
+        <id>102</id>
+        <name>Data Structures and Algorithms</name>
+        <category>Programming</category>
+        <author>Robert Lafore</author>
+    </book>
+    <book>
+        <id>103</id>
+        <name>Wings of Fire</name>
+        <category>Biography</category>
+        <author>APJ Abdul Kalam</author>
+    </book>
+    <book>
+        <id>104</id>
+        <name>The Alchemist</name>
+        <category>Fiction</category>
+        <author>Paulo Coelho</author>
+    </book>
+</books>
