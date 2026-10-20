@@ -1,0 +1,875 @@
+=======================================================
+Case Study 1: Expression Tree Evaluator
+=======================================================
+A XYZ company wants a program that implements the calculation of arithmetic expressions through data structures. They want to also implement complete modeling of the application domain. e.g., splits data structures into modules that correspond to “objects” and relations in expression trees. Therefore, construct the expression trees for the same reason.
+
+Hint:
+Expression trees consist of nodes containing operators and operands. Operators have different precedence levels, different associativities, and different arities, e.g.,
+Multiplication takes precedence over addition.
+The multiplication operator has two arguments, whereas the unary minus operator has only one.
+Operands are integers, doubles, variables, etc.
+
+Algorithm
+Step 1: Read the postfix expression.
+Step 2: Split the expression into tokens.
+Step 3: Create a stack of tree nodes.
+Step 4: For every token:
+If it is an operand, create a node and push it onto the stack.
+If it is a binary operator, pop the right and left operands, create an operator node, connect the operands as children, and push the new node.
+Step 5: The final node remaining on the stack becomes the root of the expression tree.
+Step 6: Evaluate the tree recursively by evaluating the left subtree, evaluating the right subtree, and applying the operator.
+Step 7: Display the expression and its result.
+Source Code
+import java.util.Stack;
+
+class Node {
+    String data;
+    Node left, right;
+    Node(String data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class ExpressionTreeEvaluator {
+    static boolean isOperator(String s) {
+        return s.equals("+") || s.equals("-") ||
+               s.equals("*") || s.equals("/");
+    }
+
+    static Node constructTree(String postfix) {
+        Stack<Node> stack = new Stack<>();
+        String[] tokens = postfix.trim().split("\\s+");
+        for (String token : tokens) {
+            if (!isOperator(token)) {
+                stack.push(new Node(token));
+            } else {
+                if (stack.size() < 2) {
+                    throw new IllegalArgumentException(
+                        "Invalid postfix expression");
+                }
+                Node right = stack.pop();
+                Node left = stack.pop();
+                Node operator = new Node(token);
+                operator.left = left;
+                operator.right = right;
+                stack.push(operator);
+            }
+        }
+        if (stack.size() != 1) {
+            throw new IllegalArgumentException(
+                "Invalid postfix expression");
+        }
+        return stack.pop();
+    }
+    static double evaluate(Node root) {
+        if (root == null) {
+            throw new IllegalArgumentException("Empty expression");
+        }
+        if (root.left == null && root.right == null) {
+            return Double.parseDouble(root.data);
+        }
+        double left = evaluate(root.left);
+        double right = evaluate(root.right);
+        switch (root.data) {
+            case "+":
+                return left + right;
+            case "-":
+                return left - right;
+            case "*":
+                return left * right;
+            case "/":
+                if (right == 0) {
+                    throw new ArithmeticException(
+                        "Division by zero");
+                }
+                return left / right;
+            default:
+                throw new IllegalArgumentException(
+                    "Unknown operator");
+        }
+    }
+
+    static void inorder(Node root) {
+        if (root == null) {
+            return;
+        }
+        if (isOperator(root.data)) {
+            System.out.print("(");
+        }
+        inorder(root.left);
+        System.out.print(root.data);
+        inorder(root.right);
+        if (isOperator(root.data)) {
+            System.out.print(")");
+        }
+    }
+
+    public static void main(String[] args) {
+        String postfix = "5 3 + 2 * 4 -";
+        Node root = constructTree(postfix);
+        System.out.print("Expression: ");
+        inorder(root);
+        System.out.println();
+        System.out.println("Result: " + evaluate(root));
+    }
+}
+Time and Space Complexity
+Let n be the number of tokens in the expression.
+
+Operation	Complexity
+Construct expression tree	O(n)
+Evaluate expression tree	O(n)
+Total time complexity	O(n)
+Auxiliary space complexity	O(n)
+
+=======================================================
+Case Study 2: Searching
+=======================================================
+A website called songs.com faces the problem of storing the data on the disk as the redundant copies of the data getting stored on the hard disk. For mp3 files in a large collection of MP3 files, there may be more than one copy of the same song, stored in different directories or with different file names. The goal of this exercise is to search for these duplicates.
+
+Write a program that searches a directory and all of its subdirectories, recursively, and returns a list of complete paths for all files with a given suffix (like .mp3). Provides several useful functions for manipulating file and path names.
+
+Hint:
+To recognize duplicates, you can use a hash function that reads the file and generates a short summary of the contents. For example, MD5 (Message-Digest algorithm 5) takes an arbitrarily long “message” and returns a 128-bit “checksum.” The probability is very small that two files with different contents will return the same checksum. On a Unix system you can use the program md5sum and a pipe to compute checksums from Python.
+
+Algorithm
+Start with the root directory.
+Recursively traverse all directories and subdirectories using Files.walk().
+Select regular files whose names end with .mp3.
+Read each selected file and calculate its MD5 checksum.
+Store the checksum as the key and the file path as the value in a HashMap.
+If multiple paths have the same checksum, identify them as potential duplicates.
+Display all duplicate file paths.
+If no duplicate groups exist, display a suitable message.
+Source Code
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
+public class DuplicateSongFinder {
+    // Calculate MD5 checksum of a file
+    static String getChecksum(Path path) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        try (InputStream input = Files.newInputStream(path)) {
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = input.read(buffer)) != -1) {
+                md.update(buffer, 0, bytesRead);
+            }
+        }
+        byte[] digest = md.digest();
+        StringBuilder result = new StringBuilder();
+        for (byte b : digest) {
+            result.append(String.format("%02x", b & 0xff));
+        }
+        return result.toString();
+    }
+    // Search files recursively and group duplicates
+    static void findDuplicates(Path directory, String suffix)
+            throws Exception {
+        Map<String, List<Path>> fileMap = new HashMap<>();
+        try (Stream<Path> paths = Files.walk(directory)) {
+            paths.filter(Files::isRegularFile)
+                 .filter(path -> path.getFileName().toString()
+                         .toLowerCase()
+                         .endsWith(suffix.toLowerCase()))
+                 .forEach(path -> {
+                     try {
+                         String checksum = getChecksum(path);
+                         fileMap.computeIfAbsent(
+                             checksum, key -> new ArrayList<>()
+                         ).add(path.toAbsolutePath());
+                     } catch (Exception e) {
+                         System.out.println(
+                             "Cannot read: " + path);
+                     }
+                 });
+        }
+        
+        boolean found = false;
+        for (Map.Entry<String, List<Path>> entry
+                : fileMap.entrySet()) {
+            List<Path> files = entry.getValue();
+            if (files.size() > 1) {
+                found = true;
+                System.out.println("\nDuplicate files:");
+                for (Path file : files) {
+                    System.out.println(file);
+                }
+            }
+        }
+        if (!found) {
+            System.out.println("No duplicate files found.");
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Path directory;
+        if (args.length > 0) {
+            directory = Paths.get(args[0]);
+        } else {
+            directory = Paths.get("songs");
+        }
+        if (!Files.isDirectory(directory)) {
+            System.out.println(
+                "Please provide a valid directory path.");
+            return;
+        }
+        findDuplicates(directory, ".mp3");
+    }
+}
+
+Time and Space Complexity
+Let n be the number of files and B be the total number of bytes read across all matching files.
+
+Operation	Complexity
+Directory traversal	O(n), excluding filesystem overhead
+Checksum calculation	O(B)
+HashMap grouping	O(n) expected, excluding hashing cost
+
+=======================================================
+Case Study 3: Hash Functions
+=======================================================
+
+Some company wants to introduce the searching capability to their word program. The features they want to implement are as follows:
+
+Problem 1
+If the amount of information associated with each key is relatively large (compared to the key itself), this information should not be stored in the hash table. Explain why and propose a scheme for representing such a set of data.
+
+Solution: Algorithm
+Approach: Indirect storage using references
+
+Start.
+Create a hash table to store keys and references.
+Store the complete records separately in a data store.
+For each record, calculate the hash index using its key.
+Store the key and the record's reference at that index.
+To search for a record, calculate the hash index using the key.
+Find the matching key in the hash table.
+Follow its reference to retrieve the complete record.
+Stop.
+Source Code
+import java.util.HashMap;
+
+class Student {
+    int id;
+    String name;
+    String course;
+    String address;
+
+    Student(int id, String name, String course, String address) {
+        this.id = id;
+        this.name = name;
+        this.course = course;
+        this.address = address;
+    }
+    void display() {
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Course: " + course);
+        System.out.println("Address: " + address);
+    }
+}
+
+public class IndirectHashing {
+    public static void main(String[] args) {
+        // Stores the complete records separately
+        HashMap<Integer, Student> records = new HashMap<>();
+        // Hash table stores keys and references to records
+        HashMap<Integer, Student> hashTable = new HashMap<>();
+        
+        Student s1 = new Student(101, "Amit", "PGCP-AC", "Mumbai");
+        Student s2 = new Student(102, "Rahul", "PGCP-AC", "Thane");
+        
+        records.put(s1.id, s1);
+        records.put(s2.id, s2);
+        hashTable.put(s1.id, records.get(s1.id));
+        hashTable.put(s2.id, records.get(s2.id));
+        
+        // Search using the key
+        int searchId = 101;
+        Student result = hashTable.get(searchId);
+        if (result != null) {
+            System.out.println("Record Found:");
+            result.display();
+        } else {
+            System.out.println("Record Not Found");
+        }
+    }
+}
+Operation	Complexity
+Insertion	O(1)
+Searching	O(1)
+Record Retrieval	O(1)
+Space Complexity	O(n)
+=======================================================
+
+Problem 2
+Consider the proposal to solve the clustering problem by constructing overflow trees instead of overflow lists, i.e., of organizing those keys that collided as tree structures. Hence, each entry of the scatter (hash) table can be considered as the root of a (possibly empty) tree. Compare the expected performance of this tree hashing method with that of open addressing.
+
+Solution: Algorithm
+A. Tree Hashing
+
+Start.
+Create a hash table where each index stores the root of a binary search tree (BST).
+For each key, calculate its hash index using the hash function.
+If the index is empty, insert the key as the root of that tree.
+If the index is occupied, insert the key into the BST using the BST insertion rules.
+To search for a key, calculate its hash index and search the corresponding BST.
+Stop.
+B. Open Addressing
+
+Start.
+Create a hash table with empty slots.
+For each key, calculate its hash index.
+If the slot is occupied, probe other slots until an empty slot is found.
+Insert the key into the empty slot.
+To search for a key, follow the same probing sequence until the key is found or an empty slot is reached.
+Stop.
+Source Code
+public class HashingComparison {
+    static final int SIZE = 10;
+
+    // Tree Hashing
+    static class Node {
+        int key;
+        Node left, right;
+        Node(int key) {
+            this.key = key;
+        }
+    }
+    static Node[] treeTable = new Node[SIZE];
+
+    static int hash(int key) {
+        return Math.floorMod(key, SIZE);
+    }
+
+    static Node insertTree(Node root, int key) {
+        if (root == null)
+            return new Node(key);
+        if (key < root.key)
+            root.left = insertTree(root.left, key);
+        else if (key > root.key)
+            root.right = insertTree(root.right, key);
+        return root;
+    }
+
+    static boolean searchTree(Node root, int key) {
+        if (root == null)
+            return false;
+        if (root.key == key)
+            return true;
+        if (key < root.key)
+            return searchTree(root.left, key);
+        return searchTree(root.right, key);
+    }
+
+    static void insertTreeHash(int key) {
+        int index = hash(key);
+        treeTable[index] = insertTree(treeTable[index], key);
+    }
+
+    static boolean searchTreeHash(int key) {
+        return searchTree(treeTable[hash(key)], key);
+    }
+    // Open Addressing using Linear Probing
+    static int[] table = new int[SIZE];
+    static boolean[] occupied = new boolean[SIZE];
+
+    static boolean insertOpen(int key) {
+        int index = hash(key);
+        for (int i = 0; i < SIZE; i++) {
+            int pos = (index + i) % SIZE;
+            if (!occupied[pos]) {
+                table[pos] = key;
+                occupied[pos] = true;
+                return true;
+            }
+            if (table[pos] == key)
+                return false;
+        }
+        return false;
+    }
+
+    static boolean searchOpen(int key) {
+        int index = hash(key);
+        for (int i = 0; i < SIZE; i++) {
+            int pos = (index + i) % SIZE;
+            if (!occupied[pos])
+                return false;
+            if (table[pos] == key)
+                return true;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int[] keys = {12, 22, 32, 15, 25, 18};
+        for (int key : keys) {
+            insertTreeHash(key);
+            insertOpen(key);
+        }
+        int key = 22;
+        System.out.println("Tree Hashing: "
+                + searchTreeHash(key));
+        System.out.println("Open Addressing: "
+                + searchOpen(key));
+    }
+}
+Time Complexity
+Let n be the number of keys, m the number of keys in a particular tree, and α = n / table size the load factor.
+
+Operation	Tree Hashing (BST)	Open Addressing
+Insertion	Average: O(log m) per bucket	Expected: O(1) at low load
+Searching	Average: O(log m) per bucket	Expected: O(1) at low load
+Worst-case insertion	O(n)	O(n)
+Worst-case searching	O(n)	O(n)
+Space complexity	O(n+M)	O(M)
+=======================================================
+
+Problem 3
+Devise a scheme that performs insertions and deletions in a hash table using quadratic increments for collision resolution. Compare this scheme experimentally with the straight binary tree organization by applying random sequences of keys for insertion and deletion.
+
+Solution: Algorithm
+A. Hash Table Using Quadratic Probing
+
+Insertion algorithm
+
+Start.
+Calculate the hash index using h(k) = k mod M.
+If the slot is empty, insert the key.
+If occupied, calculate the next position using: hi(k) = (h(k) + i2) mod M
+Repeat until an available slot is found.
+Stop if no suitable slot is found.
+Deletion algorithm
+
+Calculate the key's hash index.
+Follow the same quadratic probing sequence to locate the key.
+If found, mark the slot as deleted rather than empty.
+If not found, report that the key does not exist.
+Stop.
+B. Straight Binary Search Tree (BST)
+
+Start with an empty BST.
+For insertion, compare the key with the current node. Move left if the key is smaller, or right if it is larger. Insert the key at the first empty position.
+For deletion, locate the key and remove it using the standard BST deletion rules.
+Repeat for the random sequence of insertions and deletions.
+Source Code
+import java.util.Random;
+
+public class HashTreeComparison {
+    static final int SIZE = 20011;
+
+    // 0 = Empty, 1 = Occupied, 2 = Deleted
+    static class QuadraticHash {
+        int[] table = new int[SIZE];
+        int[] status = new int[SIZE];
+
+        boolean insert(int key) {
+            int h = Math.floorMod(key, SIZE);
+            int deleted = -1;
+            for (int i = 0; i < SIZE; i++) {
+                int pos = (int) ((h + (long) i * i) % SIZE);
+                if (status[pos] == 1 && table[pos] == key)
+                    return false;
+                if (status[pos] == 2 && deleted == -1)
+                    deleted = pos;
+                if (status[pos] == 0) {
+                    if (deleted != -1) pos = deleted;
+                    table[pos] = key;
+                    status[pos] = 1;
+                    return true;
+                }
+            }
+            if (deleted != -1) {
+                table[deleted] = key;
+                status[deleted] = 1;
+                return true;
+            }
+            return false;
+        }
+
+        boolean delete(int key) {
+            int h = Math.floorMod(key, SIZE);
+            for (int i = 0; i < SIZE; i++) {
+                int pos = (int) ((h + (long) i * i) % SIZE);
+                if (status[pos] == 0)
+                    return false;
+                if (status[pos] == 1 && table[pos] == key) {
+                    status[pos] = 2;
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    // Straight Binary Search Tree
+    static class Node {
+        int key;
+        Node left, right;
+        Node(int key) {
+            this.key = key;
+        }
+    }
+    static class BST {
+        Node root;
+        boolean insert(int key) {
+            if (root == null) {
+                root = new Node(key);
+                return true;
+            }
+            Node current = root;
+            while (true) {
+                if (key == current.key) return false;
+                if (key < current.key) {
+                    if (current.left == null) {
+                        current.left = new Node(key);
+                        return true;
+                    }
+                    current = current.left;
+                } else {
+                    if (current.right == null) {
+                        current.right = new Node(key);
+                        return true;
+                    }
+                    current = current.right;
+                }
+            }
+        }
+        boolean search(int key) {
+            Node current = root;
+            while (current != null) {
+                if (current.key == key) return true;
+                current = key < current.key ? current.left : current.right;
+            }
+            return false;
+        }
+        boolean delete(int key) {
+            if (!search(key)) return false;
+            root = deleteNode(root, key);
+            return true;
+        }
+        Node deleteNode(Node root, int key) {
+            if (root == null) return null;
+            if (key < root.key) {
+                root.left = deleteNode(root.left, key);
+            } else if (key > root.key) {
+                root.right = deleteNode(root.right, key);
+            } else {
+                if (root.left == null) return root.right;
+                if (root.right == null) return root.left;
+                Node successor = root.right;
+                while (successor.left != null) successor = successor.left;
+                root.key = successor.key;
+                root.right = deleteNode(root.right, successor.key);
+            }
+            return root;
+        }
+    }
+
+    public static void main(String[] args) {
+        QuadraticHash hash = new QuadraticHash();
+        BST tree = new BST();
+        int operations = 100000;
+        int keyRange = 10000;
+        int[] keys = new int[operations];
+        boolean[] insertOperation = new boolean[operations];
+        Random random = new Random(42);
+        for (int i = 0; i < operations; i++) {
+            keys[i] = random.nextInt(keyRange);
+            insertOperation[i] = random.nextBoolean();
+        }
+        long start = System.nanoTime();
+        for (int i = 0; i < operations; i++) {
+            if (insertOperation[i]) hash.insert(keys[i]);
+            else hash.delete(keys[i]);
+        }
+        long hashTime = System.nanoTime() - start;
+        start = System.nanoTime();
+        for (int i = 0; i < operations; i++) {
+            if (insertOperation[i]) tree.insert(keys[i]);
+            else tree.delete(keys[i]);
+        }
+        long treeTime = System.nanoTime() - start;
+        System.out.println("Random operations: " + operations);
+        System.out.println("Quadratic Hashing: " + hashTime / 1_000_000.0 + " ms");
+        System.out.println("Straight BST: " + treeTime / 1_000_000.0 + " ms");
+    }
+}
+Time Complexity
+Operation	Quadratic Probing	Straight BST
+Insertion	Average: O(1)	Average: O(log n)
+Deletion	Average: O(1)	Average: O(log n)
+Worst-case insertion	O(M)	O(n)
+Worst-case deletion	O(M)	O(n)
+Space complexity	O(M)	O(n)
+=======================================================
+
+Problem 4
+The primary drawback of the hash table technique is that the size of the table has to be fixed at a time when the actual number of entries is not known. Assume that your computer system incorporates a dynamic storage allocation mechanism that allows to obtain storage at any time. Hence, when the hash table H is full (or nearly full), a larger table H' is generated, and all keys in H are transferred to H', whereafter the store for H can be returned to the storage administration. This is called rehashing. Write a program that performs a rehash of a table H of size n.
+
+Solution: Algorithm
+Start.
+Create a hash table H of size n.
+Insert keys into the hash table using linear probing.
+When the table becomes nearly full, create a larger table H', typically twice the size.
+Traverse the old table H.
+For every occupied slot, recalculate its hash index using the new table size and insert the key into H'.
+Replace H with H' and release the old table.
+Continue inserting keys as required.
+Stop.
+Source Code
+public class Rehashing {
+    static class HashTable {
+        int[] table;
+        int size;
+        int count;
+
+        HashTable(int size) {
+            this.size = size;
+            table = new int[size];
+            count = 0;
+        }
+
+        int hash(int key) {
+            return Math.floorMod(key, size);
+        }
+
+        void insert(int key) {
+            // Rehash when load factor reaches 70%
+            if ((count + 1) * 100 >= size * 70) {
+                rehash();
+            }
+            int index = hash(key);
+            while (table[index] != 0) {
+                if (table[index] == key)
+                    return;
+                index = (index + 1) % size;
+            }
+            table[index] = key;
+            count++;
+        }
+
+        void rehash() {
+            int[] oldTable = table;
+            size = size * 2;
+            table = new int[size];
+            count = 0;
+            for (int key : oldTable) {
+                if (key != 0) {
+                    int index = hash(key);
+                    while (table[index] != 0) {
+                        index = (index + 1) % size;
+                    }
+                    table[index] = key;
+                    count++;
+                }
+            }
+            System.out.println("Rehash completed. New size: " + size);
+        }
+
+        void display() {
+            for (int i = 0; i < size; i++) {
+                if (table[i] != 0) {
+                    System.out.println(i + " -> " + table[i]);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        HashTable h = new HashTable(5);
+        h.insert(10);
+        h.insert(20);
+        h.insert(15);
+        h.insert(25);
+        h.insert(30);
+        h.insert(35);
+        System.out.println("Hash table after rehashing:");
+        h.display();
+    }
+}
+Operation	Complexity
+Insertion	O(1)
+Rehashing	O(n)
+Space Complexity	O(n)
+=======================================================
+Problem 5
+Very often keys are not integers but sequences of letters. These words may greatly vary in length, and therefore they cannot conveniently and economically be stored in key fields of fixed size. Write a program that operates with a hash table and variable length keys.
+
+Solution: Algorithm
+Start.
+Create a hash table of fixed capacity.
+Accept a variable-length string as the key.
+Calculate the hash index using the characters of the string.
+If the index is occupied, use linear probing to find an empty slot.
+Store the string key in the available slot.
+To search, calculate the hash index and follow the same probing sequence.
+Display the keys stored in the hash table.
+Stop.
+Source Code
+public class VariableLengthHashing {
+    static final int SIZE = 10;
+    static String[] table = new String[SIZE];
+
+    // Hash function for variable-length string keys
+    static int hash(String key) {
+        int hashValue = 0;
+        for (int i = 0; i < key.length(); i++) {
+            hashValue = (hashValue * 31 + key.charAt(i)) % SIZE;
+        }
+        return hashValue;
+    }
+
+    // Insert a key
+    static void insert(String key) {
+        int index = hash(key);
+        for (int i = 0; i < SIZE; i++) {
+            int pos = (index + i) % SIZE;
+            if (table[pos] == null) {
+                table[pos] = key;
+                System.out.println(key + " inserted");
+                return;
+            }
+            if (table[pos].equals(key)) {
+                System.out.println(key + " already exists");
+                return;
+            }
+        }
+        System.out.println("Hash table is full");
+    }
+
+    // Search a key
+    static boolean search(String key) {
+        int index = hash(key);
+        for (int i = 0; i < SIZE; i++) {
+            int pos = (index + i) % SIZE;
+            if (table[pos] == null) return false;
+            if (table[pos].equals(key)) return true;
+        }
+        return false;
+    }
+
+    // Display the hash table
+    static void display() {
+        for (int i = 0; i < SIZE; i++) {
+            System.out.println(i + " : " + table[i]);
+        }
+    }
+
+    public static void main(String[] args) {
+        insert("Apple");
+        insert("Banana");
+        insert("Computer");
+        insert("Programming");
+        insert("Java");
+        System.out.println("\nSearching Java: " + search("Java"));
+        System.out.println("Searching Python: " + search("Python"));
+        System.out.println("\nHash Table:");
+        display();
+    }
+}
+Operation	Complexity
+Insertion	O(L) average
+Searching	O(L) average
+Worst-case insertion/searching	O(nL)
+Space Complexity	O(nL + M)
+
+=======================================================
+Case study 4: Hospital Management System
+=======================================================
+
+Children’s Memorial engaged ABS to provide a variety of consulting services. One of the assignments involved conducting an independent assessment of the hospital’s existing help desk in order to improve service levels. ABS compared performance against industry standards and examined existing end-user support strategy and direction, tools and technology as well as staffing and skill sets. ABS’project team delivered a detailed analysis incorporating call metrics, conclusions, and recommendations. Having worked closely with ABS throughout the assessment process, the hospital’s technology management team had an additional project take-away: firsthand knowledge of the ABS staff, its expertise and understanding of ITIL, and commitment to first-rate customer service. In 2006, when Children’s Memorial decided to outsource, upgrade and expand its help desk services, they chose a partner they knew and trusted: ABS. So develop a software that maintains the all features explained above and customer and patients records.
+
+Solution: Algorithm
+Start.
+Create lists to store customer, patient, staff, and help desk ticket records.
+Display the menu with options to add customers, patients, staff, create tickets, display records, or exit.
+Accept the user's choice.
+Perform the selected operation using a switch statement:
+Add Customer: Accept and store the customer name.
+Add Patient: Accept and store the patient name.
+Add Staff: Accept and store staff name and skills.
+Create Help Desk Ticket: Accept the issue and priority, then store the ticket with Open status.
+Display Records: Display all stored records.
+Exit: Terminate the program.
+Repeat steps 3–5 until the user selects Exit.
+Stop.
+Source Code
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class HospitalManagementSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> customers = new ArrayList<>();
+        ArrayList<String> patients = new ArrayList<>();
+        ArrayList<String> staff = new ArrayList<>();
+        ArrayList<String> tickets = new ArrayList<>();
+        int choice;
+        do {
+            System.out.println("\n--- Hospital Management System ---");
+            System.out.println("1. Add Customer");
+            System.out.println("2. Add Patient");
+            System.out.println("3. Add Staff");
+            System.out.println("4. Create Help Desk Ticket");
+            System.out.println("5. Display Records");
+            System.out.println("0. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter customer name: ");
+                    customers.add(sc.nextLine());
+                    System.out.println("Customer added.");
+                    break;
+                case 2:
+                    System.out.print("Enter patient name: ");
+                    patients.add(sc.nextLine());
+                    System.out.println("Patient added.");
+                    break;
+                case 3:
+                    System.out.print("Enter staff name and skill: ");
+                    staff.add(sc.nextLine());
+                    System.out.println("Staff added.");
+                    break;
+                case 4:
+                    System.out.print("Enter help desk issue: ");
+                    String issue = sc.nextLine();
+                    System.out.print("Enter priority: ");
+                    String priority = sc.nextLine();
+                    tickets.add(issue + " | " + priority + " | Open");
+                    System.out.println("Ticket created.");
+                    break;
+                case 5:
+                    System.out.println("Customers: " + customers);
+                    System.out.println("Patients: " + patients);
+                    System.out.println("Staff: " + staff);
+                    System.out.println("Help Desk Tickets: " + tickets);
+                    break;
+                case 0:
+                    System.out.println("Exiting system.");
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } while (choice != 0);
+        sc.close();
+    }
+}
+Time Complexity
+Operation	Complexity
+Adding a record	O(1)
+Displaying records	O(n)
+Space complexity	O(n)

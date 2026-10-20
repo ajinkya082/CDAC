@@ -290,7 +290,6 @@ FROM Customers
 WHERE city = 'San Jose';
 
 
-Section 2: SQL queries (Questions 41–85)
 Q41. Find orders with amounts smaller than at least one order belonging to a customer in San Jose.
 SELECT *
 FROM Orders
@@ -400,7 +399,6 @@ WHERE EXISTS (
 );
 
 
-Which is more elegant? The EXISTS version is often more elegant because it directly checks whether at least one matching customer exists.
 Q53. Find customers whose ratings are equal to or greater than ANY of Serres' customers' ratings.
 SELECT *
 FROM Customers
@@ -680,7 +678,6 @@ WHERE city = 'London'
 
 
 Q87. What is the output of the given query?
-The PDF's query compares odate with 10/03/1996. That expression is not a reliable date literal in MySQL. Assuming the intended date is October 3, 1996, use:
 SELECT *
 FROM Orders
 WHERE amt < 1000
@@ -714,14 +711,12 @@ FROM Orders;
 
 
 Q92. What is the output of the given query?
-Assuming the intended date is October 3, 1996, the corrected query is:
 SELECT *
 FROM Orders
 WHERE NOT (odate = '1996-10-03' OR snum > 1006)
   AND amt >= 1500;
 
 
-Output order numbers: 3009, 3008, 3011.
 Q93. Find customers not located in San Jose whose rating is above 200.
 SELECT *
 FROM Customers
@@ -730,13 +725,12 @@ WHERE city <> 'San Jose'
 
 
 Q94. Give a simpler version of the query.
-The original condition comm > 0.12 OR comm < 0.14 is true for every non-NULL numeric commission. Therefore, the equivalent simplified query is:
+
 SELECT snum, sname AS city, comm
 FROM Salespeople
 WHERE comm IS NOT NULL;
 
 
-Note: sname AS city preserves the original query's alias, although the column label is unusual.
 Q95. Evaluate the given query.
 SELECT *
 FROM Orders
@@ -746,7 +740,6 @@ WHERE NOT (
 );
 
 
-This returns orders that are not both dated October 3 with salesperson number above 1002, and are also not above 2000 in amount. More precisely, an order is included only when the entire expression inside NOT is false.
 Q96. Which salespeople attend to customers who are not in the salespeople's city?
 SELECT DISTINCT s.snum, s.sname
 FROM Salespeople s
@@ -784,7 +777,6 @@ ORDER BY total_commission DESC
 LIMIT 1;
 
 
-Based on the provided data: Peel.
 Q100. Does the customer who placed the maximum number of orders also have the maximum rating?
 SELECT c.cnum, c.cname, c.rating, COUNT(o.onum) AS order_count
 FROM Customers c
@@ -800,7 +792,6 @@ HAVING COUNT(o.onum) = (
 );
 
 
-Answer based on the data: Yes, one of the customers tied for the maximum number of orders, Cisneros, has the highest rating of 300. There is a tie for the maximum order count, so this is not a unique customer.
 Q101. Has the customer who spent the largest total amount been given the highest rating?
 SELECT c.cname, c.rating, SUM(o.amt) AS total_spent
 FROM Customers c
@@ -810,7 +801,6 @@ ORDER BY total_spent DESC
 LIMIT 1;
 
 
-Answer based on the data: No. Clemens spent the most, but has a rating of 100, whereas the highest rating is 300.
 Q102. List all customers in descending order of rating.
 SELECT *
 FROM Customers
@@ -831,7 +821,6 @@ GROUP BY comm
 HAVING COUNT(*) > 1;
 
 
-Answer based on the data: Yes. All six salespeople have different commission rates.
 Q105. Which salespeople have no orders between October 3 and October 5, 1996, inclusive?
 SELECT s.snum, s.sname
 FROM Salespeople s
@@ -842,20 +831,15 @@ WHERE NOT EXISTS (
       AND o.odate BETWEEN '1996-10-03' AND '1996-10-05'
 );
 
-
-Answer based on the data: Fran.
 Q106. How many salespeople have received orders?
 SELECT COUNT(DISTINCT snum) AS salesperson_count
 FROM Orders;
 
-
-Answer based on the data: 5.
 Q107. How many customers have placed orders?
 SELECT COUNT(DISTINCT cnum) AS customer_count
 FROM Orders;
 
 
-Answer based on the data: 7.
 Q108. On which date did each salesperson book their maximum-value order?
 SELECT snum, onum, odate, amt
 FROM (
@@ -868,10 +852,7 @@ FROM (
 ) AS ranked_orders
 WHERE order_rank = 1;
 
-
-This returns the maximum-value order for each salesperson who has orders. Salespeople without orders are not included.
 Q109. Who is the most successful salesperson?
-If success is measured by total order value:
 SELECT s.snum, s.sname, SUM(o.amt) AS total_sales
 FROM Salespeople s
 JOIN Orders o ON s.snum = o.snum
@@ -966,7 +947,7 @@ WHERE c.snum <> s.snum;
 
 
 Q119. Which customers' ratings should be lowered?
-The PDF does not define a rule for lowering a rating. The existing tables alone do not establish which ratings are incorrect, so this requires a business rule or additional information.
+It does not define a rule for lowering a rating. The existing tables alone do not establish which ratings are incorrect, so this requires a business rule or additional information.
 
 Q120. Is there a case for assigning a salesperson to Berlin?
 Answer: Possibly, because Grass is a customer located in Berlin. However, the provided data alone does not establish whether one customer and the recorded order volume justify assigning a dedicated salesperson there.
@@ -1006,8 +987,269 @@ WHERE o.order_rank = 1;
 
 
 Q124. Which salesperson(s) should be fired?
-Answer: The PDF does not provide a formal firing criterion. Fran has no recorded orders, but that alone is insufficient evidence to recommend dismissal without considering the time period, responsibilities, and other performance measures.
+Answer:Fran has no recorded orders, but that alone is insufficient evidence to recommend dismissal without considering the time period, responsibilities, and other performance measures.
+
 Q125. What is the total income for the company?
 
 SELECT SUM(amt) AS total_order_value
 FROM Orders;
+
+
+============================================================
+CASE STUDY I – ACCOUNTS PAYABLE AND RECEIVABLES
+============================================================
+
+1. Objective
+Computerise customer and supplier records, sales invoices, purchase bills, payments, receipts,
+partial settlements, customer/supplier ledgers, sales/purchase analysis and cash-flow monitoring.
+
+2. Main tables and purpose
+- Customer: customer code, name, city, state, contact person, phone, fax and credit days.
+- Supplier: supplier code, name, city, state, contact person, phone, fax and credit days.
+- Part: part number, part name and unit rate.
+- SalesInvoice: invoice header, customer, date, total, discount and tax/gross amounts.
+- SalesInvoiceDetail: parts, quantities, rates and values on each invoice.
+- PurchaseBill: purchase-bill header and supplier.
+- PurchaseBillDetail: parts, quantities, rates and values on each bill.
+- Payment: supplier payment voucher, date, amount and cheque/bank details.
+- PaymentAllocation: maps a payment to one or more bills and stores amount settled.
+- Receipt: customer receipt voucher and cash/cheque details.
+- ReceiptAllocation: maps a receipt to one or more invoices and stores amount settled.
+
+3. Business rules
+- One invoice or bill can contain many parts.
+- A supplier payment is made by cheque; one payment can settle multiple bills.
+- Customer receipts can be cash or cheque; one receipt can settle multiple invoices.
+- Payments and receipts may be partial.
+- Discount is stored as a percentage and amount.
+- Excise = 10% × (Total Amount − Discount Amount).
+- Sales tax = 10% × (Total Amount − Discount Amount + Excise).
+- Gross amount = Total Amount − Discount Amount + Excise + Sales Tax.
+- The SQL provides customer and supplier ledger views showing billed, paid/received and outstanding amounts.
+- The SQL stores invoice/bill amounts; applications should calculate and update the formulas when a
+  transaction is saved. Example formula comments are included in the SQL file.
+
+4. Reports
+- Customer invoice ledger and outstanding invoice balances.
+- Supplier bill ledger and outstanding bill balances.
+- Payment and receipt registers (query Payment and Receipt).
+- Sales and purchase analysis (aggregate SalesInvoice and PurchaseBill by customer, supplier, date or part).
+- Cash-flow report (aggregate receipts and payments by date).
+
+============================================================
+CASE STUDY II – UNIVERSITY EXAMINATION MANAGEMENT
+============================================================
+
+1. Objective
+Maintain students, affiliated colleges, degrees, subjects, subject sections, examination centres,
+exam schedules, student registrations, marks/results and exam-fee information.
+
+2. Main tables and purpose
+- College: affiliated college information.
+- Degree: degree name and duration.
+- Student: unique exam seat number, name, college, degree and date of birth.
+- Subject: subject code/name and associated degree.
+- SubjectSection: allows up to two sections (A and B) for a subject.
+- ExaminationCentre: examination-centre details.
+- ExamSchedule: subject section, centre, date and start/end times.
+- ExamRegistration: student registration for a scheduled exam, marks and result status.
+- ExamFee: fee amount, amount paid, payment date and mode.
+
+3. Business rules
+- Every student has a unique seat number.
+- A student can register for multiple scheduled subjects.
+- A student cannot register twice for the same schedule.
+- A subject section is scheduled at a centre on a date and time.
+- Marks, when entered, must be between 0 and 100.
+- Amount paid cannot exceed the fee amount in the stored fee row.
+- The schedule and registration tables support counts of students per subject/centre/session.
+
+4. Reports
+- Student performance by student, college, degree or subject (view vw_student_exam_results).
+- Student count by centre, subject, date and time (view vw_exam_centre_subject_count).
+- Exam-fee collection: aggregate ExamFee.fee_amount and ExamFee.amount_paid by academic year.
+- Exam timetable: join ExamSchedule, SubjectSection, Subject and ExaminationCentre.
+
+============================================================
+CASE STUDY III – MATERIAL PROCUREMENT AND INVENTORY
+============================================================
+
+1. Objective
+Manage raw materials and finished parts, vendors and vendor rates, purchase orders, challans,
+Goods Received Reports (GRRs), transporter details, quality inspection, material issue requisitions
+(MIRs), supplier payments and stock reporting.
+
+2. Main tables and purpose
+- Part: category, part number, description, unit of measure, unit rate, opening and minimum stock.
+- Vendor: vendor code, name, address and payment terms.
+- VendorPart: many-to-many vendor/part relationship and vendor-specific rate/lead time.
+- Transporter: transporter master.
+- PurchaseOrder and PurchaseOrderDetail: purchase order header and line items.
+- GoodsReceived and GoodsReceivedDetail: challan/GRR header and received quantity by part.
+- QualityInspection: inspection date, result and remarks for received part lines.
+- MaterialIssue and MaterialIssueDetail: MIR header and quantity issued to a department.
+- SupplierPayment: supplier payment date, amount, reference and status.
+
+3. Business rules
+- One vendor may supply many parts; one part may be supplied by multiple vendors.
+- Each GRR references a purchase order and transporter.
+- Received quantity is split into accepted and rejected quantities; their sum cannot exceed challan quantity.
+- Quality inspection results are retained.
+- Stock view = opening stock + accepted quantity − issued quantity.
+- The minimum-stock field supports replenishment alerts.
+- Lead-time and order-date information supports supply-time analysis.
+
+4. Reports
+- Current stock and below-minimum-stock items (view vw_part_stock).
+- GRR/challan history by part, vendor, transporter or date.
+- Supplier payment position by vendor and status.
+- Purchase-order versus received quantity by part.
+- Material issue ledger by part, department and date.
+- Opening and current/closing stock reports.
+
+============================================================
+CASE STUDY IV – CRICKET STATISTICS MANAGEMENT
+============================================================
+
+1. Objective
+Maintain teams, players, venues, matches, batting and bowling performance, team innings statistics,
+and reports comparing player/team/venue performance.
+
+2. Main tables and purpose
+- Team: team/country master.
+- Venue: stadium, city, country and capacity.
+- Player: personal information, team, debut details and ODI/Test match counts.
+- CricketMatch: match date/type, venue, competing teams, winner and result.
+- PlayerMatch: players participating in each match.
+- BattingStatistics: innings, runs, balls, not-out status, fours, sixes, catches and stumpings.
+- BowlingStatistics: balls bowled, runs conceded, wickets and maidens.
+- TeamMatchStatistics: team innings runs, wickets, overs and extras.
+
+3. Business rules
+- Each player belongs to a team in the player master.
+- Each match has a venue and two different teams.
+- A player appears at most once in a match participation record.
+- Batting and bowling statistics are recorded separately for each player-match.
+- Player, team and venue masters can be extended without changing the schema.
+
+4. Reports
+- Player profile and team roster.
+- Batting summary (view vw_player_batting_summary): innings, not-outs, runs, highest score, average,
+  hundreds, fifties, catches and stumpings.
+- Bowling summary (view vw_player_bowling_summary): deliveries, wickets, runs conceded, bowling
+  average, runs per over and best innings wicket count.
+- Team performance against other teams: join CricketMatch and TeamMatchStatistics.
+- Venue-wise match and result reports.
+
+============================================================
+CASE STUDY V – EMPLOYEE MANAGEMENT SYSTEM
+============================================================
+
+1. Objective
+Maintain employee personal details, languages, appointments, designations, groups/departments,
+sanctioned permanent/temporary posts and promotion history.
+
+2. Main tables and purpose
+- Employee: employee code, name, city, home town, father's name and date of birth.
+- EmployeeLanguage: one row per language known by an employee.
+- Department: department and group (e.g. Technical, Marketing, HR).
+- Designation: designation master.
+- SanctionedPost: sanctioned permanent and temporary post counts by designation, department and date.
+- EmployeeAppointment: joining date, joining designation/group, employment type and retirement date.
+- Promotion: old/new designation, old/new department/group and promotion date.
+
+3. Business rules
+- Date fields must be valid; retirement date cannot precede joining date.
+- Employee code is unique.
+- The number of employees in a designation/department must not exceed sanctioned posts.
+- The SQL provides an employee listing view and a sanctioned/occupied-post summary view.
+- Capacity validation must be performed transactionally by the application or a database trigger/
+  stored procedure before appointments are inserted; the included schema documents the data needed.
+
+4. Reports
+- Employee listing (view vw_employee_listing).
+- Employees working in the same post for at least two years: compare current appointment joining_date
+  with the current date.
+- Incumbency register: list employees by designation, department and joining date.
+- Sanctioned/occupied/vacant posts: use vw_sanctioned_post_status and calculate vacancy as
+  sanctioned minus occupied.
+- Promotion history by employee/date.
+
+============================================================
+CASE STUDY VI – EMPLOYEE PAYROLL SYSTEM
+============================================================
+
+1. Objective
+Manage permanent/temporary employees, technical/non-technical categories, salary scales, basic pay,
+increments, allowances, GPF, professional tax, monthly payroll and payslips.
+
+2. Main tables and purpose
+- SalaryScale: minimum basic, increment step and maximum basic.
+- Designation: designation and technical/non-technical category.
+- Employee: employee code, personal data, joining date, employee type, designation, scale and joining basic.
+- EmployeeIncrement: date, number of increments, old basic and new basic.
+- AllowanceRate: scale-based DA percentage and HRA/CCA amounts with effective date.
+- EmployeeAllowance: monthly basic, DA, HRA, CCA and arrears.
+- ProfessionalTaxRate: professional-tax amount by scale and effective date.
+- Payroll: monthly earnings, deductions, gross pay and net pay.
+
+3. Business rules
+- Basic salary must fall within the employee's salary scale.
+- A salary scale is represented by minimum basic, increment amount and maximum basic.
+- DA is calculated as a percentage of basic pay.
+- HRA and CCA depend on salary scale.
+- GPF = 12% of basic pay.
+- Professional tax depends on scale.
+- Gross pay = basic + DA + HRA + CCA + arrears.
+- Total deductions = GPF + professional tax.
+- Net pay = gross pay − total deductions.
+- Scale/date-based rates are stored in master tables. A payroll run should select the applicable rates
+  for the payroll month and store the calculated amounts in Payroll.
+
+4. Reports
+- Employee listing.
+- Monthly payslips (view vw_payroll_monthly_slip).
+- Scale-wise abstract report (view vw_payroll_scale_abstract).
+- Allowances report from EmployeeAllowance.
+- Deduction report from Payroll.
+- Payroll totals by month, employee type, designation and scale.
+
+============================================================
+CASE STUDY VII – MATERIAL TESTING LABORATORY
+============================================================
+
+1. Objective
+Track material received for laboratory testing, allocate unique job numbers, store the office and
+reference-letter details, assign valid tests for each material, record results and manage receipts.
+
+2. Main tables and purpose
+- Material: material master (Brick, Bitumen, Sand, Tile, Mortar).
+- Test: test master.
+- MaterialTest: allowed tests and rates for each material.
+- JobRegister: unique job number, receipt date, office name, letter number and reference-letter date.
+- JobMaterial: materials registered under a job; unique job/material pair prevents duplicate material rows.
+- JobTest: tests booked for a job-material, rate at booking, result and status.
+- LabReceipt: job receipt amount, received-from, paid-by, payment mode, cheque and receipt details.
+
+3. Business rules
+- Each job number is unique.
+- Only tests configured for the selected material may be entered. The SQL trigger validates this on insert.
+- The primary key of JobTest prevents the same test from being added twice to the same job-material.
+- Receipt received-from must match the office name in JobRegister. The SQL trigger checks this on insert.
+- For cheque payments, receipt_number must be NULL as stated in the case study; cheque_number is required.
+- The PDF's example material/test rates are seeded in MaterialTest for Brick, Bitumen and Sand.
+- Additional tests/materials can be added to the master tables and MaterialTest.
+
+4. Reports
+- Search job details by office name (filter JobRegister.office_name).
+- Search by job number (view vw_lab_job_details).
+- Search receipt details by receipt number (query LabReceipt).
+- Calculate test charges by summing JobTest.rate_at_booking; compare with receipts by job.
+
+
+
+
+
+
+
+
