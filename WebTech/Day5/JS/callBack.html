@@ -42,6 +42,9 @@
             document.getElementById("d2").innerHTML=count1;
         }
         function Decrement(){
+            if(count1==0){
+                return;
+            }
             count1=count1-1;
             document.getElementById("d2").innerHTML=count1;
         }
