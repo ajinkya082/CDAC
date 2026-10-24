@@ -6,6 +6,11 @@ function replaceText() {
 
     let newText = document.getElementById("newText").value;
 
+
+    if(message==""){
+        alert("Enter message");
+        return;
+    }
     if (oldText == "") {
         alert("Enter old text");
         return;
@@ -25,6 +30,11 @@ function replaceAllText() {
 
     let newText = document.getElementById("newText").value;
 
+     if(message==""){
+        alert("Enter message");
+        return;
+    }
+    
     if (oldText == "") {
         alert("Enter old text");
         return;
