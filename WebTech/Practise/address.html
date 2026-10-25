@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save temp address</title>
+    <style>
+        .temp{
+            border: 1px solid black;
+            width: 50%;
+            height: 200px;
+        }
+        .maindiv{
+            width: 50%;
+            margin: auto;
+            text-align: center;
+        }
+        button{
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: lime;
+        }
+    </style>
+</head>
+<body>
+    <div class="maindiv">
+        <h3>Temp Address:</h3>
+        <textarea class="temp" id="tempAddress"></textarea> <br><br>
+    </div>
+    <br>
+    <button type="button" onclick="change()" style="display:flex;">Same as temp address</button>
+    <div class="maindiv">
+        <h3>Permanent Address:</h3>
+        <textarea class="temp" id="permanent"></textarea>
+    </div>
+    <script>
+        function change(){
+            let tempAddress=document.getElementById("tempAddress").value;
+            if(tempAddress==""){
+                alert("Please enter a temp address first.");
+                return;
+            }
+            document.getElementById("permanent").value=tempAddress;
+        }
+    </script>
+</body>
+</html>

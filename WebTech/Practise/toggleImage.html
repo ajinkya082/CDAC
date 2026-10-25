@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toogle.</title>
+    <style>
+        div{
+            border: 2px solid black;
+            width: 300px;
+            text-align: center;
+            justify-content: center;
+            padding: 7px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+   <div>
+     <img id="d1" src="../images/doll.jpeg" alt="doll" style="width: 300px; height: 400px;"> <br>
+     <h2 id="d2">Doll</h2>
+     <button type="button" onclick="Toggle()">Toggle </button>
+   </div>
+   
+   <script>
+    let isDoll=true;
+    function Toggle(){
+        if(isDoll){
+            document.getElementById("d1").src="../images/cahin.jpeg";
+            document.getElementById("d2").innerHTML="Chain";
+            isDoll=false;
+        }
+        else{
+            document.getElementById("d1").src="../images/doll.jpeg";
+            document.getElementById("d2").innerHTML="Doll";
+            isDoll=true;
+        }
+    }
+   </script>
+</body>
+</html>

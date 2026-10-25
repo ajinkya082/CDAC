@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Replacer</title>
+    <style>
+        div {
+            width: 50%;
+            margin: auto;
+            text-align: center;
+        }
+
+        #t1 {
+            width: 50%;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label for="">Enter your sentence:</label> <br>
+        <textarea name="text" id="t1"></textarea>
+        <br>
+        <label for="">Old Text</label>
+        <input type="text" id="t2">
+        <br>
+        <label for="">New Text</label>
+        <input type="text" id="t3">
+        <br><br>
+        <button type="button" onclick="Replace()"> Replace</button>
+        <button type="button" onclick="ReplaceAll()">ReplaceAll</button>
+    </div>
+
+    <script src="./wordreplace.js"></script>
+</body>
+
+</html>
