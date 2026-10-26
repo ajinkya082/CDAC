@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        let red = document.querySelector(".circel");
+        let green = document.querySelector(".circel1");
+        let yellow = document.querySelector(".circel2");
+
+        function turnRed() {
+            red.style.backgroundColor = "red";
+            green.style.backgroundColor = "gray";
+            yellow.style.backgroundColor = "gray";
+
+            setTimeout(turnGreen, 2000);
+        }
+
+        function turnGreen() {
+            red.style.backgroundColor = "gray";
+            green.style.backgroundColor = "green";
+            yellow.style.backgroundColor = "gray";
+
+            setTimeout(turnYellow, 2000);
+        }
+
+        function turnYellow() {
+            red.style.backgroundColor = "gray";
+            green.style.backgroundColor = "gray";
+            yellow.style.backgroundColor = "yellow";
+
+            setTimeout(turnRed, 2000);
+        }
+
+        turnRed();
+    </script>
+</body>
+</html>
