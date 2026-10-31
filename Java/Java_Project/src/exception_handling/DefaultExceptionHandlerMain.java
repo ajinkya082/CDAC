@@ -9,7 +9,6 @@ public class DefaultExceptionHandlerMain {
 			int y=Integer.parseInt(args[1]);
 			int result=x/y;
 			System.out.println(result);
-
 		}
 		catch(ArrayIndexOutOfBoundsException  |ArithmeticException e   ) {
 			if(e instanceof ArrayIndexOutOfBoundsException) {
@@ -23,6 +22,8 @@ public class DefaultExceptionHandlerMain {
 		catch(Exception e) {
 			System.out.println("General Error...");
 		}
-
+		finally {
+			System.out.println("Done...");
+		}
 	}
 }
