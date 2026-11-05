@@ -6,7 +6,7 @@ public class Player {
 	public Player() {
 		System.out.println("Inside Player()");
 	}
-	
+
 	public Player(String name, int age) {
 		System.out.println("Inside Player(String,int)");
 		this.name = name;

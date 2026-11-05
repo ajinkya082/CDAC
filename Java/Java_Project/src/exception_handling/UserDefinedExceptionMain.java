@@ -3,7 +3,7 @@ package exception_handling;
 public class UserDefinedExceptionMain {
 	public static void main(String[] args) {
 		try {
-			int position =NameCollection.getPosition("Ramushonat");
+			int position =NameCollection.getPosition("Kashyap");
 			System.out.println(position);
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
