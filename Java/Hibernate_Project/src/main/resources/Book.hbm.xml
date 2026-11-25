@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+	<class name="example.hibernate.entity.Book" table="Book_master">
+		<id name="bookId" type="int" column="book_id"/>
+		<property name="title" type="string" column="book_title"/>
+		<property name="author" type="string" column="book_author"/>
+	</class>
+</hibernate-mapping>
+
