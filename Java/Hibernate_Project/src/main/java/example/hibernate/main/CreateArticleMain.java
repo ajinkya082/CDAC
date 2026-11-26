@@ -16,7 +16,7 @@ public class CreateArticleMain {
 				SessionFactory sf=HibernateUtlis.getSessionFactory();
 				Session session=sf.openSession();
 				){
-			Article a=new Article(null,"Java Coffee Beans","James Goslin",LocalDate.of(2026, 5, 23));
+			Article a=new Article(null,"Non Techonologies","Dr.Pym",LocalDate.of(1970, 07, 23));
 			Transaction tx=session.beginTransaction();
 				session.persist(a);
 			tx.commit();

@@ -21,7 +21,6 @@ public class Actor {
 	@Column(name="actor_name",length = 50)
 	private String name;
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy="actors")//Indicating this END as INVERSE side 
-//	@Column(name="movie_name")
 	private List<Movie> movies; 
 	public Actor() {
 		// TODO Auto-generated constructor stub

@@ -10,7 +10,7 @@ import example.hibernate.entity.CricketTeam;
 public class CreateCricketTeamMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		try(
 				SessionFactory sf=HibernateUtlis.getSessionFactory();
 				Session session=sf.openSession();
