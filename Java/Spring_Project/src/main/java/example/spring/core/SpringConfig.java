@@ -14,12 +14,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 
 @Configuration//Marks the class as a configuration specific class
+@ComponentScan(basePackages = {"example","second","third"})
 public class SpringConfig {
 	//Declare a bean of HelloService
 	@Bean //Marks this method as a bean declaration method
